@@ -1,70 +1,40 @@
-%body
-  / Navigation
-  %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
-    .container
-      %a.navbar-brand{:href => "#"} Start Bootstrap
-      %button.navbar-toggler{"aria-controls" => "navbarResponsive", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarResponsive", "data-toggle" => "collapse", :type => "button"}
-        %span.navbar-toggler-icon
-      #navbarResponsive.collapse.navbar-collapse
-        %ul.navbar-nav.ml-auto
-          %li.nav-item.active
-            %a.nav-link{:href => "#"}
-              Home
-              %span.sr-only (current)
-          %li.nav-item
-            %a.nav-link{:href => "#"} About
-          %li.nav-item
-            %a.nav-link{:href => "#"} Services
-          %li.nav-item
-            %a.nav-link{:href => "#"} Contact
-  / Page Content
-  .container
-    / Jumbotron Header
-    %header.jumbotron.my-4
-      %h1.display-3 A Warm Welcome!
-      %p.lead Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.
-      %a.btn.btn-primary.btn-lg{:href => "#"} Call to action!
-    / Page Features
-    .row.text-center
-      .col-lg-3.col-md-6.mb-4
-        .card
-          %img.card-img-top{:alt => "", :src => "http://placehold.it/500x325"}/
-          .card-body
-            %h4.card-title Card title
-            %p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.
-          .card-footer
-            %a.btn.btn-primary{:href => "#"} Find Out More!
-      .col-lg-3.col-md-6.mb-4
-        .card
-          %img.card-img-top{:alt => "", :src => "http://placehold.it/500x325"}/
-          .card-body
-            %h4.card-title Card title
-            %p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.
-          .card-footer
-            %a.btn.btn-primary{:href => "#"} Find Out More!
-      .col-lg-3.col-md-6.mb-4
-        .card
-          %img.card-img-top{:alt => "", :src => "http://placehold.it/500x325"}/
-          .card-body
-            %h4.card-title Card title
-            %p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.
-          .card-footer
-            %a.btn.btn-primary{:href => "#"} Find Out More!
-      .col-lg-3.col-md-6.mb-4
-        .card
-          %img.card-img-top{:alt => "", :src => "http://placehold.it/500x325"}/
-          .card-body
-            %h4.card-title Card title
-            %p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.
-          .card-footer
-            %a.btn.btn-primary{:href => "#"} Find Out More!
-    / /.row
-  / /.container
-  / Footer
-  %footer.py-5.bg-dark
-    .container
-      %p.m-0.text-center.text-white Copyright © Your Website 2018
-    / /.container
-  / Bootstrap core JavaScript
-  %script{:src => "vendor/jquery/jquery.min.js"}
-  %script{:src => "vendor/bootstrap/js/bootstrap.bundle.min.js"}
+/ Page Content
+.container
+  / Page Features
+  .row
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th{:scope => "col"} Day
+          %th{:scope => "col", :colspan => 2} Olympic NP
+          %th{:scope => "col", :colspan => 2} North Cascades NP
+          %th{:scope => "col", :colspan => 2} Teanaway
+        %tr
+          %th{:scope => "col"}
+          %th{:scope => "col"} Precipitation
+          %th{:scope => "col"} Hi/Low
+          %th{:scope => "col"} Precipitation
+          %th{:scope => "col"} Hi/Low
+          %th{:scope => "col"} Precipitation
+          %th{:scope => "col"} Hi/Low
+      %tbody
+        %tr
+          %th{:scope => "row"} Today
+          %td 30%
+          %td 41/65
+          %td 30%
+          %td 41/65
+          %td 30%
+          %td 41/65
+        %tr
+          %th{:scope => "row"} Tuesday
+          %td 30%
+          %td 41/65
+          %td 30%
+          %td 41/65
+          %td 30%
+          %td 41/65
+
+
+  / /.row
+/ /.container

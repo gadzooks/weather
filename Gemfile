@@ -71,3 +71,10 @@ end
 
 gem "haml-rails", "~> 1.0"
 gem 'simple_form'
+
+gem 'apixu', :git => 'https://github.com/apixu/apixu-ruby.git'
+
+# TODO gem 'rubocop', '~> 0.55.0', require: false
+
+gem 'typhoeus'
+gem 'frozen_record'
