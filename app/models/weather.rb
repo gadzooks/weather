@@ -1,17 +1,14 @@
 class Weather
+  def initialize(places = [])
+    #places ||= ['seattle', 'hood canal', 'teanaway']
+    places = ['seattle']
 
-  attr_reader :details
-  Details = Struct.new(:location, :current, :forecast)
-
-  def initialize(city)
-    client = ApixuClient.new
-
-    @details = setup_details(client.current(city))
-    self
+    lat_long = LatitudeLongitude.instance.convert(places)
+    @client = Forecast::Client.new lat_long
   end
 
-  def setup_details(res)
-    Details.new(res[:location], res[:current], res[:forecast])
+  def get_forecast
+    @forecast = @client.get_forecast
   end
 
 end

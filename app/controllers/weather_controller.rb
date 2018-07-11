@@ -1,8 +1,7 @@
 class WeatherController < ApplicationController
   def index
-    @weather = Weather.new :paris
+    @weather = Weather.new
+    @forecast = @weather.get_forecast
   end
 
-  def current
-  end
 end

@@ -78,3 +78,4 @@ gem 'apixu', :git => 'https://github.com/apixu/apixu-ruby.git'
 
 gem 'typhoeus'
 gem 'frozen_record'
+gem 'safe-enum'
