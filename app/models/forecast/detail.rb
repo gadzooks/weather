@@ -13,12 +13,12 @@ class Detail
     @currently.timeseries
   end
 
-  def daily
-    @daily.timeseries
+  def daily(index = nil)
+    @daily.timeseries(index)
   end
 
-  def hourly
-    @hourly.timeseries
+  def hourly(index = nil)
+    @hourly.timeseries(index)
   end
 
 end

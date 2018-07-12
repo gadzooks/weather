@@ -25,11 +25,8 @@ class Parser
 
       h_forecast = response[HOURLY_FORECAST]
       unless h_forecast.blank?
-        hourly_data = ActiveSupport::OrderedHash.new
-        (h_forecast['data'] || []).map do |hsh|
-          time = Time.at hsh['time']
-          ts = Forecast::TimeSeries.new(hsh)
-          hourly_data[time] = ts
+        hourly_data = (h_forecast['data'] || []).map do |hsh|
+          Forecast::TimeSeries.new(hsh)
         end
 
         hourly = Forecast::TimeSeriesSummary.new_hourly(
@@ -41,11 +38,8 @@ class Parser
 
       d_forecast = response[DAILY_FORECAST]
       unless d_forecast.blank?
-        daily_data = ActiveSupport::OrderedHash.new
-        (h_forecast['data'] || []).map do |hsh|
-          time = Time.at hsh['time']
-          ts = Forecast::TimeSeries.new(hsh)
-          daily_data[time] = ts
+        daily_data = (h_forecast['data'] || []).map do |hsh|
+          Forecast::TimeSeries.new(hsh)
         end
 
         daily = Forecast::TimeSeriesSummary.new_daily(

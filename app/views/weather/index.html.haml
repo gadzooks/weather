@@ -2,32 +2,35 @@
 .container
   / Page Features
   .row
-    %table.table.table-bordered.compact
+    %table.table.table-bordered
       %thead
         %tr
           %th{:scope => "col"}
           - @forecast.each do |loc, detail|
-            %th.center{:scope => "col", :colspan => 3}=loc.description.titleize
+            %th.center{:scope => "col", :colspan => 2}=loc.description.titleize
         %tr
-          %th{:scope => "col"} Day
-          - @forecast.keys.size.times do
+          %th{:scope => "col"} Time
+          - @forecast.size.times do
             %th{:scope => "col"} Rain
             %th{:scope => "col"} Hi/Low
       %tbody
         - first_forecast = @forecast.values.first
         - #current weather row
         %tr
-          %th{:scope => "row"}=first_forecast.currently.time.strftime('%D')
+          %th{:scope => "row"} Now
           - @forecast.each do |loc, detail|
-            %td=detail.currently.precipProbability.to_s
+            %td=detail.currently.precipProbability.to_s + '%'
+            %td=detail.currently.temperature.to_s
         / current hourly weather
-        - first_forecast.hourly.keys.each do |hour|
+        - first_forecast.hourly.size.times do |index|
+          - ts = first_forecast.hourly(index)
           %tr
-            %th{:scope => "row"}=hour.strftime('%h')
+            %td{:scope => "row"}=ts.time.strftime('%I:%M %p')
             - @forecast.each do |loc, detail|
               / FIXME move a lot of this to helper code
-              - hourly_ts = detail.hourly[hour]
-              %td=hourly_ts.precipProbability.to_s
+              - hourly_ts = detail.hourly(index)
+              %td=hourly_ts.precipProbability.to_s + '%'
+              %td=hourly_ts.temperature.to_s
 
   / /.row
 / /.container
