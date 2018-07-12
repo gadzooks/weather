@@ -1,8 +1,6 @@
 class Weather
   def initialize(places = [])
-    #places ||= ['seattle', 'hood canal', 'teanaway']
-    places = ['seattle']
-
+    places = ['hood canal', 'teanaway', 'seattle']
     lat_long = LatitudeLongitude.instance.convert(places)
     @client = Forecast::Client.new lat_long
   end

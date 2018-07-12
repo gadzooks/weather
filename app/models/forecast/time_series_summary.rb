@@ -4,9 +4,12 @@ class TimeSeriesSummary
 
   Type.all.each do |type|
     self.define_singleton_method("new_#{type}") do |summary, icon, data|
-      data = [data] unless data.respond_to?(:each)
       new(type, summary, icon, data)
     end
+  end
+
+  def timeseries(time = nil)
+    time.nil? ? @data : @data[time]
   end
 
   #######

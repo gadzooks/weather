@@ -2,39 +2,32 @@
 .container
   / Page Features
   .row
-    %table.table.table-bordered
+    %table.table.table-bordered.compact
       %thead
         %tr
-          %th{:scope => "col"} Day
-          %th{:scope => "col", :colspan => 2} Olympic NP
-          %th{:scope => "col", :colspan => 2} North Cascades NP
-          %th{:scope => "col", :colspan => 2} Teanaway
-        %tr
           %th{:scope => "col"}
-          %th{:scope => "col"} Precipitation
-          %th{:scope => "col"} Hi/Low
-          %th{:scope => "col"} Precipitation
-          %th{:scope => "col"} Hi/Low
-          %th{:scope => "col"} Precipitation
-          %th{:scope => "col"} Hi/Low
+          - @forecast.each do |loc, detail|
+            %th.center{:scope => "col", :colspan => 3}=loc.description.titleize
+        %tr
+          %th{:scope => "col"} Day
+          - @forecast.keys.size.times do
+            %th{:scope => "col"} Rain
+            %th{:scope => "col"} Hi/Low
       %tbody
+        - first_forecast = @forecast.values.first
+        - #current weather row
         %tr
-          %th{:scope => "row"} Today
-          %td 30%
-          %td 41/65
-          %td 30%
-          %td 41/65
-          %td 30%
-          %td 41/65
-        %tr
-          %th{:scope => "row"} Tuesday
-          %td 30%
-          %td 41/65
-          %td 30%
-          %td 41/65
-          %td 30%
-          %td 41/65
-
+          %th{:scope => "row"}=first_forecast.currently.time.strftime('%D')
+          - @forecast.each do |loc, detail|
+            %td=detail.currently.precipProbability.to_s
+        / current hourly weather
+        - first_forecast.hourly.keys.each do |hour|
+          %tr
+            %th{:scope => "row"}=hour.strftime('%h')
+            - @forecast.each do |loc, detail|
+              / FIXME move a lot of this to helper code
+              - hourly_ts = detail.hourly[hour]
+              %td=hourly_ts.precipProbability.to_s
 
   / /.row
 / /.container

@@ -1,7 +1,10 @@
 module Forecast
 class TimeSeries
   TS_ATTRIBUTES = [:time, :summary, :icon, :precipIntensity, :precipProbability,
-    :temperature, :apparentTemperature, :dewPoint, :timeSeriesType ]
+    :temperature, :apparentTemperature, :dewPoint, :timeSeriesType,
+    :temperatureHigh, :temperatureHighTime, :temperatureLow, :temperatureLowTime,
+    :sunsetTime, :sunriseTime
+  ]
   attr_reader *TS_ATTRIBUTES
 
   def initialize(input)
@@ -14,7 +17,8 @@ class TimeSeries
       end
 
       # FIXME handle parse errors
-      @time = DateTime.strptime(@time.to_s,'%s') if @time
+      #@time = DateTime.strptime(@time.to_s,'%s') if @time
+      @time = Time.at(@time) if @time
     end
     self
   end

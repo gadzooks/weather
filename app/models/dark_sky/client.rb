@@ -11,9 +11,32 @@ class Client
   # FIXME better ways to store secret key
   #https://stackoverflow.com/questions/26498357/how-to-use-secrets-yml-for-api-keys-in-rails-4-1
   #https://www.engineyard.com/blog/encrypted-rails-secrets-on-rails-5.1
+  def self.get_forecast_by_location(locations)
+    if Rails.env.production?
+      actual_api_call(locations)
+    else
+      fake_api_call(locations)
+    end
+  end
+
+  def self.fake_api_call(locations)
+    Rails.logger.debug 'Making FAKE api call'
+    responses = {}
+    locations.each do |loc|
+      filename = "spec/models/api/response/#{loc.name}.json"
+      filename = filename.gsub(/ /,'')
+      if File.exists? filename
+        File.open(filename) do |fh|
+          responses[loc] = JSON.parse fh.read
+        end
+      end
+    end
+
+    responses
+  end
 
   # https://api.darksky.net/forecast/[key]/[latitude],[longitude]
-  def self.get_forecast_by_location(locations)
+  def self.actual_api_call(locations)
     hydra = Hydra.new
     requests = {}
     locations.each do |loc|
@@ -28,13 +51,17 @@ class Client
 
     responses = {}
     requests.each do |location, r|
-      Rails.logger.debug "Response code is : " + r.response.response_code.to_s
+      Rails.logger.debug "Response code for #{location.name} is : " +
+        r.response.response_code.to_s
 
       # FIXME handle JSON parse errors
       next unless r.response.response_code == 200
 
       if r.response.body
-        responses[location] = JSON.parse r.response.body
+        body = r.response.body
+        responses[location] = JSON.parse body
+        #filename = location.name.gsub(/ /,'').upcase + '.json'
+        #File.open(filename, 'w') { |f| f.write responses[location].to_json }
       else
         responses[location] = {}
       end

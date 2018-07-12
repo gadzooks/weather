@@ -25,9 +25,13 @@ class Parser
 
       h_forecast = response[HOURLY_FORECAST]
       unless h_forecast.blank?
-        hourly_data = (h_forecast['data'] || []).map do |hsh|
-          Forecast::TimeSeries.new(hsh)
+        hourly_data = ActiveSupport::OrderedHash.new
+        (h_forecast['data'] || []).map do |hsh|
+          time = Time.at hsh['time']
+          ts = Forecast::TimeSeries.new(hsh)
+          hourly_data[time] = ts
         end
+
         hourly = Forecast::TimeSeriesSummary.new_hourly(
           h_forecast['summary'],
           h_forecast['icon'],
@@ -37,9 +41,13 @@ class Parser
 
       d_forecast = response[DAILY_FORECAST]
       unless d_forecast.blank?
-        daily_data = (d_forecast['data'] || []).map do |hsh|
-          Forecast::TimeSeries.new(hsh)
+        daily_data = ActiveSupport::OrderedHash.new
+        (h_forecast['data'] || []).map do |hsh|
+          time = Time.at hsh['time']
+          ts = Forecast::TimeSeries.new(hsh)
+          daily_data[time] = ts
         end
+
         daily = Forecast::TimeSeriesSummary.new_daily(
           d_forecast['summary'],
           d_forecast['icon'],
@@ -55,6 +63,8 @@ class Parser
       )
     end
 
+    Rails.logger.debug 'parsing forecast for locations : '
+    Rails.logger.debug forecast_by_location.keys.inspect
     forecast_by_location
   end
 

@@ -16,7 +16,7 @@ RSpec.describe Forecast::TimeSeriesSummary, type: :model do
       expect(ts.type).to eq(Forecast::Type.enum(:currently))
       expect(ts.summary).to eq(summary)
       expect(ts.icon).to eq(icon)
-      expect(ts.data).to eq( [data] )
+      expect(ts.data).to eq(data)
     end
 
   end

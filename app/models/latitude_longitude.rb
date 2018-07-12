@@ -8,15 +8,14 @@ class LatitudeLongitude
 
   Location = Struct.new(:name, :description, :latitude, :longitude) do
     def ==(other)
-      self.class === other and other.name == @name
+      self.class == other.class && other.name == name
     end
 
     alias eql? ==
 
     def hash
-      @name.hash
+      name.hash
     end
-
   end
 
   def self.instance
@@ -29,7 +28,6 @@ class LatitudeLongitude
     YAML_DATA.each do |y|
       name = y.first
       hsh = y.second
-      puts hsh.inspect
       @locations[name] = Location.new(name, hsh['description'], hsh['latitude'],
                                       hsh['longitude'])
     end
