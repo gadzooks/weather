@@ -12,4 +12,6 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
-Rails.application.config.assets.precompile += %w( common.css )
+Rails.application.config.assets.precompile += %w( common.css  weather-icons.min.css )
+Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'font')
+Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
