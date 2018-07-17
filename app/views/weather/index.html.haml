@@ -1,30 +1,33 @@
 / Page Content
 
-%h2 Icon here
-%i.wi.wi-day-sunny
-%h2 Icon here
 .container
   / Page Features
   .row
-    %table.table.table-bordered
+    %table.table.table-bordered.weather-forecast
       %thead
         %tr
           %th{:scope => "col"}
           - @forecast.each do |loc, detail|
-            %th.center{:scope => "col", :colspan => 2}=loc.description.titleize
-        %tr
+            %th.center{:scope => "col", :colspan => 3, :class => 'header-main'}=loc.description.titleize
+        %tr.header-secondary
           %th{:scope => "col"} Time
           - @forecast.size.times do
-            %th{:scope => "col"} Rain
-            %th{:scope => "col"} Hi/Low
+            %th{:scope => "col", :colspan => 2} Rain
+            %th{:scope => "col", :class => 'fahrenheit'}
+              Temp
+              %i.wi-fahrenheit
       %tbody
         - first_forecast = @forecast.values.first
         - #current weather row
         %tr
           %th{:scope => "row"} Now
           - @forecast.each do |loc, detail|
-            %td=detail.currently.precipProbability.to_s + '%'
-            %td=detail.currently.temperature.to_s
+            - current = detail.currently
+            %td.precipitation
+              %i{:class => icon_class(current.icon, current.precipProbability)}
+            %td.align-right
+              =precipitation(current.precipProbability)
+            %td=current.temperature.round.to_s
         / current hourly weather
         - first_forecast.hourly.size.times do |index|
           - ts = first_forecast.hourly(index)
@@ -33,8 +36,11 @@
             - @forecast.each do |loc, detail|
               / FIXME move a lot of this to helper code
               - hourly_ts = detail.hourly(index)
-              %td=hourly_ts.precipProbability.to_s + '%'
-              %td=hourly_ts.temperature.to_s
+              %td
+                %i{:class => icon_class(hourly_ts.icon, hourly_ts.precipProbability) }
+              %td.align-right
+                =precipitation(hourly_ts.precipProbability)
+              %td=hourly_ts.temperature.round.to_s
 
   / /.row
 / /.container

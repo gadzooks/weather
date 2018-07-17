@@ -1,8 +1,5 @@
 .center {
-  margin: auto;
-  width: 50%;
-  border: 3px solid green;
-  padding: 10px;
+  text-align:center
 }
 
 html {
@@ -30,3 +27,57 @@ html {
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
 
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+/* move to weather.scss */
+
+.header-main {
+  background-color:#def0ff;
+}
+
+.header-secondary {
+  background-color:#fef7e9;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.weather-icon {
+  font-size: 1.7em;
+}
+
+.day-sunny {
+  color: yellow;
+}
+
+.night-clear {
+  color: black;
+}
+
+.rain {
+  color: blue;
+}
+
+.cloudy {
+  color: grey;
+}
+
+.night-partly-cloudy {
+  color: #6767f2;
+}
+
+.day-cloudy-10 {
+  color: #f9f952;
+}
+
+.day-cloudy-20 {
+  color: #f9f952;
+}
+
+.day-cloudy-30 {
+  color: #f9f952;
+}
+
+.day-cloudy-100 {
+  color: grey;
+}
