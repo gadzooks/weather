@@ -4,6 +4,7 @@
   / Page Features
   .row
     %table.table.table-bordered.weather-forecast
+
       %thead
         %tr
           %th{:scope => "col"}
@@ -17,7 +18,6 @@
               Temp
               %i.wi-fahrenheit
       %tbody
-        - first_forecast = @forecast.values.first
         - #current weather row
         %tr
           %th{:scope => "row"} Now
@@ -29,6 +29,7 @@
               =precipitation(current.precipProbability)
             %td=current.temperature.round.to_s
         / current hourly weather
+        - first_forecast = @forecast.values.first
         - first_forecast.hourly.size.times do |index|
           - ts = first_forecast.hourly(index)
           %tr
@@ -42,6 +43,20 @@
                 =precipitation(hourly_ts.precipProbability)
               %td=hourly_ts.temperature.round.to_s
 
-  / /.row
-/ /.container
--#=debug @forecast
+      / current daily weather
+      - first_forecast = @forecast.values.first
+      - first_forecast.daily.size.times do |index|
+        - ts = first_forecast.daily(index)
+        %tr
+          %td{:scope => "row"}=ts.time.strftime('%a')
+          - @forecast.each do |loc, detail|
+            / FIXME move a lot of this to helper code
+            - daily_ts = detail.daily(index)
+            %td
+              %i{:class => icon_class(daily_ts.icon, daily_ts.precipProbability) }
+            %td.align-right
+              =precipitation(daily_ts.precipProbability)
+            %td=daily_ts.temperatureLow.round.to_s + ' / ' + daily_ts.temperatureHigh.round.to_s
+
+
+-#=debug @forecast.values.first.daily

@@ -38,7 +38,7 @@ class Parser
 
       d_forecast = response[DAILY_FORECAST]
       unless d_forecast.blank?
-        daily_data = (h_forecast['data'] || []).map do |hsh|
+        daily_data = (d_forecast['data'] || []).map do |hsh|
           Forecast::TimeSeries.new(hsh)
         end
 

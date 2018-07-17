@@ -29,6 +29,9 @@ html {
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
 
 /* move to weather.scss */
+table.weather-forecast {
+  line-height:1;
+}
 
 .header-main {
   background-color:#def0ff;
@@ -43,7 +46,7 @@ html {
 }
 
 .weather-icon {
-  font-size: 1.7em;
+  font-size: 1.3em;
 }
 
 .day-sunny {
