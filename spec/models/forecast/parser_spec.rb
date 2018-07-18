@@ -7,8 +7,8 @@ RSpec.describe Forecast::Parser, type: :model do
       location = LatitudeLongitude.instance.convert(['seattle'])
       service_response = DarkSky::Client.fake_api_call(location)
 
-      forecast_details_hsh = Forecast::Parser.dark_sky_parser(service_response)
-      details = forecast_details_hsh.values.first
+      forecast_summary = Forecast::Parser.dark_sky_parser(service_response)
+      details = forecast_summary.forecasts.values.first
 
       expect(details.location).to eq(location.first)
       expect(details.currently.summary).to eq('Clear')

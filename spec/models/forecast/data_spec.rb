@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Forecast::TimeSeries, type: :model do
+RSpec.describe Forecast::Data, type: :model do
 
   context "initialize object" do
     it "should setup object with valid input" do
@@ -29,7 +29,7 @@ RSpec.describe Forecast::TimeSeries, type: :model do
 
       j = JSON.parse txt
 
-      ts = Forecast::TimeSeries.new j
+      ts = Forecast::Data.new j
 
       expect(ts.icon).to eq('clear-day')
     end

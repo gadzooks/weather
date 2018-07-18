@@ -4,15 +4,16 @@
   / Page Features
   .row
     %table.table.table-bordered.weather-forecast
-
+      - forecasts = @forecast_summary.forecasts
       %thead
         %tr
           %th{:scope => "col"}
-          - @forecast.each do |loc, detail|
+
+          - forecasts.each do |loc, detail|
             %th.center{:scope => "col", :colspan => 3, :class => 'header-main'}=loc.description.titleize
         %tr.header-secondary
           %th{:scope => "col"} Time
-          - @forecast.size.times do
+          - forecasts.size.times do
             %th{:scope => "col", :colspan => 2} Rain
             %th{:scope => "col", :class => 'fahrenheit'}
               Temp
@@ -21,7 +22,7 @@
         - #current weather row
         %tr
           %th{:scope => "row"} Now
-          - @forecast.each do |loc, detail|
+          - forecasts.each do |loc, detail|
             - current = detail.currently
             %td.precipitation
               %i{:class => icon_class(current.icon, current.precipProbability)}
@@ -29,14 +30,12 @@
               =precipitation(current.precipProbability)
             %td=current.temperature.round.to_s
         / current hourly weather
-        - first_forecast = @forecast.values.first
-        - first_forecast.hourly.size.times do |index|
-          - ts = first_forecast.hourly(index)
+        - @forecast_summary.hourly_times.each do |time|
           %tr
-            %td{:scope => "row"}=ts.time.strftime('%I:%M %p')
-            - @forecast.each do |loc, detail|
+            %td{:scope => "row"}=time.strftime('%I:%M %p')
+            - forecasts.each do |loc, detail|
               / FIXME move a lot of this to helper code
-              - hourly_ts = detail.hourly(index)
+              - hourly_ts = detail.hourly(time)
               %td
                 %i{:class => icon_class(hourly_ts.icon, hourly_ts.precipProbability) }
               %td.align-right
@@ -44,14 +43,12 @@
               %td=hourly_ts.temperature.round.to_s
 
       / current daily weather
-      - first_forecast = @forecast.values.first
-      - first_forecast.daily.size.times do |index|
-        - ts = first_forecast.daily(index)
+      - @forecast_summary.daily_times.each do |time|
         %tr
-          %td{:scope => "row"}=ts.time.strftime('%a')
-          - @forecast.each do |loc, detail|
+          %td{:scope => "row"}=time.strftime('%a')
+          - forecasts.each do |loc, detail|
             / FIXME move a lot of this to helper code
-            - daily_ts = detail.daily(index)
+            - daily_ts = detail.daily(time)
             %td
               %i{:class => icon_class(daily_ts.icon, daily_ts.precipProbability) }
             %td.align-right
@@ -59,4 +56,4 @@
             %td=daily_ts.temperatureLow.round.to_s + ' / ' + daily_ts.temperatureHigh.round.to_s
 
 
--#=debug @forecast.values.first.daily
+-#=debug @forecast_summary.forecasts.values.first.daily

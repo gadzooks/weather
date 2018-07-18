@@ -8,12 +8,4 @@ RSpec.describe WeatherController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
-
-  describe "GET #current" do
-    it "returns http success" do
-      get :current
-      expect(response).to have_http_status(:success)
-    end
-  end
-
 end

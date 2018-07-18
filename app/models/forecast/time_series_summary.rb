@@ -9,7 +9,7 @@ class TimeSeriesSummary
   end
 
   def timeseries(time = nil)
-    time.nil? ? @data : @data[time]
+    time ? @data[time] : @data
   end
 
   #######
@@ -19,7 +19,15 @@ class TimeSeriesSummary
     @type = type
     @summary = summary
     @icon = icon
-    @data = data
+    @data = nil
+    if (type == Forecast::Type.enum(:currently))
+      @data = data
+    else
+      @data = {}
+      (data || []).each do |d|
+        @data[d.time] = d
+      end
+    end
   end
 
 end

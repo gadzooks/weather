@@ -23,6 +23,10 @@ class Client
     Rails.logger.debug 'Making FAKE api call'
     responses = {}
     locations.each do |loc|
+      if rand(3) == 1
+        responses[loc] = {}
+        next
+      end
       filename = "spec/models/api/response/#{loc.name}.json"
       filename = filename.gsub(/ /,'')
       if File.exists? filename

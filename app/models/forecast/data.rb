@@ -1,5 +1,5 @@
 module Forecast
-class TimeSeries
+class Data
   TS_ATTRIBUTES = [:time, :summary, :icon, :precipIntensity, :precipProbability,
     :temperature, :apparentTemperature, :dewPoint, :timeSeriesType,
     :temperatureHigh, :temperatureHighTime, :temperatureLow, :temperatureLowTime,

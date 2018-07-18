@@ -16,7 +16,7 @@ module WeatherHelper
   }
 
   def icon_class(icon, precipitation)
-    mapping = ICON_MAPPING[icon] || icon
+    mapping = ICON_MAPPING[icon] || 'na'
     addional_class = ''
     if mapping == 'day-cloudy'
       addional_class =
