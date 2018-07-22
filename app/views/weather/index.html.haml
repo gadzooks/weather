@@ -7,53 +7,33 @@
       - forecasts = @forecast_summary.forecasts
       %thead
         %tr
-          %th{:scope => "col"}
-
+          %th{scope: 'col', class: 'header-main'}
           - forecasts.each do |loc, detail|
-            %th.center{:scope => "col", :colspan => 3, :class => 'header-main'}=loc.description.titleize
+            %th.center{scope: 'col', colspan: 4, class: 'header-main'}
+              =loc.description.titleize
         %tr.header-secondary
-          %th{:scope => "col"} Time
+          %td{scope: "col"} TIME
           - forecasts.size.times do
-            %th{:scope => "col", :colspan => 2} Rain
-            %th{:scope => "col", :class => 'fahrenheit'}
-              Temp
-              %i.wi-fahrenheit
+            %td{scope: "col", colspan: 2} DESC
+            %td{scope: "col", class: 'fahrenheit'} HI/LOW
+            %td{scope: "col"} PRECIP
       %tbody
-        - #current weather row
-        %tr
-          %th{:scope => "row"} Now
-          - forecasts.each do |loc, detail|
-            - current = detail.currently
-            %td.precipitation
-              %i{:class => icon_class(current.icon, current.precipProbability)}
-            %td.align-right
-              =precipitation(current.precipProbability)
-            %td=current.temperature.round.to_s
-        / current hourly weather
-        - @forecast_summary.hourly_times.each do |time|
-          %tr
-            %td{:scope => "row"}=time.strftime('%I:%M %p')
-            - forecasts.each do |loc, detail|
-              / FIXME move a lot of this to helper code
-              - hourly_ts = detail.hourly(time)
-              %td
-                %i{:class => icon_class(hourly_ts.icon, hourly_ts.precipProbability) }
-              %td.align-right
-                =precipitation(hourly_ts.precipProbability)
-              %td=hourly_ts.temperature.round.to_s
-
       / current daily weather
       - @forecast_summary.daily_times.each do |time|
-        %tr
-          %td{:scope => "row"}=time.strftime('%a')
+        %tr.weather-details
+          %td{scope: :row, class: 'forecast-date'}
+            =time.strftime('%a').upcase
+            %span.date
+              =time.strftime('%b %d').upcase
           - forecasts.each do |loc, detail|
             / FIXME move a lot of this to helper code
             - daily_ts = detail.daily(time)
+            %td.precipitation
+              %i{class: icon_class(daily_ts.icon, daily_ts.precipProbability)}
+            %td{class: 'summary', title: daily_ts.summary}
+              =daily_ts.icon.gsub(/-/,' ').titleize
+            %td=daily_ts.temperatureHigh.round.to_s + '°/' +  daily_ts.temperatureLow.round.to_s + '°'
             %td
-              %i{:class => icon_class(daily_ts.icon, daily_ts.precipProbability) }
-            %td.align-right
               =precipitation(daily_ts.precipProbability)
-            %td=daily_ts.temperatureLow.round.to_s + ' / ' + daily_ts.temperatureHigh.round.to_s
 
-
--#=debug @forecast_summary.forecasts.values.first.daily
+-#%a{:href => "https://www.freepik.com/free-photos-vectors/icon", class: 'freepik'} Icons by Freepik

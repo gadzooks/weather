@@ -15,3 +15,6 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile += %w( common.css  weather-icons.min.css )
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'font')
 Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+
+# add per controller stylesheets here
+Rails.application.config.assets.precompile += %w( weather.css )

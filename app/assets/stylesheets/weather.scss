@@ -2,3 +2,59 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+table.weather-forecast {
+  line-height:1;
+  border-collapse:collapse;
+  thead tr td {
+    font-size: 0.8em;
+  }
+
+  td { border-bottom: 1px solid #000; }
+
+  tbody {
+    tr.weather-details {
+      td {
+        border-bottom:1px solid black;
+      }
+
+      td.summary {
+        white-space: nowrap;
+        text-align: left;
+      }
+
+      td.forecast-date {
+      }
+
+      td span.date {
+        color: #999;
+        font-size: 0.8em;
+        white-space: nowrap;
+      }
+
+    }
+
+  }
+
+}
+
+.header-main {
+  background-color:#def0ff;
+}
+
+.header-secondary {
+  background-color:#fef7e9;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.weather-icon {
+  font-size: 1.4em;
+  font-weight: 1.2em;
+}
+
+a.freepik {
+  text-decoration: underline;
+  font-size: 0.6em;
+}
