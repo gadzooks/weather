@@ -1,6 +1,8 @@
 class WeatherController < ApplicationController
   def index
-    @weather = Weather.new
+    force_load = params[:prod] || 'false'
+    @call_weather_client = force_load.downcase == 'true'
+    @weather = Weather.all(@call_weather_client)
     @forecast_summary = @weather.get_forecast
   end
 

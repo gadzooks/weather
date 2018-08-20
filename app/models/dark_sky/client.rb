@@ -11,8 +11,8 @@ class Client
   # FIXME better ways to store secret key
   #https://stackoverflow.com/questions/26498357/how-to-use-secrets-yml-for-api-keys-in-rails-4-1
   #https://www.engineyard.com/blog/encrypted-rails-secrets-on-rails-5.1
-  def self.get_forecast_by_location(locations)
-    if Rails.env.production?
+  def self.get_forecast_by_location(locations, call_weather_client)
+    if Rails.env.production? || call_weather_client
       actual_api_call(locations)
     else
       fake_api_call(locations)
@@ -23,6 +23,7 @@ class Client
     Rails.logger.debug 'Making FAKE api call'
     responses = {}
     locations.each do |loc|
+      next if loc.blank?
       #if rand(3) == 1
         #responses[loc] = {}
         #next
@@ -44,6 +45,7 @@ class Client
     hydra = Hydra.new
     requests = {}
     locations.each do |loc|
+      next if loc.blank?
       url = BASE_URL + '/' +  loc.latitude.to_s + ',' + loc.longitude.to_s +
         EXCLUDE_BLOCK
       req = Request.new url

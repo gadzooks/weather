@@ -3,7 +3,7 @@ class Data
   TS_ATTRIBUTES = [:time, :summary, :icon, :precipIntensity, :precipProbability,
     :temperature, :apparentTemperature, :dewPoint, :timeSeriesType,
     :temperatureHigh, :temperatureHighTime, :temperatureLow, :temperatureLowTime,
-    :sunsetTime, :sunriseTime
+    :sunsetTime, :sunriseTime, :visibility, :cloudCover
   ]
   attr_reader *TS_ATTRIBUTES
 
@@ -19,6 +19,9 @@ class Data
       # FIXME handle parse errors
       #@time = DateTime.strptime(@time.to_s,'%s') if @time
       @time = Time.at(@time) if @time
+
+      @visibility = @visibility.to_i * 10
+      @cloudCover = (@cloudCover.to_f * 100).round
     end
     self
   end

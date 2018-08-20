@@ -2,14 +2,16 @@ module Forecast
 class Client
 
   attr_reader :locations
+
   def initialize(locations)
     @locations = locations
     self
   end
 
-  def get_forecast
+  def get_forecast(call_weather_client)
     Rails.logger.debug "Getting forecast for : " + @locations.inspect
-    @json_response = DarkSky::Client.get_forecast_by_location(@locations)
+    @json_response = DarkSky::Client.get_forecast_by_location(@locations,
+                                                              call_weather_client)
     #Rails.logger.debug @json_response.inspect
 
     Parser.dark_sky_parser(@json_response)

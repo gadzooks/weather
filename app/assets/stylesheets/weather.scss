@@ -9,12 +9,17 @@ table.weather-forecast {
     font-size: 0.8em;
   }
 
-  td { border-bottom: 1px solid #000; }
+  td { 
+    font-size: 0.8em;
+    border-bottom: 1px solid #000;
+  }
 
   tbody {
     tr.weather-details {
       td {
         border-bottom:1px solid black;
+        padding: 4px;
+        padding-top: 10px;
       }
 
       td.summary {
@@ -22,13 +27,20 @@ table.weather-forecast {
         text-align: left;
       }
 
-      td.forecast-date {
+      td.forecast-date span.day-of-week {
+        border-right: 0;
       }
 
-      td span.date {
-        color: #999;
-        font-size: 0.8em;
+      td.forecast-date span.day-of-month {
+        color: #df993d;
+        font-size: 0.85em;
+        font-weight: 900;
         white-space: nowrap;
+        border-left: 0;
+      }
+
+      td.precipitation {
+        text-align: center;
       }
 
     }
