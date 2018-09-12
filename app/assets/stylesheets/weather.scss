@@ -12,7 +12,41 @@ table.weather-forecast {
     border-bottom: 1px solid #000;
   }
 
+  .location-change {
+    border-right: 3px solid rgba(45, 128, 246, 0.14);
+  }
+
+  .fog {
+    color: rgb(152, 150, 152);
+  }
+
+  .snow {
+    color: rgb(25, 151, 245);
+  }
+
+  .cloudy {
+    color: blue;
+  }
+
+  .rain {
+    color: blue;
+  }
+
+  .day-cloudy-10 {
+    color: rgb(255, 187, 33);
+  }
+
+  .day-cloudy-100 {
+    color: rgb(38, 163, 231);
+  }
+
+  .day-sunny {
+    color: rgb(252, 255, 36);
+  }
+
   tbody {
+    white-space: nowrap;
+
     tr.daily-summary {
       font-size: 0.9em;
     }
@@ -26,7 +60,6 @@ table.weather-forecast {
       }
 
       td.summary {
-        white-space: nowrap;
         text-align: left;
       }
 
@@ -35,7 +68,7 @@ table.weather-forecast {
       }
 
       td.forecast-date span.day-of-month {
-        color: #df993d;
+        color: #df788e;
         font-size: 0.85em;
         font-weight: 900;
         white-space: nowrap;
