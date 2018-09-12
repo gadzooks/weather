@@ -1,50 +1,53 @@
 / Page Content
 
-.container
-  / Page Features
-  .row
-    .h3.center
-      -if @call_weather_client
-        Results from calling real API
-      -else
-        FAKE results (for testing only)
+.h3.center
+  -if @call_weather_client
+    Results from calling real API
+  -else
+    FAKE results (for testing only)
 
-    %table.table.table-bordered.weather-forecast
-      - forecasts = @forecast_summary.forecasts
-      %thead
-        %tr
-          %th{scope: 'col', class: 'header-main', colspan:2}
-          - forecasts.each do |loc, detail|
-            %th.center{scope: 'col', colspan: 5, class: 'header-main'}
-              =loc.description.titleize
-        %tr.header-secondary
-          %td{scope: "col", colspan: 2, class: 'center'} TIME
-          - forecasts.size.times do
-            %td{scope: "col", colspan: 2, class: :center} DESC
-            %td{scope: "col", class: 'fahrenheit'} HI/LOW
-            %td{scope: "col"} PRECIP
-            %td{scope: "col"} CLOUD COVER
-      %tbody
-      / current daily weather
-      - @forecast_summary.daily_times.each do |time|
-        %tr.weather-details
-          %td{class: 'forecast-date'}
-            %span.day-of-week
-              =time.strftime('%a').upcase
-          %td{class: 'forecast-date'}
-            %span.day-of-month
-              =time.strftime('%b %d').upcase
-          - forecasts.each do |loc, detail|
-            / FIXME move a lot of this to helper code
-            - daily_ts = detail.daily(time)
-            %td.precipitation
-              %i{class: icon_class(daily_ts.icon, daily_ts.precipProbability), title: daily_ts.summary}
-            %td{class: 'summary'}
-              =daily_ts.icon.gsub(/-/,' ').titleize
-            %td=daily_ts.temperatureHigh.round.to_s + '° / ' +  daily_ts.temperatureLow.round.to_s + '°'
-            %td.center
-              =precipitation(daily_ts.precipProbability)
-            %td.center
-              =daily_ts.cloudCover.to_s + '%'
+%table.table.table-bordered.weather-forecast
+  - forecasts = @forecast_summary.forecasts
+  %thead
+    %tr
+      %th{scope: 'col', class: 'header-main', colspan:2}
+      - forecasts.each do |loc, detail|
+        %th.center{scope: 'col', colspan: 5, class: 'header-main'}
+          %span{title: detail.daily_summary}
+            =loc.description.titleize
+    %tr.header-secondary
+      %td{scope: "col", colspan: 2, class: 'center'} TIME
+      - forecasts.size.times do
+        %td{scope: "col", colspan: 2, class: :center} DESC
+        %td{scope: "col", class: 'fahrenheit'} HI/LOW
+        %td{scope: "col"} PRECIP
+        %td{scope: "col"} CLOUD COVER
+  %tbody
+    %tr.daily-summary
+      %td{scope: 'col', class: 'center', colspan:2}
+      - forecasts.each do |loc, detail|
+        %td.center{scope: 'col', colspan: 5}
+          =detail.daily_summary
+  / current daily weather
+  - @forecast_summary.daily_times.each do |time|
+    %tr.weather-details
+      %td{class: 'forecast-date'}
+        %span.day-of-week
+          =time.strftime('%a').upcase
+      %td{class: 'forecast-date'}
+        %span.day-of-month
+          =time.strftime('%b %d').upcase
+      - forecasts.each do |loc, detail|
+        / FIXME move a lot of this to helper code
+        - daily_ts = detail.daily(time)
+        %td.precipitation
+          %i{class: icon_class(daily_ts.icon, daily_ts.precipProbability), title: daily_ts.summary}
+        %td{class: 'summary'}
+          =daily_ts.icon.gsub(/-/,' ').titleize
+        %td=daily_ts.temperatureHigh.round.to_s + '° / ' +  daily_ts.temperatureLow.round.to_s + '°'
+        %td.center
+          =precipitation(daily_ts.precipProbability)
+        %td.center
+          =daily_ts.cloudCover.to_s + '%'
 
 -#%a{:href => "https://www.freepik.com/free-photos-vectors/icon", class: 'freepik'} Icons by Freepik

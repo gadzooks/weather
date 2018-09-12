@@ -1,7 +1,9 @@
 module Forecast
 class Detail
 
-  attr_reader :location, :max_hourly_data_points, :max_daily_data_points
+  attr_reader :location, :max_hourly_data_points, :max_daily_data_points,
+    :daily_summary
+
   def initialize(hsh)
     @location = hsh[:location]
     @currently = hsh[:currently]
@@ -9,6 +11,7 @@ class Detail
     @hourly = hsh[:hourly]
     @max_daily_data_points = hsh[:max_daily_data_points]
     @max_hourly_data_points = hsh[:max_hourly_data_points]
+    @daily_summary = hsh[:daily_summary]
   end
 
   def currently

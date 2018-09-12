@@ -42,8 +42,10 @@ class Parser
         )
       end
 
+      daily_summary = ''
       d_forecast = response[DAILY_FORECAST]
       unless d_forecast.blank?
+        daily_summary = d_forecast['summary'] || ''
         daily_data = (d_forecast['data'] || []).map do |hsh|
           Forecast::Data.new(hsh)
         end
@@ -64,6 +66,7 @@ class Parser
         currently: currently,
         daily: daily,
         hourly: hourly,
+        daily_summary: daily_summary,
       }
 
       forecast_by_location[location] = Forecast::Detail.new hsh

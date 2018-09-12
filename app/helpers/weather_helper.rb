@@ -36,6 +36,7 @@ module WeatherHelper
   end
 
   def precipitation(precipitation)
-    precipitation.round.to_s + '%'
+    precipitation ||= 0
+    (precipitation * 100).round.to_s + '%'
   end
 end

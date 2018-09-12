@@ -3,23 +3,26 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 table.weather-forecast {
-  line-height:1;
+  padding-left: 100px;
   border-collapse:collapse;
   thead tr td {
-    font-size: 0.8em;
   }
 
   td { 
-    font-size: 0.8em;
     border-bottom: 1px solid #000;
   }
 
   tbody {
+    tr.daily-summary {
+      font-size: 0.9em;
+    }
+
     tr.weather-details {
       td {
         border-bottom:1px solid black;
         padding: 4px;
         padding-top: 10px;
+        padding-bottom: 6px;
       }
 
       td.summary {
