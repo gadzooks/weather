@@ -3,17 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 table.weather-forecast {
-  padding-left: 100px;
   border-collapse:collapse;
-  thead tr td {
-  }
-
-  td { 
-    border-bottom: 1px solid #000;
-  }
 
   .location-change {
-    border-right: 3px solid rgba(45, 128, 246, 0.14);
+    border-right: 2px solid rgba(1, 2, 4, 0.07);
   }
 
   .fog {
@@ -49,6 +42,12 @@ table.weather-forecast {
 
     tr.daily-summary {
       font-size: 0.9em;
+      white-space: normal;
+    }
+
+    tr.weekend {
+      background-image:linear-gradient(142deg, #b2f7c6 11.11%, #faf5f5 11.11%, #faf5f5 50%, #b2f7c6 50%, #b2f7c6 61.11%, #faf5f5 61.11%, #faf5f5 100%);
+      background-size: 14.62px 11.42px;
     }
 
     tr.weather-details {
@@ -80,17 +79,19 @@ table.weather-forecast {
       }
 
     }
-
   }
 
-}
+  .header-main {
+    background-color:#def0ff;
+  }
 
-.header-main {
-  background-color:#def0ff;
-}
-
-.header-secondary {
-  background-color:#fef7e9;
+  tr.header-secondary {
+    background-color:#fef7e9;
+    text-align: center;
+    td {
+      padding: 8px 8px;
+    }
+  }
 }
 
 .align-right {

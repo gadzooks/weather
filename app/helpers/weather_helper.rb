@@ -15,12 +15,17 @@ module WeatherHelper
     'tornado' => 'tornado',
   }
 
+  def add_weekend_class(time, additional_class)
+    weekend_class = (time && time.on_weekend?) ? ' weekend ' : ' '
+    additional_class + weekend_class
+  end
+
   def icon_class(icon, precipitation)
     precipitation = precipitation.to_f
     mapping = ICON_MAPPING[icon] || 'na'
-    addional_class = ''
+    additional_class = ''
     if mapping == 'day-cloudy'
-      addional_class =
+      additional_class =
         if precipitation < 0.3
           'day-cloudy-10'
         else
@@ -28,7 +33,7 @@ module WeatherHelper
         end
     end
 
-    "wi weather-icon wi-#{mapping} #{mapping} #{addional_class}"
+    "wi weather-icon wi-#{mapping} #{mapping} #{additional_class}"
   end
 
   def precipitation(precipitation)
