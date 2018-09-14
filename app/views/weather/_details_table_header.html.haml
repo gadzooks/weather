@@ -1,0 +1,15 @@
+%thead
+  %tr
+    %th{scope: 'col', class: 'header-main location-change', colspan:2}
+    - forecasts.each do |loc, detail|
+      %th{scope: 'col', colspan: 5, class: 'header-main location-change center'}
+        %span{title: detail.daily_summary}
+          =loc.description.upcase
+  %tr.header-secondary
+    %td{scope: "col", colspan: 2, class: 'center location-change'} DATE
+    - forecasts.size.times do
+      %td{scope: "col", colspan: 2, class: :center} DESC
+      %td{scope: "col", class: 'fahrenheit'} HI / LOW
+      %td{scope: "col"} PRECIP
+      %td{scope: "col", class:'location-change'} CLOUD COVER
+

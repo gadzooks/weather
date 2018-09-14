@@ -1,6 +1,9 @@
 // Place all the styles related to the Weather controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+table.weather-forecast-summary {
+  width: 100px;
+}
 
 table.weather-forecast {
   border-collapse:collapse;
@@ -34,7 +37,7 @@ table.weather-forecast {
   }
 
   .day-sunny {
-    color: rgb(252, 255, 36);
+    color: #ffb412;
   }
 
   tbody {
@@ -45,7 +48,7 @@ table.weather-forecast {
       white-space: normal;
     }
 
-    tr.weekend {
+    .weekend {
       background-image:linear-gradient(142deg, #b2f7c6 11.11%, #faf5f5 11.11%, #faf5f5 50%, #b2f7c6 50%, #b2f7c6 61.11%, #faf5f5 61.11%, #faf5f5 100%);
       background-size: 14.62px 11.42px;
     }

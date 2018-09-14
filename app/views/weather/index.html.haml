@@ -4,24 +4,14 @@
   .h3.center
     FAKE results (for testing only)
 
-%table.table.table-bordered.weather-forecast
-  - forecasts = @forecast_summary.forecasts
-  %thead
-    %tr
-      %th{scope: 'col', class: 'header-main location-change', colspan:2}
-      - forecasts.each do |loc, detail|
-        %th{scope: 'col', colspan: 5, class: 'header-main location-change center'}
-          %span{title: detail.daily_summary}
-            =loc.description.upcase
-    %tr.header-secondary
-      %td{scope: "col", colspan: 2, class: 'center location-change'} TIME
-      - forecasts.size.times do
-        %td{scope: "col", colspan: 2, class: :center} DESC
-        %td{scope: "col", class: 'fahrenheit'} HI / LOW
-        %td{scope: "col"} PRECIP
-        %td{scope: "col", class:'location-change'} CLOUDS
+= render 'weather_summary_table', forecast_summary: @forecast_summary
+
+%table.table.table-bordered.table-sm.weather-forecast
+  = render 'details_table_header', forecasts: @forecast_summary.forecasts
+
   %tbody
   / current daily weather
+  - forecasts = @forecast_summary.forecasts
   - @forecast_summary.daily_times.each do |time|
     - css_row_classes = add_weekend_class(time, 'weather-details')
     %tr{class: css_row_classes}
@@ -38,7 +28,7 @@
           %i{class: icon_class(daily_ts.icon, daily_ts.precipProbability), title: daily_ts.summary}
         %td{class: 'summary'}
           =daily_ts.icon.gsub(/-/,' ').titleize
-        %td.center=daily_ts.temperatureHigh.round.to_s + '° / ' +  daily_ts.temperatureLow.round.to_s + '°'
+        %td=daily_ts.temperatureHigh.round.to_s + '° / ' +  daily_ts.temperatureLow.round.to_s + '°'
         %td.center
           =precipitation(daily_ts.precipProbability)
         %td{class: 'center location-change'}

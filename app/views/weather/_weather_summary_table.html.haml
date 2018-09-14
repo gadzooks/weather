@@ -1,0 +1,24 @@
+- forecasts = forecast_summary.forecasts
+%table.table.table-sm.weather-forecast.weather-forecast-summary
+  %thead
+    %tr.header-secondary
+      %td{scope: "col", rowspan: 2, class: 'center location-change'}
+      - forecast_summary.daily_times.each do |time|
+        %td{class: 'forecast-date location-change'}
+          %span.day-of-week
+            =time.strftime('%a %b %d').upcase
+
+  - locations = forecasts.keys
+  %tbody
+    - locations.each do |loc|
+      %tr.weather-details
+        %td.location-change
+          =loc.description.upcase
+        - forecast_summary.daily_times.each do |time|
+          - detail = forecasts[loc]
+          / FIXME move a lot of this to helper code
+          - daily_ts = detail.daily(time)
+          - css_row_classes = add_weekend_class(time, 'precipitation location-change')
+          %td{class: css_row_classes}
+            %i{class: icon_class(daily_ts.icon, daily_ts.precipProbability), title: daily_ts.summary}
+
