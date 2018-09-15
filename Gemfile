@@ -80,3 +80,5 @@ gem 'typhoeus'
 gem 'frozen_record'
 gem 'safe-enum'
 gem 'sprockets', '~>3.7.2'
+
+gem 'jquery-rails'

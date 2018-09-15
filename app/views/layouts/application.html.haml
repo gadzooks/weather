@@ -8,7 +8,7 @@
     = stylesheet_link_tag    'application', 'common', 'weather-icons.min', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag params[:controller]
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
+  %body{ id: controller_name + '_' + action_name }
     .d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.mb-3.bg-white.border-bottom.box-shadow
       %h5.my-0.mr-md-auto.font-weight-normal Sunny Side Up
       - if false
