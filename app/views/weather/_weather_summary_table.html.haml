@@ -2,7 +2,10 @@
 %table.table.table-sm.weather-forecast.weather-forecast-summary
   %thead
     %tr.header-secondary
-      %td{scope: "col", rowspan: 2, class: 'center location-change'}
+      %td{scope: "col", class: 'center location-change'}
+      %td{scope: "col", class: 'center location-change'}
+        \%
+        PRECIP
       - forecast_summary.daily_times.each do |time|
         %td{class: 'forecast-date location-change'}
           %span.day-of-week
@@ -11,11 +14,15 @@
   - locations = forecasts.keys
   %tbody
     - locations.each do |loc|
+    - detail = forecasts[loc]
       %tr.weather-details
         %td.location-change
           =loc.description.upcase
+        %td.location-change
+          - d = forecast_summary.daily_values_for(loc, 'precipProbability')
+          %span{class: :inlinesparkline, 'sparktooltipFormat000' => 'Precipitation'}
+            = d.map { |f| (f*100).round }.join ','
         - forecast_summary.daily_times.each do |time|
-          - detail = forecasts[loc]
           / FIXME move a lot of this to helper code
           - daily_ts = detail.daily(time)
           - css_row_classes = add_weekend_class(time, 'precipitation location-change')

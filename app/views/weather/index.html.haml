@@ -3,19 +3,21 @@
 -unless @call_weather_client
   .h3.center
     FAKE results (for testing only)
-%p
-  Inline Sparkline:
-  = succeed "." do
-    %span.inlinesparkline 1,4,4,7,5,9,10
-%p
-  Sparkline with dynamic data:
-  %span.dynamicsparkline Loading..
-%p
-  Bar chart with dynamic data:
-  %span.dynamicbar Loading..
-%p
-  Bar chart with inline data:
-  %span.inlinebar 1,3,4,5,3,5
+
+-if false
+  %p
+    Inline Sparkline:
+    = succeed "." do
+      %span.inlinesparkline 10,4,4,7,5,9,10
+  %p
+    Sparkline with dynamic data:
+    %span.dynamicsparkline Loading..
+  %p
+    Bar chart with dynamic data:
+    %span.dynamicbar Loading..
+  %p
+    Bar chart with inline data:
+    %span.inlinebar 1,3,4,5,3,5
 
 = render 'weather_summary_table', forecast_summary: @forecast_summary
 
@@ -53,3 +55,6 @@
         =detail.daily_summary
 
 -#%a{:href => "https://www.freepik.com/free-photos-vectors/icon", class: 'freepik'} Icons by Freepik
+
+// debug @forecast_summary.forecasts
+
