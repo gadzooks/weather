@@ -4,55 +4,11 @@
   .h3.center
     FAKE results (for testing only)
 
--if false
-  %p
-    Inline Sparkline:
-    = succeed "." do
-      %span.inlinesparkline 10,4,4,7,5,9,10
-  %p
-    Sparkline with dynamic data:
-    %span.dynamicsparkline Loading..
-  %p
-    Bar chart with dynamic data:
-    %span.dynamicbar Loading..
-  %p
-    Bar chart with inline data:
-    %span.inlinebar 1,3,4,5,3,5
-
 = render 'weather_summary_table', forecast_summary: @forecast_summary
 
-%table.table.table-bordered.table-sm.weather-forecast
-  = render 'details_table_header', forecasts: @forecast_summary.forecasts
-
-  %tbody
-  / current daily weather
-  - forecasts = @forecast_summary.forecasts
-  - @forecast_summary.daily_times.each do |time|
-    - css_row_classes = add_weekend_class(time, 'weather-details')
-    %tr{class: css_row_classes}
-      %td{class: 'forecast-date'}
-        %span.day-of-week
-          =time.strftime('%a').upcase
-      %td{class: 'forecast-date location-change'}
-        %span.day-of-month
-          =time.strftime('%b %d').upcase
-      - forecasts.each do |loc, detail|
-        / FIXME move a lot of this to helper code
-        - daily_ts = detail.daily(time)
-        %td.precipitation
-          %i{class: icon_class(daily_ts.icon, daily_ts.precipProbability), title: daily_ts.summary}
-        %td{class: 'summary'}
-          =daily_ts.icon.gsub(/-/,' ').titleize
-        %td=daily_ts.temperatureHigh.round.to_s + '° / ' +  daily_ts.temperatureLow.round.to_s + '°'
-        %td.center
-          =precipitation(daily_ts.precipProbability)
-        %td{class: 'center location-change'}
-          =daily_ts.cloudCover.to_s + '%'
-  %tr.daily-summary
-    %td{scope: 'col', colspan:2, class: 'location-change'}
-    - forecasts.each do |loc, detail|
-      %td.center{scope: 'col', class: 'center location-change', colspan: 5}
-        =detail.daily_summary
+-@forecast_summary.forecasts.each do |loc, detail|
+  = render partial: 'forecast_details',
+    locals: { loc: loc, detail: detail, daily_times: @forecast_summary.daily_times  }
 
 -#%a{:href => "https://www.freepik.com/free-photos-vectors/icon", class: 'freepik'} Icons by Freepik
 
