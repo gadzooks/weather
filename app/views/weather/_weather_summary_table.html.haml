@@ -3,9 +3,6 @@
   %thead
     %tr.header-secondary
       %td{scope: "col", class: 'center location-change'}
-      %td{scope: "col", class: 'center location-change'}
-        \%
-        PRECIP
       - forecast_summary.daily_times.each do |time|
         %td{class: 'forecast-date location-change'}
           %span.day-of-week
@@ -18,10 +15,6 @@
       %tr.weather-details
         %td.location-change
           =loc.description.upcase
-        %td.location-change
-          - d = forecast_summary.daily_values_for(loc, 'precipProbability')
-          %span{class: :inlinesparkline, 'sparktooltipFormat000' => 'Precipitation'}
-            = d.map { |f| (f*100).round }.join ','
         - forecast_summary.daily_times.each do |time|
           / FIXME move a lot of this to helper code
           - daily_ts = detail.daily(time)

@@ -15,4 +15,5 @@
 //= require rails-ujs
 //= require activestorage
 //= require jquery-readyselector
+//= require tooltipster.bundle.min.js
 //= require_tree .

@@ -4,6 +4,19 @@
   .h3.center
     FAKE results (for testing only)
 
+.span{class: 'tooltip', title: 'some title'}
+  Some text
+  even more text
+  one more line
+
+.span
+  Some more text
+
+%span.tooltip{"data-tooltip-content" => "#tooltip_content"} This span has a tooltip with HTML when you hover over it!
+.tooltip_templates
+  %span#tooltip_content
+    %strong This is the content of my tooltip!
+
 = render 'weather_summary_table', forecast_summary: @forecast_summary
 
 -@forecast_summary.forecasts.each do |loc, detail|
