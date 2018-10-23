@@ -1,0 +1,40 @@
+%table.table.table-bordered.table-sm.weather-forecast
+  %thead
+    %tr
+      %th{scope: 'col', class: 'header-main location-change', colspan:2}
+      %th{scope: 'col', colspan: 5, class: 'header-main location-change center'}
+        %span{title: detail.daily_summary}
+          =loc.description.upcase
+    %tr.header-secondary
+      %td{scope: "col", colspan: 2, class: 'center location-change'} DATE
+      %td{scope: "col", colspan: 2, class: :center} DESC
+      %td{scope: "col", class: 'fahrenheit'} HI / LOW
+      %td{scope: "col"} PRECIP
+      %td{scope: "col", class:'location-change'} CLOUD COVER
+
+  %tbody
+    / current daily weather
+    - daily_times.each do |time|
+      - css_row_classes = add_weekend_class(time, 'weather-details')
+      %tr{class: css_row_classes}
+        %td{class: 'forecast-date'}
+          %span.day-of-week
+            =time.strftime('%a').upcase
+        %td{class: 'forecast-date location-change'}
+          %span.day-of-month
+            =time.strftime('%b %d').upcase
+        / FIXME move a lot of this to helper code
+        - daily_ts = detail.daily(time)
+        %td.precipitation
+          %i{class: icon_class(daily_ts.icon, daily_ts.precipProbability), title: daily_ts.summary}
+        %td{class: 'summary'}
+          =daily_ts.icon.gsub(/-/,' ').titleize
+        %td.center=daily_ts.temperatureHigh.round.to_s + '° / ' +  daily_ts.temperatureLow.round.to_s + '°'
+        %td.center
+          =precipitation(daily_ts.precipProbability)
+        %td{class: 'center location-change'}
+          =daily_ts.cloudCover.to_s + '%'
+    %tr.daily-summary
+      %td{scope: 'col', colspan:2, class: 'location-change'}
+      %td.center{scope: 'col', class: 'center location-change', colspan: 5}
+        =detail.daily_summary
