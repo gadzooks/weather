@@ -7,14 +7,17 @@
         FAKE results (for testing only)
 
 .row
-  .col-4
+  .col-3
   .col-4
     = render 'weather_summary_table', forecast_summary: @forecast_summary
-  .col-4
+  .col-3
 
 .row
-  -@forecast_summary.forecasts.each do |loc, detail|
-    = render partial: 'forecast_details',
-      locals: { loc: loc, detail: detail, daily_times: @forecast_summary.daily_times  }
+  .col-2
+  .col-8
+    -@forecast_summary.forecasts.each do |loc, detail|
+      = render partial: 'forecast_details',
+        locals: { loc: loc, detail: detail, daily_times: @forecast_summary.daily_times  }
+  .col-2
 
   %a{:href => "https://www.freepik.com/free-photos-vectors/icon", class: 'freepik'} Icons by Freepik

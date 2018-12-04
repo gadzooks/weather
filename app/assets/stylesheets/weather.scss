@@ -1,8 +1,17 @@
 // Place all the styles related to the Weather controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.h4.summary {
+  background-color: red;
+}
 table.weather-forecast-summary {
   width: 100px;
+  tr.table-heading {
+    td {
+      border: 0;
+      font-size: 1.2em;
+    }
+  }
 }
 
 table.weather-forecast {
@@ -43,8 +52,7 @@ table.weather-forecast {
     white-space: nowrap;
 
     tr.daily-summary {
-      font-size: 0.9em;
-      white-space: normal;
+      background-color: #feffd4;
     }
 
     .weekend {
@@ -63,16 +71,20 @@ table.weather-forecast {
         text-align: left;
       }
 
-      td.forecast-date span.day-of-week {
-        border-right: 0;
+      td.left-col-of-merged-cells {
+        border-right: solid 1px #FFF;
+      }
+
+      td.right-col-of-merged-cells {
+        border-left: solid 1px #FFF;
       }
 
       td.forecast-date span.day-of-month {
+        border:none;
         color: #df788e;
         font-size: 0.85em;
         font-weight: 900;
         white-space: nowrap;
-        border-left: 0;
       }
 
       td.precipitation {

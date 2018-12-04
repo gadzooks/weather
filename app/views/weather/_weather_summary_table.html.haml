@@ -1,6 +1,10 @@
 - forecasts = forecast_summary.forecasts
 %table.table.table-sm.weather-forecast.weather-forecast-summary
   %thead
+    %tr.table-heading.center
+      %th{scope: 'col', colspan: 9}
+        Weather Forecast Summary
+  %thead
     %tr.header-secondary
       %td{scope: "col", class: 'center location-change'}
       - forecast_summary.daily_times.each do |time|
