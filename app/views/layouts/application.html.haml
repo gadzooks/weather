@@ -11,50 +11,9 @@
   %body{ id: controller_name + '_' + action_name }
     .d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.mb-3.bg-white.border-bottom.box-shadow
       %h5.my-0.mr-md-auto.font-weight-normal Sunny Side Up
-      - if false
-        %nav.my-2.my-md-0.mr-md-3
-          %a.p-2.text-dark{:href => "#"} Features
-          %a.p-2.text-dark{:href => "#"} Enterprise
-          %a.p-2.text-dark{:href => "#"} Support
-          %a.p-2.text-dark{:href => "#"} Pricing
-        %a.btn.btn-outline-primary{:href => "#"} Sign up
-    = yield
+    .container-fluid
+      = yield
   %footer.pt-4.my-md-5.pt-md-5.border-top
     .row
       .col-12.col-md
         %small.d-block.mb-3.text-muted © 2018
-      .col-6.col-md
-        - if false
-          %h5 Features
-          %ul.list-unstyled.text-small
-            %li
-              %a.text-muted{:href => "#"} Another one
-            %li
-              %a.text-muted{:href => "#"} Last time
-      .col-6.col-md
-        - if false
-          %h5 Resources
-          %ul.list-unstyled.text-small
-            %li
-              %a.text-muted{:href => "#"} Resource
-            %li
-              %a.text-muted{:href => "#"} Resource name
-            %li
-              %a.text-muted{:href => "#"} Another resource
-            %li
-              %a.text-muted{:href => "#"} Final resource
-      .col-6.col-md
-        - if false
-          %h5 About
-          %ul.list-unstyled.text-small
-            %li
-              %a.text-muted{:href => "#"} Team
-            %li
-              %a.text-muted{:href => "#"} Locations
-            %li
-              %a.text-muted{:href => "#"} Privacy
-            %li
-              %a.text-muted{:href => "#"} Terms
-    / Bootstrap core JavaScript
-    -#%script{:src => "vendor/jquery/jquery.min.js"}
-    -#%script{:src => "vendor/bootstrap/js/bootstrap.bundle.min.js"}

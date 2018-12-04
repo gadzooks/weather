@@ -7,9 +7,8 @@ table.weather-forecast-summary {
 
 table.weather-forecast {
   border-collapse:collapse;
-
-  .location-change {
-    border-right: 2px solid rgba(1, 2, 4, 0.07);
+  tr td {
+    border: 2px solid rgba(1, 2, 4, 0.07);
   }
 
   .fog {
@@ -55,7 +54,6 @@ table.weather-forecast {
 
     tr.weather-details {
       td {
-        border-bottom:1px solid black;
         padding: 4px;
         padding-top: 10px;
         padding-bottom: 6px;
