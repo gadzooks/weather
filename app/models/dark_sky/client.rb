@@ -3,14 +3,10 @@ class Client
   include Typhoeus
 
   # FIXME use different api keys for devo and prod
-  # FIXME set up mock for rspec
-  API_KEY="3b3556692fd048477a0decc9b6911ebe"
+  API_KEY = Rails.application.credentials.dark_sky[:api_key]
   BASE_URL = "https://api.darksky.net/forecast/#{API_KEY}"
   EXCLUDE_BLOCK = "?exclude=minutely,hourly"
 
-  # FIXME better ways to store secret key
-  #https://stackoverflow.com/questions/26498357/how-to-use-secrets-yml-for-api-keys-in-rails-4-1
-  #https://www.engineyard.com/blog/encrypted-rails-secrets-on-rails-5.1
   def self.get_forecast_by_location(locations, call_weather_client)
     if Rails.env.production? || call_weather_client
       actual_api_call(locations)
