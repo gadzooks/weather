@@ -23,6 +23,6 @@ I decided to build this simple website to answer that question for me. The Pacif
 3) localhost:3000 for test data, localhost:3000/prod for real weather information.
 
 # Tech details
-Stack - Rails 5.2, SCSS, haml, bootstrap, Rspec
-Weather API provided by DarkSky.net
-Weather icons : https://www.freepik.com/free-photos-vectors/icon
+* Stack - Rails 5.2, SCSS, haml, bootstrap, Rspec
+* Weather API provided by DarkSky.net
+* Weather icons : https://www.freepik.com/free-photos-vectors/icon
