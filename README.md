@@ -1,7 +1,7 @@
 ## tl;dr (select code samples)
-### tech stack
+### Tech stack
 - Use HAML, SCSS, coffeescript (when required), Rspec & guard (for testing)
-### views
+### Views
 - Use partials in Views to keep code clean : https://github.com/gadzooks/weather/blob/master/app/views/weather/index.html.haml
 - Helpers to keep view code clean : https://github.com/gadzooks/weather/blob/master/app/helpers/weather_helper.rb
 
@@ -24,7 +24,7 @@ https://github.com/gadzooks/weather/blob/master/app/models/forecast/parser.rb
 - More ruby metaprogramming to create instant variables and keep code DRY : https://github.com/gadzooks/weather/blob/master/app/models/forecast/data.rb
 - Dynamically set instance variable values and keep code DRY : https://github.com/gadzooks/weather/blob/master/app/models/forecast/data.rb
 
-### testing - use Rspec and guard
+### Testing - use Rspec and guard
 https://github.com/gadzooks/weather/blob/master/spec/models/forecast/parser_spec.rb
 
 ## Problem statement :
