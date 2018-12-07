@@ -1,5 +1,34 @@
 # Sunny side up 
 
+# tl;dr (select code samples)
+## tech stack
+- Use HAML, SCSS, coffeescript (when required), Rspec & guard (for testing)
+## views
+- Use partials in Views to keep code clean : https://github.com/gadzooks/weather/blob/master/app/views/weather/index.html.haml
+- Helpers to keep view code clean : https://github.com/gadzooks/weather/blob/master/app/helpers/weather_helper.rb
+
+## Design pattern
+- Skinny controller fat model : https://github.com/gadzooks/weather/blob/master/app/controllers/weather_controller.rb
+- Use singleton pattern to keep track of latitude / longitudes : https://github.com/gadzooks/weather/blob/master/app/models/latitude_longitude.rb
+
+## Security
+- Store API secret key securely : https://github.com/gadzooks/weather/blob/master/app/models/dark_sky/client.rb
+
+## Decoupling code
+- Use separate parser class to keep API specific details decoupled from rest of code and make it easier to plug in a different weather API : 
+https://github.com/gadzooks/weather/blob/master/app/models/forecast/parser.rb
+
+## Use ENUMs where they make sense
+- Use ENUMs for forecast types : https://github.com/gadzooks/weather/blob/master/app/models/forecast/type.rb
+
+## Ruby metaprogramming
+- Use ruby metaprogramming to create class methods on the fly : https://github.com/gadzooks/weather/blob/master/app/models/forecast/time_series_summary.rb
+- More ruby metaprogramming to create instant variables and keep code DRY : https://github.com/gadzooks/weather/blob/master/app/models/forecast/data.rb
+- Dynamically set instance variable values and keep code DRY : https://github.com/gadzooks/weather/blob/master/app/models/forecast/data.rb
+
+## testing - use Rspec and guard 
+https://github.com/gadzooks/weather/blob/master/spec/models/forecast/parser_spec.rb
+
 # Problem statement : 
 Where should I go hiking in the next week based on weather forecasts ?
 
