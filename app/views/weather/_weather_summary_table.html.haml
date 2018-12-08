@@ -1,4 +1,5 @@
 - forecasts = forecast_summary.forecasts
+%top
 %table.table.table-sm.weather-forecast.weather-forecast-summary
   %thead
     %tr.table-heading.center
@@ -18,7 +19,7 @@
     - detail = forecasts[loc]
       %tr.weather-details
         %td.location-change
-          =loc.description.upcase
+          =link_to loc.description.upcase, :anchor => loc.description
         - forecast_summary.daily_times.each do |time|
           / FIXME move a lot of this to helper code
           - daily_ts = detail.daily(time)
