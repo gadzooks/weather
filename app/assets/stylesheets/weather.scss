@@ -5,7 +5,6 @@
   background-color: red;
 }
 table.weather-forecast-summary {
-  width: 100px;
   tr.table-heading {
     td {
       border: 0;
@@ -18,34 +17,6 @@ table.weather-forecast {
   border-collapse:collapse;
   tr td {
     border: 2px solid rgba(1, 2, 4, 0.07);
-  }
-
-  .fog {
-    color: rgb(152, 150, 152);
-  }
-
-  .snow {
-    color: rgb(25, 151, 245);
-  }
-
-  .cloudy {
-    color: blue;
-  }
-
-  .rain {
-    color: blue;
-  }
-
-  .day-cloudy-10 {
-    color: rgb(255, 187, 33);
-  }
-
-  .day-cloudy-100 {
-    color: rgb(38, 163, 231);
-  }
-
-  .day-sunny {
-    color: #ffb412;
   }
 
   tbody {
@@ -61,12 +32,6 @@ table.weather-forecast {
     }
 
     tr.weather-details {
-      td {
-        padding: 4px;
-        padding-top: 10px;
-        padding-bottom: 6px;
-      }
-
       td.summary {
         text-align: left;
       }
@@ -105,6 +70,16 @@ table.weather-forecast {
       padding: 8px 8px;
     }
   }
+
+  .fog { color: rgb(152, 150, 152); }
+  .snow { color: rgb(25, 151, 245); }
+  .cloudy { color: blue; }
+  .rain { color: blue; }
+  .day-cloudy-10 { color: rgb(255, 187, 33); }
+  .day-cloudy-100 { color: rgb(38, 163, 231); }
+  .day-sunny { color: #ffb412; }
+
+
 }
 
 .align-right {

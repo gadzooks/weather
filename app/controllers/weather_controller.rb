@@ -5,5 +5,4 @@ class WeatherController < ApplicationController
     @weather = Weather.all(@call_weather_client)
     @forecast_summary = @weather.get_forecast
   end
-
 end
