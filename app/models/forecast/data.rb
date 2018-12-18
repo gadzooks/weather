@@ -26,10 +26,19 @@ class Data
     self
   end
 
+  def desc
+    unless @icon.blank?
+      r = DESC_REGEXP.match @icon
+      return r[0] if r
+    end
+    ''
+  end
+
   #######
   private
   #######
   attr_writer *TS_ATTRIBUTES
+  DESC_REGEXP = /^\w+(-\w+)?/
 
 end
 end

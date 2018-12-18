@@ -15,6 +15,7 @@ class TimeSeriesSummary
   #######
   private
   #######
+
   def initialize(type, summary, icon, data)
     @type = type
     @summary = summary

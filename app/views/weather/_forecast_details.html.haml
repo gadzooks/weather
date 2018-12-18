@@ -28,7 +28,7 @@
         %td.precipitation.left-col-of-merged-cells
           %i{class: icon_class(daily_ts.icon, daily_ts.precipProbability), title: daily_ts.summary}
         %td.right-col-of-merged-cells
-          =daily_ts.icon.gsub(/-/,' ').titleize
+          =daily_ts.desc.gsub(/-/,' ').titleize
         %td.center=daily_ts.temperatureHigh.round.to_s + '° / ' +  daily_ts.temperatureLow.round.to_s + '°'
         %td.center
           =precipitation(daily_ts.precipProbability)
