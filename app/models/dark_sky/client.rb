@@ -7,8 +7,8 @@ class Client
   BASE_URL = "https://api.darksky.net/forecast/#{API_KEY}"
   EXCLUDE_BLOCK = "?exclude=minutely,hourly"
 
-  def self.get_forecast_by_location(locations, call_weather_client)
-    if Rails.env.production? || call_weather_client
+  def self.get_forecast_by_location(locations, make_actual_call)
+    if make_actual_call
       actual_api_call(locations)
     else
       fake_api_call(locations)
@@ -18,7 +18,9 @@ class Client
   def self.fake_api_call(locations)
     Rails.logger.debug 'Making FAKE api call'
     responses = {}
-    locations.each do |loc|
+    selected_locations = locations[0..rand(locations.size)]
+    Rails.logger.debug "Calling for : #{selected_locations.inspect}"
+    selected_locations.each do |loc|
       next if loc.blank?
       #if rand(3) == 1
         #responses[loc] = {}
