@@ -5,7 +5,7 @@
     %title Where is the sun ?
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag    'application', 'common', 'weather-icons.min', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application',  media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag params[:controller]
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body{ id: controller_name + '_' + action_name }
