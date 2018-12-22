@@ -1,20 +1,17 @@
+require_dependency 'initialize_from_hash'
 module Forecast
 class Data
-  TS_ATTRIBUTES = [:time, :summary, :icon, :precipIntensity, :precipProbability,
+  include InitializeFromHash
+  MY_ATTRIBUTES = [:time, :summary, :icon, :precipIntensity, :precipProbability,
     :temperature, :apparentTemperature, :dewPoint, :timeSeriesType,
     :temperatureHigh, :temperatureHighTime, :temperatureLow, :temperatureLowTime,
     :sunsetTime, :sunriseTime, :visibility, :cloudCover
   ]
-  attr_reader *TS_ATTRIBUTES
+  attr_reader *MY_ATTRIBUTES
 
   def initialize(input)
     unless input.blank?
-      TS_ATTRIBUTES.each do |ivar|
-        ivar = ivar.to_s
-        method_name = "#{ivar}="
-        # send is safe here since we are iterating over TS_ATTRIBUTES
-        send("#{ivar}=", input[ivar])
-      end
+      setup_instance_variables input
 
       # FIXME handle parse errors
       #@time = DateTime.strptime(@time.to_s,'%s') if @time
@@ -23,7 +20,6 @@ class Data
       @visibility = @visibility.to_i * 10
       @cloudCover = (@cloudCover.to_f * 100).round
     end
-    self
   end
 
   def desc
@@ -37,7 +33,7 @@ class Data
   #######
   private
   #######
-  attr_writer *TS_ATTRIBUTES
+  attr_writer *MY_ATTRIBUTES
   DESC_REGEXP = /^\w+(-\w+)?/
 
 end

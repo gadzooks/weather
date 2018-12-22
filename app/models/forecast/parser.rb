@@ -2,17 +2,16 @@ module Forecast
 class Parser
   CURRENT_FORECAST = 'currently'
   DAILY_FORECAST = 'daily'
-  HOURLY_FORECAST = 'hourly'
+  ALERTS = 'alerts'
 
   def self.dark_sky_parser(json_response)
     return {} if json_response.blank?
 
     forecast_by_location = {}
 
-    max_hourly_data_points = []
     max_daily_data_points = []
     json_response.each do |location, response|
-      currently = hourly = daily = nil
+      currently = daily = nil
       next if response.blank?
 
       c_forecast = response[CURRENT_FORECAST]
@@ -22,23 +21,6 @@ class Parser
           c_forecast['summary'],
           c_forecast['icon'],
           ts
-        )
-      end
-
-      h_forecast = response[HOURLY_FORECAST]
-      unless h_forecast.blank?
-        hourly_data = (h_forecast['data'] || []).map do |hsh|
-          Forecast::Data.new(hsh)
-        end
-
-        if hourly_data.size > max_hourly_data_points.size
-          max_hourly_data_points = hourly_data.map { |hd| hd.time }
-        end
-
-        hourly = Forecast::TimeSeriesSummary.new_hourly(
-          h_forecast['summary'],
-          h_forecast['icon'],
-          hourly_data
         )
       end
 
@@ -61,12 +43,14 @@ class Parser
         )
       end
 
+      alerts = (response[ALERTS] || []).map { |alert| Forecast::Alert.new(alert) }
+
       hsh = {
         location: location,
         currently: currently,
         daily: daily,
-        hourly: hourly,
         daily_summary: daily_summary,
+        alerts: alerts,
       }
 
       forecast_by_location[location] = Forecast::Detail.new hsh
@@ -74,8 +58,7 @@ class Parser
 
     Rails.logger.debug 'parsing forecast for locations : '
     Rails.logger.debug forecast_by_location.keys.inspect
-    Forecast::Summary.new(forecast_by_location, max_hourly_data_points,
-                          max_daily_data_points)
+    Forecast::Summary.new(forecast_by_location, max_daily_data_points)
   end
 
 end

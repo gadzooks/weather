@@ -9,7 +9,8 @@ class DarkSkyMock < Base
     selected_locations = @locations[0..rand(@locations.size)]
 
     Rails.logger.debug "Calling for : #{selected_locations.inspect}"
-    Parser.dark_sky_parser setup_raw_response(selected_locations)
+    raw_response = setup_raw_response(selected_locations)
+    Parser.dark_sky_parser raw_response
   end
 
   def setup_raw_response(selected_locations)

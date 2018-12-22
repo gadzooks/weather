@@ -16,5 +16,8 @@ module Ecommerce
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    # used with require_dependency to reload classes under lib dir in
+    # development
+    config.watchable_dirs['lib'] = [:rb]
   end
 end

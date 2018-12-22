@@ -14,7 +14,7 @@
       - forecast_summary.daily_times.each do |time|
         %td{class: 'forecast-date location-change'}
           %span.day-of-week
-            =time.strftime('%a %b %d').upcase
+            =time.strftime('%a %b %d').upcase unless time.blank?
 
   - locations = forecasts.keys
   %tbody

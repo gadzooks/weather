@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_dependency 'initialize_from_hash'
 
 RSpec.describe Forecast::Data, type: :model do
 

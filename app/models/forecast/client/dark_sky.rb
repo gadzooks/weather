@@ -31,8 +31,7 @@ class DarkSky < Base
       if r.response.body
         body = r.response.body
         responses[location] = JSON.parse body
-        #filename = location.name.gsub(/ /,'').upcase + '.json'
-        #File.open(filename, 'w') { |f| f.write responses[location].to_json }
+        #write_dark_sky_api_results_to_files(location, responses)
       else
         responses[location] = {}
       end
@@ -49,6 +48,13 @@ class DarkSky < Base
   API_KEY = Rails.application.credentials.dark_sky[:api_key]
   BASE_URL = "https://api.darksky.net/forecast/#{API_KEY}"
   EXCLUDE_BLOCK = "?exclude=minutely,hourly"
+
+  # useful for debugging and using in mock service
+  def write_dark_sky_api_results_to_files
+    filename = 'tmp/' + location.name.gsub(/ /,'').upcase + '.json'
+    puts "Writing to #{filename}"
+    File.open(filename, 'w') { |f| f.write responses[location].to_json }
+  end
 
   def create_dark_sky_request(loc)
     url = BASE_URL + '/' +  loc.latitude.to_s + ',' + loc.longitude.to_s +
