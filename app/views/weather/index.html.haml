@@ -6,18 +6,24 @@
       .h3
         FAKE results (for testing only)
 
-.row
-  .col-sm-2.col-xs-2.col-lg-3
-  .col-sm-8.col-xs-8.col-lg-6
-    = render 'weather_summary_table', forecast_summary: @forecast_summary
-  .col-sm-2.col-xs-2.col-lg-3
+-unless @forecast_summary.blank?
+  .row
+    .col-sm-2.col-xs-2.col-lg-3
+    .col-sm-8.col-xs-8.col-lg-6
+      = render 'weather_summary_table', forecast_summary: @forecast_summary
+    .col-sm-2.col-xs-2.col-lg-3
 
-.row
-  .col-xs-0.col-lg-2
-  .col-xs-12.col-lg-8
-    -@forecast_summary.forecasts.each do |loc, detail|
-      = render partial: 'forecast_details',
-        locals: { loc: loc, detail: detail, daily_times: @forecast_summary.daily_times  }
-  .col-xs-0.col-lg-2
+  -unless @forecast_summary.forecasts.blank?
+    .row
+      .col-xs-0.col-lg-2
+      .col-xs-12.col-lg-8
+        -@forecast_summary.forecasts.each do |loc, detail|
+          = render partial: 'forecast_details',
+            locals: { loc: loc, detail: detail, daily_times: @forecast_summary.daily_times  }
+      .col-xs-0.col-lg-2
 
-%a{:href => "https://www.freepik.com/free-photos-vectors/icon", class: 'freepik'} Icons by Freepik
+  %a{:href => "https://www.freepik.com/free-photos-vectors/icon", class: 'freepik'} Icons by Freepik
+
+-else
+  .h3.center.warn
+    Could not retrieve the forecast. Please again !

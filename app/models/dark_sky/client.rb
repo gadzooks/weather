@@ -38,6 +38,13 @@ class Client
     responses
   end
 
+  def self.create_dark_sky_request(loc)
+    url = BASE_URL + '/' +  loc.latitude.to_s + ',' + loc.longitude.to_s +
+        EXCLUDE_BLOCK
+
+    Request.new(url, cache_ttl: 10.minutes)
+  end
+
   # https://api.darksky.net/forecast/[key]/[latitude],[longitude]
   def self.actual_api_call(locations)
     hydra = Hydra.new
@@ -46,7 +53,7 @@ class Client
       next if loc.blank?
       url = BASE_URL + '/' +  loc.latitude.to_s + ',' + loc.longitude.to_s +
         EXCLUDE_BLOCK
-      req = Request.new url
+      req = create_dark_sky_request(loc)
       requests[loc] = req
       hydra.queue req
     end

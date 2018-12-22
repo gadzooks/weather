@@ -38,3 +38,6 @@
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# fonts are copied over from vendor/asset/font dir
+/public/font
