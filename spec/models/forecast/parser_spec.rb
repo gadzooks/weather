@@ -5,7 +5,8 @@ RSpec.describe Forecast::Parser, type: :model do
   context "#dark_sky_parser" do
     it "should parse valid input" do
       location = LatitudeLongitude.instance.convert(['seattle'])
-      service_response = DarkSky::Client.fake_api_call(location)
+      client = Forecast::Client::Base.new_client(false, location)
+      service_response = client.setup_raw_response(location)
 
       forecast_summary = Forecast::Parser.dark_sky_parser(service_response)
       details = forecast_summary.forecasts.values.first
