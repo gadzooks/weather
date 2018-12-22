@@ -13,6 +13,7 @@
 - Strong cohesion, loose coupling : Use separate parser class to keep API specific details decoupled from rest of code and make it easier to plug in a different weather API :
 https://github.com/gadzooks/weather/blob/master/app/models/forecast/parser.rb
 - Use ENUMs for forecast types : https://github.com/gadzooks/weather/blob/master/app/models/forecast/type.rb
+- Make parallel service calls using Hydra : https://github.com/gadzooks/weather/blob/2e00d8eca2c64b65bd20b5ae59e4e8a99f9c1101/app/models/dark_sky/client.rb#L43
 
 ### Security
 - Store API secret key securely : https://github.com/gadzooks/weather/blob/master/app/models/dark_sky/client.rb
@@ -23,7 +24,14 @@ https://github.com/gadzooks/weather/blob/master/app/models/forecast/parser.rb
 - Dynamically set instance variable values and keep code DRY : https://github.com/gadzooks/weather/blob/master/app/models/forecast/data.rb
 
 ### Testing - use Rspec and guard
+- spec for critical parsing code
 https://github.com/gadzooks/weather/blob/master/spec/models/forecast/parser_spec.rb
+- Added acceptance tests using turnip 
+https://github.com/gadzooks/weather/blob/2e00d8eca2c64b65bd20b5ae59e4e8a99f9c1101/spec/acceptance/weather_page.feature#L1
+
+### Custom rake tasks
+- Rake task to run rails server in production locally 
+https://github.com/gadzooks/weather/blob/3e37ff24c0e89b1e6aa6498edef836d6c63ac161/lib/tasks/runlocally.rake#L1
 
 ## Problem statement :
 Where should I go hiking in the next week based on weather forecasts ?
