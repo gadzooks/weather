@@ -8,8 +8,9 @@ class Parser
     return {} if json_response.blank?
 
     forecast_by_location = {}
-
     max_daily_data_points = []
+    all_alerts = Hash.new { |h, k| h[k] = [] }
+
     json_response.each do |location, response|
       currently = daily = nil
       next if response.blank?
@@ -44,6 +45,9 @@ class Parser
       end
 
       alerts = (response[ALERTS] || []).map { |alert| Forecast::Alert.new(alert) }
+      alerts.each do |alert|
+        all_alerts[alert] << location
+      end
 
       hsh = {
         location: location,
@@ -58,7 +62,7 @@ class Parser
 
     Rails.logger.debug 'parsing forecast for locations : '
     Rails.logger.debug forecast_by_location.keys.inspect
-    Forecast::Summary.new(forecast_by_location, max_daily_data_points)
+    Forecast::Summary.new(forecast_by_location, max_daily_data_points, all_alerts)
   end
 
 end

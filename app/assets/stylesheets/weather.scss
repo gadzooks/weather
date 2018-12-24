@@ -1,9 +1,73 @@
 // Place all the styles related to the Weather controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.h4.summary {
-  background-color: red;
+.alert-details {
+  padding: 0.5rem;
+  margin-bottom: 1.25rem;
+  border: 2px solid #eee;
+  border-left-width: .25rem;
+  border-radius: .5rem;
+  span.title {
+    margin-top: 0;
+    margin-bottom: .25rem;
+    color: white;
+    padding: 5px;
+    border-radius: .25rem;
+  }
+  .regions {
+    padding: 3px;
+    span.region {
+      background-color: white;
+      font-weight: 700;
+    }
+  }
+  .description {
+    padding: 3px;
+    span.description {
+      background-color: white;
+      font-weight: 700;
+    }
+  }
 }
+
+// level 1 warning
+$color-alert-advisory: rgba(23, 188, 255, 1);
+.alert-advisory {
+  border-left-color: $color-alert-advisory;
+  span {
+    background-color: $color-alert-advisory;
+  }
+}
+
+// level 2 warning
+$color-alert-watch: rgba(255, 213, 46, 1);
+.alert-watch {
+  border-left-color: $color-alert-watch;
+  span {
+    background-color: $color-alert-watch;
+  }
+}
+
+$color-alert-warning: rgba(255, 66, 39, 0.88);
+// level 3 warning
+.alert-warning {
+  border-left-color: $color-alert-warning;
+  span {
+    background-color: $color-alert-warning;
+  }
+}
+
+
+
+table.weather-forecast-alerts {
+  tr.table-heading {
+    td {
+      border: 0;
+      font-size: 1.2em;
+    }
+  }
+}
+
 table.weather-forecast-summary {
   tr.table-heading {
     td {
@@ -93,5 +157,5 @@ table.weather-forecast {
 
 a.freepik {
   text-decoration: underline;
-  font-size: 0.6em;
+  font-size: 0.8em;
 }

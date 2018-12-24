@@ -1,0 +1,13 @@
+-unless alerts.blank?
+  - alerts.keys.sort_by { |a| a.numeric_severity }.each do |alert|
+    %div{class: 'alert-details alert-' + alert.severity}
+      %span.title
+        = alert.title
+      .regions
+        %span.center.region
+          = "Regions Impacted : "
+        = alert.regions.join(', ')
+      .description
+        %span.center.description
+          = "Details : "
+        =alert.description

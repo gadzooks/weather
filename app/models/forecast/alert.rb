@@ -1,5 +1,4 @@
 require_dependency 'lib/initialize_from_hash'
-module Forecast
 HEREDOC =<<-SAMPLE_ALERT
   "alerts": [
     {
@@ -24,13 +23,34 @@ HEREDOC =<<-SAMPLE_ALERT
     }
   ],
 SAMPLE_ALERT
+
+module Forecast
 class Alert
   include ::InitializeFromHash
 
   MY_ATTRIBUTES = :title, :regions, :severity, :time, :expires, :description, :uri
+  attr_accessor *MY_ATTRIBUTES
+
+  SEVERITIES = { 'advisory' => 2, 'watch' => 1, 'warning' => 0 }
+
+  def numeric_severity
+    SEVERITIES[severity] || -1
+  end
 
   def initialize(input)
-    self.setup_instance_variables(input)
+    setup_instance_variables(input)
+    @time = Time.at(@time) if @time
+    @expires = Time.at(@expires) if @expires
+  end
+
+  def ==(other)
+    other.class == self.class && other.title == self.title
+  end
+
+  alias eql? ==
+
+  def hash
+    title.hash
   end
 
 end

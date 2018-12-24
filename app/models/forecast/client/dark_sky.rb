@@ -50,7 +50,7 @@ class DarkSky < Base
   EXCLUDE_BLOCK = "?exclude=minutely,hourly"
 
   # useful for debugging and using in mock service
-  def write_dark_sky_api_results_to_files
+  def write_dark_sky_api_results_to_files(location, responses)
     filename = 'tmp/' + location.name.gsub(/ /,'').upcase + '.json'
     puts "Writing to #{filename}"
     File.open(filename, 'w') { |f| f.write responses[location].to_json }

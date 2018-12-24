@@ -40,4 +40,9 @@ module WeatherHelper
     precipitation ||= 0
     (precipitation * 100).round.to_s + '%'
   end
+
+  def sorted_alerts(alerts)
+    alerts.sort_by { |a| a.numeric_severity }
+  end
+
 end
