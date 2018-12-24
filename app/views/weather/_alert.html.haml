@@ -3,7 +3,9 @@
   - alerts.sort.each do |alert|
     %div{class: 'alert-details alert-' + alert.severity}
       %span.alert_id.title{id: alert.alert_id}
-        =link_to alert.alert_id, :anchor => 'top'
+        %a{href: root_path(anchor: 'top')}
+          =alert.alert_id
+          &uarr;
       %span.title
         = alert.title
       .regions

@@ -32,7 +32,9 @@
         %td{class: 'center'}
           - detail.alerts.each do |k, v|
             %span.alert_id
-              =link_to k, root_path(anchor: k)
+              %a{href: root_path(anchor: k)}
+                =k
+                &darr;
           - if detail.alerts.blank?
             N/A
         %td.location-change
