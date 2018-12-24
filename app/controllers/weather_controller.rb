@@ -6,6 +6,6 @@ class WeatherController < ApplicationController
   end
 
   def deep_ping
-    render status: 200
+    head :ok
   end
 end
