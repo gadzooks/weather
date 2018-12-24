@@ -1,6 +1,8 @@
 -unless alerts.blank?
-  - alerts.keys.sort_by { |a| a.numeric_severity }.each do |alert|
+  - alerts.each do |alert_id, alert|
     %div{class: 'alert-details alert-' + alert.severity}
+      %span.alert_id.title{id: alert_id}
+        =link_to alert_id, :anchor => 'top'
       %span.title
         = alert.title
       .regions

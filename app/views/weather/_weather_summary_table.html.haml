@@ -25,10 +25,13 @@
       %tr.weather-details
         -css_class = ' center '
         %td{class: css_class}
-          %span
-            =detail.alerts.size
+          - detail.alerts.each do |k, v|
+            %span.alert_id
+              =link_to k, root_path(anchor: k)
+          - if detail.alerts.blank?
+            N/A
         %td.location-change
-          =link_to loc.description.upcase, :anchor => loc.description
+          =link_to loc.description.upcase, root_path(anchor: loc.description)
         - forecast_summary.daily_times.each do |time|
           / FIXME move a lot of this to helper code
           - daily_ts = detail.daily(time)

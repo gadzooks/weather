@@ -1,4 +1,4 @@
-require_dependency 'lib/initialize_from_hash'
+require_dependency 'initialize_from_hash'
 HEREDOC =<<-SAMPLE_ALERT
   "alerts": [
     {
@@ -28,7 +28,8 @@ module Forecast
 class Alert
   include ::InitializeFromHash
 
-  MY_ATTRIBUTES = :title, :regions, :severity, :time, :expires, :description, :uri
+  MY_ATTRIBUTES = :title, :regions, :severity, :time, :expires, :description, :uri,
+    :alert_id
   attr_accessor *MY_ATTRIBUTES
 
   SEVERITIES = { 'advisory' => 2, 'watch' => 1, 'warning' => 0 }

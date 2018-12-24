@@ -12,7 +12,7 @@ RSpec.describe Forecast::Parser, type: :model do
       details = forecast_summary.forecasts.values.first
 
       expect(details.location).to eq(location.first)
-      expect(details.currently.summary).to eq('Clear')
+      expect(details.currently.summary).to eq('Overcast')
 
     end
   end

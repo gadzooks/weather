@@ -41,3 +41,6 @@
 
 # fonts are copied over from vendor/asset/font dir
 /public/font
+
+# file used by guard to rerun selective tests
+spec/examples.txt
