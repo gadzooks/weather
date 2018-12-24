@@ -1,8 +1,9 @@
 -unless alerts.blank?
-  - alerts.each do |alert_id, alert|
+  %a{name: 'all-alerts'}
+  - alerts.sort.each do |alert|
     %div{class: 'alert-details alert-' + alert.severity}
-      %span.alert_id.title{id: alert_id}
-        =link_to alert_id, :anchor => 'top'
+      %span.alert_id.title{id: alert.alert_id}
+        =link_to alert.alert_id, :anchor => 'top'
       %span.title
         = alert.title
       .regions

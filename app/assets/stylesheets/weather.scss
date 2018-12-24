@@ -57,13 +57,22 @@ $color-alert-warning: rgba(255, 66, 39, 0.88);
   }
 }
 
+span.alerts-summary {
+  background-color: blue;
+  color: white;
+  padding: 1px 5px;
+  margin-right: 10px;
+  border-radius: .2rem;
+}
+
 span.alert_id {
-  background-color: rgb(255, 108, 56);
-  padding: 3px;
+  background-color: #ffc453;
+  padding: 1px 5px;
   margin: 3px;
   a {
     color: white;
   }
+  border-radius: .2rem;
 }
 
 table.weather-forecast-alerts {

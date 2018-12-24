@@ -47,8 +47,11 @@ class Alert
   def ==(other)
     other.class == self.class && other.title == self.title
   end
-
   alias eql? ==
+
+  def <=>(other)
+    numeric_severity <=> other.numeric_severity
+  end
 
   def hash
     title.hash

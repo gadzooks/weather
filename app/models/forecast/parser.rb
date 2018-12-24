@@ -10,10 +10,10 @@ class Parser
     forecast_by_location = {}
     max_daily_data_points = []
     alert_starting_id = 'A'
-    all_alerts = {}
+    all_alerts = Set.new
 
     json_response.each do |location, response|
-      alerts = {}
+      alerts_for_location = {}
       currently = daily = nil
       next if response.blank?
 
@@ -49,11 +49,12 @@ class Parser
       (response[ALERTS] || []).each do |alert_hash|
         alert = Forecast::Alert.new(alert_hash)
         if all_alerts.include?(alert)
-          alert.alert_id = all_alerts[alert]
+          alert.alert_id = all_alerts.first { |a| a == alert }.alert_id
+          alerts_for_location[alert.alert_id] = alert
         else
           alert.alert_id = alert_starting_id
-          alerts[alert_starting_id] = alert
-          all_alerts[alert_starting_id] = alert
+          alerts_for_location[alert_starting_id] = alert
+          all_alerts << alert
           alert_starting_id = alert_starting_id.next
         end
       end
@@ -63,7 +64,7 @@ class Parser
         currently: currently,
         daily: daily,
         daily_summary: daily_summary,
-        alerts: alerts,
+        alerts: alerts_for_location,
       }
 
       forecast_by_location[location] = Forecast::Detail.new hsh

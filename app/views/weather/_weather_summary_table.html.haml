@@ -4,10 +4,15 @@
   %thead
     %tr.table-heading.center
       %th{scope: 'col', colspan: 10}
+        -unless @forecast_summary.alerts.blank?
+          %span.alert_id
+            %a{href: '#all-alerts'}
+              &darr;
+              =pluralize(@forecast_summary.alerts.size, 'Alert')
+              &darr;
         Weather Forecast Summary
         %a{:href => 'https://darksky.net/poweredby', :target=>"_blank"}
-          [Powered By Dark SKY]
-
+          [Dark SKY API]
   %thead
     %tr.header-secondary
       %td
@@ -23,8 +28,7 @@
     - locations.each do |loc|
     - detail = forecasts[loc]
       %tr.weather-details
-        -css_class = ' center '
-        %td{class: css_class}
+        %td{class: 'center'}
           - detail.alerts.each do |k, v|
             %span.alert_id
               =link_to k, root_path(anchor: k)
