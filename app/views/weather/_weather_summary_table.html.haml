@@ -15,9 +15,10 @@
           [Dark SKY API]
   %thead
     %tr.header-secondary
-      %td
+      %td.align-middle
         WEATHER ALERTS
-      %td
+      %td.align-middle
+        LOCATION
       - forecast_summary.daily_times.each do |time|
         %td{class: 'forecast-date location-change'}
           %span.day-of-week
