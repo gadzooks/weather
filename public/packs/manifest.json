@@ -1,0 +1,10 @@
+{
+  "application.js": "/packs/application-5d3e08eaa32be1ac32de.js",
+  "application.js.map": "/packs/application-5d3e08eaa32be1ac32de.js.map",
+  "hello_react.js": "/packs/hello_react-54129c3fabc64fcc89f4.js",
+  "hello_react.js.map": "/packs/hello_react-54129c3fabc64fcc89f4.js.map",
+  "hello_typescript.js": "/packs/hello_typescript-0282c35c888d7e3d26f6.js",
+  "hello_typescript.js.map": "/packs/hello_typescript-0282c35c888d7e3d26f6.js.map",
+  "server_rendering.js": "/packs/server_rendering-6070e8ffbf75d13e84e2.js",
+  "server_rendering.js.map": "/packs/server_rendering-6070e8ffbf75d13e84e2.js.map"
+}
