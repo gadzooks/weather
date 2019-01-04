@@ -30,7 +30,8 @@
     - detail = forecasts[loc]
       %tr.weather-details
         %td{class: 'center'}
-          = render partial: 'alert_links', locals: {alerts: detail.alerts}
+          = render partial: 'alert_links',
+            locals: {alerts: detail.alerts, blank_alert_msg: 'N/A'}
         %td.location-change
           =link_to loc.description.upcase, root_path(anchor: loc.description)
         - forecast_summary.daily_times.each do |time|
