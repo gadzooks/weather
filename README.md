@@ -19,14 +19,14 @@ https://github.com/gadzooks/weather/blob/master/app/models/forecast/parser.rb
 - Store API secret key securely : https://github.com/gadzooks/weather/blob/master/app/models/dark_sky/client.rb
 
 ### Ruby metaprogramming
-- Use ruby metaprogramming to create class methods on the fly : https://github.com/gadzooks/weather/blob/master/app/models/forecast/time_series_summary.rb
-- More ruby metaprogramming to create instant variables and keep code DRY : https://github.com/gadzooks/weather/blob/master/app/models/forecast/data.rb
+- Create class methods on the fly : https://github.com/gadzooks/weather/blob/master/app/models/forecast/time_series_summary.rb
+- Create instant variables dynamically (DRY) : https://github.com/gadzooks/weather/blob/master/app/models/forecast/data.rb
 - Dynamically set instance variable values and keep code DRY : https://github.com/gadzooks/weather/blob/master/app/models/forecast/data.rb
 
 ### Testing - use Rspec and guard
-- spec for critical parsing code
+- RSpec for critical parsing code
 https://github.com/gadzooks/weather/blob/master/spec/models/forecast/parser_spec.rb
-- Added acceptance tests using turnip 
+- Added acceptance tests using turnip (cucumber alernative) 
 https://github.com/gadzooks/weather/blob/2e00d8eca2c64b65bd20b5ae59e4e8a99f9c1101/spec/acceptance/weather_page.feature#L1
 
 ### Custom rake tasks
