@@ -5,7 +5,4 @@ class WeatherController < ApplicationController
     @forecast_summary = @weather.get_forecast
   end
 
-  def deep_ping
-    head :ok
-  end
 end
