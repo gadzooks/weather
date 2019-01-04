@@ -23,7 +23,7 @@ RSpec.describe "routes for Weather", type: :routing do
 
   it "routes /ping to the weather controller" do
     expect( :get => "/deep-ping" ).to route_to(
-      :controller => "weather",
+      :controller => "ping",
       :action => "deep_ping",
     )
   end

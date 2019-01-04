@@ -3,6 +3,7 @@
     %tr
       %th{scope: 'col', colspan: 7, class: 'header-main center'}
         %span{title: detail.daily_summary}
+          = render partial: 'alert_links', locals: {alerts: detail.alerts}
           =loc.description.upcase
           =link_to '(top)', :anchor => 'top'
     %tr.header-secondary

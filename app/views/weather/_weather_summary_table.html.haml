@@ -30,14 +30,7 @@
     - detail = forecasts[loc]
       %tr.weather-details
         %td{class: 'center'}
-          - detail.alerts.keys.sort.each do |k|
-            - v = detail.alerts[k]
-            %span.alert_id
-              %a{href: root_path(anchor: k)}
-                =k
-                &darr;
-          - if detail.alerts.blank?
-            N/A
+          = render partial: 'alert_links', locals: {alerts: detail.alerts}
         %td.location-change
           =link_to loc.description.upcase, root_path(anchor: loc.description)
         - forecast_summary.daily_times.each do |time|
