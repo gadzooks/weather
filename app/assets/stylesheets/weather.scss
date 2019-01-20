@@ -112,6 +112,14 @@ table.weather-forecast {
     }
 
     tr.weather-details {
+      span.forecast-id {
+        color: white;
+        background-color: rgba(240, 55, 50, 0.8);
+        padding: 3px;
+        border-radius: 0.25em;
+        margin-right: 5px;
+      }
+
       td.summary {
         text-align: left;
       }

@@ -12,6 +12,7 @@ class Parser
     alert_starting_id = 'A'
     all_alerts = Set.new
 
+    forecast_id = 1
     json_response.each do |location, response|
       alerts_for_location = {}
       currently = daily = nil
@@ -60,6 +61,7 @@ class Parser
       end
 
       hsh = {
+        forecast_id: forecast_id,
         location: location,
         currently: currently,
         daily: daily,
@@ -68,6 +70,7 @@ class Parser
       }
 
       forecast_by_location[location] = Forecast::Detail.new hsh
+      forecast_id += 1
     end
 
     Rails.logger.debug 'parsing forecast for locations : '
