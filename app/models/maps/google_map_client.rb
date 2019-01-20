@@ -1,3 +1,4 @@
+require_dependency 'google_url_signer'
 module Maps
 class GoogleMapClient
 
