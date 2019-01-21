@@ -19,8 +19,7 @@ class GoogleMapClient
       uri << '&' + {markers: m_text}.to_query
     end
 
-    uri << "&key=#{API_KEY}"
-
+    GoogleUrlSigner.sign uri, API_KEY
     uri
   end
 
