@@ -15,9 +15,15 @@ class Weather
         (params[:test].to_s == 'true')
       end
 
-    places = params[:places] || DEFAULT_PLACES
+    places = params[:places]
+    lat_long =
+      if places.blank?
+        LatitudeLongitude.instance.all_places
+      else
+        LatitudeLongitude.instance.convert(places)
+      end
 
-    self.new(make_fake_call, places)
+    self.new(make_fake_call, lat_long)
   end
 
   def get_forecast
@@ -28,10 +34,8 @@ class Weather
   private
   #######
 
-  def initialize(make_fake_call, places)
+  def initialize(make_fake_call, lat_long)
     @make_actual_call = !make_fake_call
-
-    lat_long = LatitudeLongitude.instance.convert(places)
     @client = Forecast::Client::Base.new_client(@make_actual_call, lat_long)
   end
 

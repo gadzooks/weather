@@ -44,3 +44,27 @@ easton:
   latitude: 47.237060
   longitude: -121.178979
 
+pacific_coast_nw:
+  description: 'NW ONP'
+  latitude: 47.6129
+  longitude: -124.3762
+
+shi_shi:
+  description: 'shi shi'
+  latitude: 48.2937
+  longitude: -124.665
+
+lacrosse_basin:
+  description: 'LaCrosse Basin'
+  latitude: 47.5162
+  longitude: -123.3311
+
+gold_bar:
+  description: 'Gold Bar'
+  latitude: 47.8567
+  longitude: -121.6970605
+
+stevens_pass_east:
+  description: 'Stevens pass east'
+  latitude: 47.7847
+  longitude: -121.0343

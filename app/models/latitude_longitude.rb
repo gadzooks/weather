@@ -33,6 +33,10 @@ class LatitudeLongitude
     end
   end
 
+  def all_places
+    @locations.values
+  end
+
   def convert(names)
     names.map { |n| @locations[n] }
   end
