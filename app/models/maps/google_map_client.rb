@@ -1,4 +1,3 @@
-require_dependency 'google_url_signer'
 module Maps
 class GoogleMapClient
 
@@ -19,7 +18,10 @@ class GoogleMapClient
       uri << '&' + {markers: m_text}.to_query
     end
 
-    GoogleUrlSigner.sign uri, API_KEY
+    uri << "&key=#{API_KEY}"
+
+    Rails.logger.info "original uri is "
+    Rails.logger.info uri
     uri
   end
 

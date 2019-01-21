@@ -1,4 +1,7 @@
 - forecasts = forecast_summary.forecasts
+-unless map_src.blank?
+  .center
+    %img{src: map_src}
 %top
 %table.table.table-sm.weather-forecast.weather-forecast-summary
   %thead
