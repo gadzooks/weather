@@ -34,7 +34,7 @@ class LatitudeLongitude
   end
 
   def all_places
-    @locations.values
+    @locations.keys
   end
 
   def convert(names)

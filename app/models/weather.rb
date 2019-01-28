@@ -6,7 +6,16 @@ class Weather
   attr_accessor :make_actual_call
   attr_reader :forecast
 
-  def self.all(params)
+  def self.find(params)
+    places =
+      if !params[:places].blank?
+        params[:places]
+      elsif params[:locations].to_s == 'all'
+        LatitudeLongitude.instance.all_places
+      else
+        Weather::DEFAULT_PLACES
+      end
+
     make_fake_call =
       if(params[:test].blank? && !Rails.env.production?)
         # in non prod by default we will make FAKE service calls
@@ -15,13 +24,7 @@ class Weather
         (params[:test].to_s == 'true')
       end
 
-    places = params[:places]
-    lat_long =
-      if places.blank?
-        LatitudeLongitude.instance.all_places
-      else
-        LatitudeLongitude.instance.convert(places)
-      end
+    lat_long = LatitudeLongitude.instance.convert(places)
 
     self.new(make_fake_call, lat_long)
   end
