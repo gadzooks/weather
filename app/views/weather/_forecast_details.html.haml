@@ -6,7 +6,8 @@
           = render partial: 'alert_links',
               locals: {alerts: detail.alerts, blank_alert_msg: ''}
           =loc.description.upcase
-          =link_to '(top)', :anchor => 'top'
+          %a{href: '#top'}
+            (top)
     %tr.header-secondary
       %td{scope: "col", colspan: 2, class: 'center'} DATE
       %td{scope: "col", colspan: 2, class: :center} DESC

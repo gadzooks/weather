@@ -4,6 +4,6 @@
   -alerts.keys.sort.each do |k|
     - v = alerts[k]
     %span.alert_id
-      %a{href: root_path(anchor: k)}
+      %a{href: "##{k}"}
         =k
         &darr;

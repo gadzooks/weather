@@ -38,7 +38,8 @@
         %td.location-change
           %span.forecast-id
             = detail.forecast_id
-          =link_to loc.description.upcase, root_path(anchor: loc.description)
+          %a{href: "##{loc.description}"}
+            =loc.description.upcase
         - forecast_summary.daily_times.each do |time|
           / FIXME move a lot of this to helper code
           - daily_ts = detail.daily(time)

@@ -3,7 +3,7 @@
   - alerts.sort.each do |alert|
     %div{class: 'alert-details alert-' + alert.severity}
       %span.alert_id.title{id: alert.alert_id}
-        %a{href: root_path(anchor: 'top')}
+        %a{href: '#top'}
           =alert.alert_id
           &uarr;
       %span.title
