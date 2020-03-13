@@ -44,3 +44,6 @@
 
 # file used by guard to rerun selective tests
 spec/examples.txt
+
+.undodir
+.idea

@@ -31,7 +31,7 @@ class DarkSky < Base
       if r.response.body
         body = r.response.body
         responses[location] = JSON.parse body
-        #write_dark_sky_api_results_to_files(location, responses)
+        write_dark_sky_api_results_to_files(location, responses)
       else
         responses[location] = {}
       end
@@ -52,6 +52,7 @@ class DarkSky < Base
   # useful for debugging and using in mock service
   def write_dark_sky_api_results_to_files(location, responses)
     filename = 'tmp/' + location.name.gsub(/ /,'').upcase + '.json'
+    filename.downcase!
     puts "Writing to #{filename}"
     File.open(filename, 'w') { |f| f.write responses[location].to_json }
   end
