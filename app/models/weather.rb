@@ -34,8 +34,6 @@ class Weather
 
     lat_long = LatitudeLongitudeByRegion.instance.convert(places)
 
-    Rails.logger.debug("lat-log is #{lat_long.pretty_print_inspect}")
-
     self.new(self.make_fake_call(params), lat_long)
   end
 

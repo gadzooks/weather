@@ -31,7 +31,7 @@ class DarkSky < Base
       if r.response.body
         body = r.response.body
         responses[location] = JSON.parse body
-        write_dark_sky_api_results_to_files(location, responses)
+        # write_dark_sky_api_results_to_files(location, responses)
       else
         responses[location] = {}
       end
