@@ -1,7 +1,4 @@
 - forecasts = forecast_summary.forecasts
--unless map_src.blank?
-  .center
-    %img{src: map_src}
 %top
 %table.table.table-sm.weather-forecast.weather-forecast-summary
   %thead
@@ -30,7 +27,7 @@
   - locations = forecasts.keys
   %tbody
     - locations.each do |loc|
-    - detail = forecasts[loc]
+      - detail = forecasts[loc]
       %tr.weather-details
         %td{class: 'center'}
           = render partial: 'alert_links',
