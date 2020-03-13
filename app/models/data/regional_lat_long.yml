@@ -1,0 +1,155 @@
+gold bar:
+  region: central_cascades
+  description: 'Stevens Pass - West'
+  latitude: 47.8090
+  longitude: -121.5738
+
+leavenworth:
+  region: central_cascades
+  description: 'Stevens Pass - East'
+  latitude: 47.596233
+  longitude: -120.661476
+
+blewett pass:
+  region: central_cascades
+  description: 'Blewett pass'
+  latitude: 47.338173
+  longitude: -120.580296
+
+chelan:
+  region: central_cascades
+  description: 'chelan'
+  latitude: 47.849387
+  longitude: -120.014500
+
+tri cities:
+  region: central_wa
+  description: 'Tri-cities'
+  latitude: 46.266891
+  longitude: -119.222523
+
+wenatchee:
+  region: central_wa
+  description: 'Wenatche'
+  latitude: 47.427033
+  longitude:  -120.311021
+
+yakima:
+  region: central_wa
+  description: 'Yakima'
+  latitude: 46.603240
+  longitude:  -120.509983
+
+issaquah:
+  region: issaquah
+  description: 'Issaquah'
+  latitude: 47.533287
+  longitude: -122.032801
+
+chinook pass:
+  region: mt_rainier
+  description: 'Chinook Pass'
+  latitude: 46.872994
+  longitude: -121.515559
+
+sunrise:
+  region: mt_rainier
+  description: 'NE - Sunrise/White River'
+  latitude: 46.915357
+  longitude: -121.642959
+
+carbon_river:
+  region: mt_rainier
+  description: 'NW - Carbon River/Mowich'
+  latitude: 46.975021
+  longitude: -121.812600
+
+paradise:
+  region: mt_rainier
+  description: 'SW - Longmire / Paradise'
+  latitude: 46.786138
+  longitude: -121.734802
+
+cayuse pass:
+  region: mt_rainier
+  description: 'SE - Cayuse pass / Stevens Canyon'
+  latitude: 46.867905
+  longitude: -121.538701
+
+mt_look_hwy:
+  region: north_cascades
+  description: 'Mountain Loop Highway'
+  latitude: 48.094116
+  longitude: -121.961362
+
+methow_sawtooth:
+  region: north_cascades
+  description: 'Methow/Sawtooth'
+  latitude: 48.669363
+  longitude: -120.437442
+
+mt_baker:
+  region: north_cascades
+  description: 'Mt Baker'
+  latitude: 48.777336
+  longitude: -121.814500
+
+hwy_20:
+  region: north_cascades
+  description: 'North Cascades Highway - Hwy 20'
+  latitude: 48.628015
+  longitude: -120.557212
+
+pasayetan:
+  region: north_cascades
+  description: 'Pasayetan'
+  latitude: 48.861189
+  longitude:  -120.553880
+
+hood_canal:
+  region: olympic_np
+  description: 'Hood Canal'
+  latitude: 47.624825
+  longitude:  -122.945855
+
+kitsap:
+  region: olympic_np
+  description: 'Kitsap Peninsula'
+  latitude: 47.675611
+  longitude:  -122.640073
+
+pacific_coast:
+  region: olympic_np
+  description: 'Pacific Coast'
+  latitude: 48.2937
+  longitude:  -124.6651
+
+northern_coast:
+  region: olympic_np
+  description: 'Northern Coast'
+  latitude: 47.9766
+  longitude:  -123.5178
+
+north_bend:
+  region: snowqualmie_region
+  description: 'North Bend'
+  latitude: 47.497428
+  longitude: -121.786648
+
+snowqualmie_pass:
+  region: snowqualmie_region
+  description: 'Snowqualmie Pass'
+  latitude: 47.396170
+  longitude:  -121.399756
+
+teanaway:
+  region: snowqualmie_region
+  description: 'Teanaway'
+  latitude: 47.175000
+  longitude: -120.856390
+
+cle_elum_area:
+  region: snowqualmie_region
+  description: 'Cle Elum Area'
+  latitude: 47.196943
+  longitude:  -120.939134
