@@ -6,8 +6,29 @@ class LatitudeLongitudeByRegion
   YAML_REGION_DATA = YAML::load(File.open('app/models/data/wta_search_regions.yml'))
   YAML_LOCATION_DATA = YAML::load(File.open('app/models/data/regional_lat_long.yml'))
 
-  Location = Struct.new(:name, :description, :latitude, :longitude, :region, :sub_region)
-  Region = Struct.new(:name, :search_key, :description)
+  Location = Struct.new(:name, :description, :latitude, :longitude, :region, :sub_region) do
+    def ==(other)
+      self.class == other.class && other.name == name
+    end
+
+    alias eql? ==
+
+    def hash
+      name.hash
+    end
+  end
+
+  Region = Struct.new(:name, :search_key, :description) do
+    def ==(other)
+      self.class == other.class && other.name == name
+    end
+
+    alias eql? ==
+
+    def hash
+      name.hash
+    end
+  end
 
   def self.instance
     @@instance ||= new
@@ -37,8 +58,14 @@ class LatitudeLongitudeByRegion
     @locations.keys
   end
 
+  def all_regions
+    @regions
+  end
+
   def region_for_location(location)
-    @regions[location]
+    region_name = location
+    region_name = location.region if location.respond_to? :region
+    @regions[region_name]
   end
 
   def convert(names)

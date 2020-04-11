@@ -30,5 +30,9 @@ class Detail
     end
   end
 
+  def region
+    LatitudeLongitudeByRegion.instance.region_for_location(@location)
+  end
+
 end
 end
