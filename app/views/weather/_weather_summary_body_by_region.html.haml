@@ -1,0 +1,24 @@
+%tbody
+  - forecasts_by_region(forecasts) do |is_new_region, region, loc, detail|
+    -if is_new_region
+      %tr
+        %td
+          = region.name
+
+    -if true
+      %tr.weather-details
+        %td{class: 'center'}
+          = render partial: 'alert_links',
+            locals: {alerts: detail.alerts, blank_alert_msg: 'N/A'}
+        %td.location-change
+          %span.forecast-id
+            = detail.forecast_id
+          %a{href: "##{loc.description}"}
+            =loc.description.upcase
+        - forecast_summary.daily_times.each do |time|
+          / FIXME move a lot of this to helper code
+          - daily_ts = detail.daily(time)
+          - css_row_classes = add_weekend_class(time, 'precipitation location-change')
+          %td{class: css_row_classes}
+            -if daily_ts
+              %i{class: icon_class(daily_ts.icon, daily_ts.precipProbability), title: daily_ts.summary}
