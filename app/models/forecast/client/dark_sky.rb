@@ -25,7 +25,7 @@ class DarkSky < Base
 
     requests.each do |location, r|
       Rails.logger.debug "Response code for #{location.name} is : " +
-        r.response.body
+        r.response.response_code.to_s
 
       # FIXME handle JSON parse errors
       if r.response.response_code != 200

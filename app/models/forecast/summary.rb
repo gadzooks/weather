@@ -14,10 +14,5 @@ module Forecast
     def alerts_for(location)
       alerts[location]
     end
-
-    def errors_for(location)
-      return nil if errors.blank?
-      errors[location]
-    end
   end
 end
