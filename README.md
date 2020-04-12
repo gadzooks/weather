@@ -50,12 +50,16 @@ I decided to build this simple website to answer that question for me. The Pacif
 2) Upgrade Rails credetials as per https://www.engineyard.com/blog/rails-encrypted-credentials-on-rails-5.2
 3) Profit ??
 
+### Caching
+1) Typheus is setup to use Rails default cache
+2) To enable caching/disable in development : rails dev:cache
+
 ### How to run :
 1) Download this code.
 2) on command line, run : rails server
 3) localhost:3000/test for test data, localhost:3000 for real weather information.
 
 ### Tech details
-* Stack - Rails 5.2, SCSS, haml, bootstrap, Rspec
+* Stack - Rails 6.0, SCSS, haml, bootstrap, Rspec
 * Weather API provided by DarkSky.net
 * Weather icons : https://www.freepik.com/free-photos-vectors/icon
