@@ -23,5 +23,7 @@
           %span.day-of-week
             =time.strftime('%a %b %d').upcase unless time.blank?
 
-  /= render :partial => 'weather_summary_body', locals: {forecasts: forecasts, forecast_summary: forecast_summary}
-  = render :partial => 'weather_summary_body_by_region', locals: {forecasts: forecasts, forecast_summary: forecast_summary}
+  - if by_region
+    = render :partial => 'weather_summary_body_by_region', locals: {forecasts: forecasts, forecast_summary: forecast_summary}
+  - else
+    = render :partial => 'weather_summary_body', locals: {forecasts: forecasts, forecast_summary: forecast_summary}
