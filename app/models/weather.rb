@@ -7,14 +7,14 @@ class Weather
       if !params[:places].blank?
         params[:places]
       elsif params[:locations].to_s == 'all'
-        LatitudeLongitude.instance.all_places
+        LatitudeLongitudeByRegion.instance.all_places
       else
         ['hood canal', 'teanaway', 'seattle', 'north casacdes',
          'paradise mt rainier', 'glacier peak', 'leavenworth',
          'snowqualmie pass', 'easton']
       end
 
-    lat_long = LatitudeLongitude.instance.convert(places)
+    lat_long = LatitudeLongitudeByRegion.instance.convert(places)
 
     self.new(self.make_fake_call(params), lat_long)
   end

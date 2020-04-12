@@ -1,5 +1,9 @@
 module Forecast
-  Summary = Struct.new(:forecasts, :daily_times, :alerts) do
+  Summary = Struct.new(:forecasts, :daily_times, :alerts, :errors) do
+    def blank?
+      forecasts.blank?
+    end
+
     def daily_values_for(location, weather_property)
       forecast_details_for_loc = forecasts[location]
       (daily_times || []).map do |time|
@@ -9,6 +13,11 @@ module Forecast
 
     def alerts_for(location)
       alerts[location]
+    end
+
+    def errors_for(location)
+      return nil if errors.blank?
+      errors[location]
     end
   end
 end

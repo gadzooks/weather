@@ -4,9 +4,19 @@ class Parser
   DAILY_FORECAST = 'daily'
   ALERTS = 'alerts'
 
-  def self.dark_sky_parser(json_response)
-    return {} if json_response.blank?
+  def self.dark_sky_parser(json_response, errors)
+    json_response ||= {}
 
+    all_alerts, forecast_by_location, max_daily_data_points = parse_weather_responses(json_response)
+
+    Rails.logger.debug 'parsing forecast for locations : '
+    Rails.logger.debug forecast_by_location.keys.inspect
+    Forecast::Summary.new(forecast_by_location, max_daily_data_points, all_alerts, errors)
+  end
+
+  private
+
+  def self.parse_weather_responses(json_response)
     forecast_by_location = {}
     max_daily_data_points = []
     alert_starting_id = 'A'
@@ -22,9 +32,9 @@ class Parser
       unless c_forecast.blank?
         ts = Forecast::Data.new(c_forecast)
         currently = Forecast::TimeSeriesSummary.new_currently(
-          c_forecast['summary'],
-          c_forecast['icon'],
-          ts
+            c_forecast['summary'],
+            c_forecast['icon'],
+            ts
         )
       end
 
@@ -41,9 +51,9 @@ class Parser
         end
 
         daily = Forecast::TimeSeriesSummary.new_daily(
-          d_forecast['summary'],
-          d_forecast['icon'],
-          daily_data
+            d_forecast['summary'],
+            d_forecast['icon'],
+            daily_data
         )
       end
 
@@ -61,21 +71,18 @@ class Parser
       end
 
       hsh = {
-        forecast_id: forecast_id,
-        location: location,
-        currently: currently,
-        daily: daily,
-        daily_summary: daily_summary,
-        alerts: alerts_for_location,
+          forecast_id: forecast_id,
+          location: location,
+          currently: currently,
+          daily: daily,
+          daily_summary: daily_summary,
+          alerts: alerts_for_location,
       }
 
       forecast_by_location[location] = Forecast::Detail.new hsh
       forecast_id += 1
     end
-
-    Rails.logger.debug 'parsing forecast for locations : '
-    Rails.logger.debug forecast_by_location.keys.inspect
-    Forecast::Summary.new(forecast_by_location, max_daily_data_points, all_alerts)
+    return all_alerts, forecast_by_location, max_daily_data_points
   end
 
 end

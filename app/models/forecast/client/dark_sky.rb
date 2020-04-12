@@ -21,23 +21,32 @@ class DarkSky < Base
     hydra.run
 
     responses = {}
+    errors = {}
+
     requests.each do |location, r|
       Rails.logger.debug "Response code for #{location.name} is : " +
-        r.response.response_code.to_s
+        r.response.body
 
       # FIXME handle JSON parse errors
-      next unless r.response.response_code == 200
-
-      if r.response.body
-        body = r.response.body
-        responses[location] = JSON.parse body
-        # write_dark_sky_api_results_to_files(location, responses)
+      if r.response.response_code != 200
+        if r.try(:response).try(:body)
+          body = r.response.body
+          errors[location] = JSON.parse body
+        else
+          errors[location] = { code: nil, error: 'Unknown error while calling API' }
+        end
       else
-        responses[location] = {}
+        if r.response.body
+          body = r.response.body
+          responses[location] = JSON.parse body
+          # write_dark_sky_api_results_to_files(location, responses)
+        else
+          responses[location] = {}
+        end
       end
     end
 
-    Parser.dark_sky_parser responses
+    Parser.dark_sky_parser(responses, errors)
   end
 
 
