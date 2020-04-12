@@ -45,4 +45,24 @@ module WeatherHelper
     alerts.sort_by { |a| a.numeric_severity }
   end
 
+  def forecasts_by_region(forecasts)
+    # compute locations by region
+    locations_by_region = Hash.new{ |h, k| h[k] = []}
+    forecasts.keys.each do |loc|
+      region = LatitudeLongitudeByRegion.instance.region_for_location loc
+      locations_by_region[region] << loc if region
+    end
+
+    LatitudeLongitudeByRegion.instance.all_regions.values.each do |region|
+      is_new_region = true
+      unless locations_by_region[region].empty?
+        locations_by_region[region].each do |location|
+          yield(is_new_region, region, location, forecasts[location])
+          is_new_region = false
+        end
+      end
+    end
+
+  end
+
 end

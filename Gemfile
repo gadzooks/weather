@@ -68,7 +68,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # install rspec
 group :development, :test do
-  gem 'rspec-rails', '~> 3.7'
+  gem 'rspec-rails', '~> 4.0.0'
 end
 
 gem "haml-rails", "~> 1.0"

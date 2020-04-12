@@ -10,11 +10,10 @@
               &darr;
               =pluralize(@forecast_summary.alerts.size, 'Alert')
               &darr;
-        Weather Forecast Summary
         %a{:href => 'https://darksky.net/poweredby', :target=>"_blank"}
           [Dark SKY API]
   %thead
-    %tr.header-secondary
+    %tr.header-secondary.header-secondary-main
       %td.align-middle
         WEATHER ALERTS
       %td.align-middle
@@ -24,23 +23,7 @@
           %span.day-of-week
             =time.strftime('%a %b %d').upcase unless time.blank?
 
-  - locations = forecasts.keys
-  %tbody
-    - locations.each do |loc|
-      - detail = forecasts[loc]
-      %tr.weather-details
-        %td{class: 'center'}
-          = render partial: 'alert_links',
-            locals: {alerts: detail.alerts, blank_alert_msg: 'N/A'}
-        %td.location-change
-          %span.forecast-id
-            = detail.forecast_id
-          %a{href: "##{loc.description}"}
-            =loc.description.upcase
-        - forecast_summary.daily_times.each do |time|
-          / FIXME move a lot of this to helper code
-          - daily_ts = detail.daily(time)
-          - css_row_classes = add_weekend_class(time, 'precipitation location-change')
-          %td{class: css_row_classes}
-            -if daily_ts
-              %i{class: icon_class(daily_ts.icon, daily_ts.precipProbability), title: daily_ts.summary}
+  - if by_region
+    = render :partial => 'weather_summary_body_by_region', locals: {forecasts: forecasts, forecast_summary: forecast_summary}
+  - else
+    = render :partial => 'weather_summary_body', locals: {forecasts: forecasts, forecast_summary: forecast_summary}

@@ -22,7 +22,7 @@ olympic_np:
   search_key: '922e688d784aa95dfb80047d2d79dcf6'
   description: 'Olympic National Park'
 
-snowqualmie_search_key:
+snowqualmie_region:
   search_key: '04d37e830680c65b61df474e7e655d64'
-  description: 'Snowqualmie search_key'
+  description: 'Snowqualmie Region'
 

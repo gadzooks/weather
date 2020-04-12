@@ -34,7 +34,7 @@ class Weather
 
     lat_long = LatitudeLongitudeByRegion.instance.convert(places)
 
-    self.new(self.make_fake_call(params), lat_long)
+    new(make_fake_call(params), lat_long)
   end
 
   #######

@@ -99,6 +99,12 @@ table.weather-forecast {
     border: 2px solid rgba(1, 2, 4, 0.07);
   }
 
+  thead {
+    tr.header-secondary-main {
+      background-color:#f2d8a4;
+    }
+  }
+
   tbody {
     white-space: nowrap;
 
@@ -111,11 +117,19 @@ table.weather-forecast {
       background-size: 14.62px 11.42px;
     }
 
+    tr.region-details {
+      td {
+        column-span: all;
+        text-align: center;
+      }
+      background: #fef7e9;
+    }
+
     tr.weather-details {
       span.forecast-id {
         color: white;
-        background-color: rgba(240, 55, 50, 0.8);
-        padding: 3px;
+        background-color: rgba(156, 191, 240, 0.8);
+        padding: 3px 3px 3px 5px;
         border-radius: 0.25em;
         margin-right: 5px;
       }
