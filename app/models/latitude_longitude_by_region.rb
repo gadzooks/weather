@@ -28,6 +28,10 @@ class LatitudeLongitudeByRegion
     def hash
       name.hash
     end
+
+    def wta_trip_report_url
+      "https://www.wta.org/go-outside/trip-reports/tripreport_search?title=&region=#{search_key}&subregion=all&searchabletext=&author=&startdate=&_submit=&enddate=&_submit=&month=all&format=list&filter=Search"
+    end
   end
 
   def self.instance

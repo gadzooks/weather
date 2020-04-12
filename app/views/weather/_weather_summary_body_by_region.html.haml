@@ -1,9 +1,11 @@
 %tbody
   - forecasts_by_region(forecasts) do |is_new_region, region, loc, detail|
     -if is_new_region
-      %tr
-        %td
-          = region.name
+      %tr.region-details
+        %td{colspan: 10}
+          = region.description
+          %a{href: "#{region.wta_trip_report_url}", target: '_blank'}
+            WTA trip reports
 
     -if true
       %tr.weather-details

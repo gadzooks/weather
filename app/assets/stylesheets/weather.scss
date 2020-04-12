@@ -99,6 +99,12 @@ table.weather-forecast {
     border: 2px solid rgba(1, 2, 4, 0.07);
   }
 
+  thead {
+    tr.header-secondary-main {
+      background-color:#f2d8a4;
+    }
+  }
+
   tbody {
     white-space: nowrap;
 
@@ -109,6 +115,14 @@ table.weather-forecast {
     .weekend {
       background-image:linear-gradient(142deg, #b2f7c6 11.11%, #faf5f5 11.11%, #faf5f5 50%, #b2f7c6 50%, #b2f7c6 61.11%, #faf5f5 61.11%, #faf5f5 100%);
       background-size: 14.62px 11.42px;
+    }
+
+    tr.region-details {
+      td {
+        column-span: all;
+        text-align: center;
+      }
+      background: #fef7e9;
     }
 
     tr.weather-details {
