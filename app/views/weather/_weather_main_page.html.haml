@@ -24,7 +24,7 @@
     .h3.center.warn
       Could not retrieve the forecast. Please try again !
 
--unless @forecast_summary.alerts.blank?
+-if !@forecast_summary.blank? && @forecast_summary.respond_to?(:alerts)
   .row
     .col-sm-12.col-xs-12.col-lg-12
       = render partial: 'alert', locals: { alerts: @forecast_summary.alerts }
