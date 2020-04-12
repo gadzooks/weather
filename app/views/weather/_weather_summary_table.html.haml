@@ -1,29 +1,30 @@
 - forecasts = forecast_summary.forecasts
-%top
-%table.table.table-sm.weather-forecast.weather-forecast-summary
-  %thead
-    %tr.table-heading.center
-      %th{scope: 'col', colspan: 10}
-        -unless @forecast_summary.alerts.blank?
-          %span.alert_id
-            %a{href: '#all-alerts'}
-              &darr;
-              =pluralize(@forecast_summary.alerts.size, 'Alert')
-              &darr;
-        %a{:href => 'https://darksky.net/poweredby', :target=>"_blank"}
-          [Dark SKY API]
-  %thead
-    %tr.header-secondary.header-secondary-main
-      %td.align-middle
-        WEATHER ALERTS
-      %td.align-middle
-        LOCATION
-      - forecast_summary.daily_times.each do |time|
-        %td{class: 'forecast-date location-change'}
-          %span.day-of-week
-            =time.strftime('%a %b %d').upcase unless time.blank?
+- unless forecasts.blank?
+  %top
+  %table.table.table-sm.weather-forecast.weather-forecast-summary
+    %thead
+      %tr.table-heading.center
+        %th{scope: 'col', colspan: 10}
+          -unless forecast_summary.alerts.blank?
+            %span.alert_id
+              %a{href: '#all-alerts'}
+                &darr;
+                =pluralize(forecast_summary.alerts.size, 'Alert')
+                &darr;
+          %a{:href => 'https://darksky.net/poweredby', :target=>"_blank"}
+            [Dark SKY API]
+    %thead
+      %tr.header-secondary.header-secondary-main
+        %td.align-middle
+          WEATHER ALERTS
+        %td.align-middle
+          LOCATION
+        - forecast_summary.daily_times.each do |time|
+          %td{class: 'forecast-date location-change'}
+            %span.day-of-week
+              =time.strftime('%a %b %d').upcase unless time.blank?
 
-  - if by_region
-    = render :partial => 'weather_summary_body_by_region', locals: {forecasts: forecasts, forecast_summary: forecast_summary}
-  - else
-    = render :partial => 'weather_summary_body', locals: {forecasts: forecasts, forecast_summary: forecast_summary}
+    - if by_region
+      = render :partial => 'weather_summary_body_by_region', locals: {forecasts: forecasts, forecast_summary: forecast_summary}
+    - else
+      = render :partial => 'weather_summary_body', locals: {forecasts: forecasts, forecast_summary: forecast_summary}

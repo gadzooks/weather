@@ -11,7 +11,7 @@ class WeatherController < ApplicationController
   def by_region
     @weather = Weather.find_by_region(params)
     @forecast_summary = @weather.get_forecast
-    @by_region =  true
+    @by_region = true
     @google_image_src = nil
   end
 

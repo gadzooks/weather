@@ -19,16 +19,32 @@
           = render partial: 'forecast_details',
             locals: { loc: loc, detail: detail, daily_times: @forecast_summary.daily_times  }
       .col-xs-0.col-lg-2
+  -if @forecast_summary.respond_to?(:alerts)
+    .row
+      .col-sm-12.col-xs-12.col-lg-12
+        = render partial: 'alert', locals: { alerts: @forecast_summary.alerts }
+
 -else
-  - if  @weather.make_actual_call
+  - if @weather.make_actual_call
     .h3.center.warn
       Could not retrieve the forecast. Please try again !
+  - unless @forecast_summary.errors.blank?
+    %table.table.table-sm.weather-forecast.weather-forecast-summary
+      %thead
+        %tr
+          %th
+            Location
+          %th
+            Code
+          %th
+            Details
 
--unless @forecast_summary.alerts.blank?
-  .row
-    .col-sm-12.col-xs-12.col-lg-12
-      = render partial: 'alert', locals: { alerts: @forecast_summary.alerts }
-
+      %tbody
+        - @forecast_summary.errors.each do |location, details|
+          %tr
+            %td=location.description
+            %td=details['code']
+            %td=details['error']
 
 %a{:href => "https://www.freepik.com/free-photos-vectors/icon", class: 'freepik'} Icons by Freepik
 
