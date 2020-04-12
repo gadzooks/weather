@@ -57,7 +57,6 @@ class LatitudeLongitudeByRegion
     YAML_REGION_DATA.each do |y|
       name = y.first
       hsh = y.second
-      Rails.logger.info y.inspect
       @regions[name] = Region.new(name, hsh['search_key'], hsh['description'])
     end
 
@@ -65,7 +64,6 @@ class LatitudeLongitudeByRegion
       name = y.first
       hsh = y.second
       region = @regions[hsh['region']]
-      Rails.logger.info "Region for location #{name} is #{region}"
       @locations[name] = Location.new(name, hsh['description'], hsh['latitude'],
                                       hsh['longitude'], region, hsh['sub_region'])
     end
