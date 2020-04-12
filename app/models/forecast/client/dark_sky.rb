@@ -11,8 +11,6 @@ class DarkSky < Base
     requests = {}
     locations.each do |loc|
       next if loc.blank?
-      url = BASE_URL + '/' +  loc.latitude.to_s + ',' + loc.longitude.to_s +
-        EXCLUDE_BLOCK
       req = create_dark_sky_request(loc)
       requests[loc] = req
       hydra.queue req
@@ -70,7 +68,7 @@ class DarkSky < Base
     url = BASE_URL + '/' +  loc.latitude.to_s + ',' + loc.longitude.to_s +
         EXCLUDE_BLOCK
 
-    Request.new(url, cache_ttl: 10.minutes)
+    Request.new(url, cache_ttl: 6.hours)
   end
 
 
