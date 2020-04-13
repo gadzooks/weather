@@ -5,7 +5,7 @@ class Weather
   def self.find(params)
     places =
       if !params[:places].blank?
-        params[:places]
+        params[:places].split ','
       elsif params[:locations].to_s == 'all'
         LatitudeLongitudeByRegion.instance.all_places
       else
