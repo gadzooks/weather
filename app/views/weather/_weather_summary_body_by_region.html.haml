@@ -4,17 +4,14 @@
       %tr.region-details
         %td{colspan: 10}
           = region.description
-          %a{href: "#{region.wta_trip_report_url}", target: '_blank'}
-            = image_tag("wta-logo.png", size: '25x25', title: 'WTA Trip Reports', alt: 'WTA Trip Reports')
-            WTA trip reports
+          = render partial: 'wta_trip_report_link', locals: { loc: loc, link_text: 'WTA trip reports' }
 
     %tr.weather-details
       %td{class: 'center'}
         = render partial: 'alert_links',
           locals: {alerts: detail.alerts, blank_alert_msg: 'N/A'}
       %td.location-change
-        %a{href: "#{loc.wta_trip_report_url}", target: '_blank' }
-          = image_tag("wta-logo.png", size: '25x25', title: 'WTA Trip report', alt: 'TR')
+        = render partial: 'wta_trip_report_link', locals: { loc: loc, link_text: nil }
         %a{href: "##{loc.description}"}
           =loc.description.upcase
       - forecast_summary.daily_times.each do |time|
