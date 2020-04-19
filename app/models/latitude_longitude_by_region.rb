@@ -41,6 +41,7 @@ class LatitudeLongitudeByRegion
     end
 
     def wta_trip_report_url(subregion_key = nil)
+      return nil if search_key.blank?
       subregion_query_str = subregion_key.blank? ? 'all' : subregion_key
       "https://www.wta.org/go-outside/trip-reports/tripreport_search?title=&region=#{search_key}&subregion=#{subregion_query_str}&searchabletext=&author=&startdate=&_submit=&enddate=&_submit=&month=all&format=list&filter=Search"
     end

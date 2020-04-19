@@ -26,3 +26,5 @@ snowqualmie_region:
   search_key: '04d37e830680c65b61df474e7e655d64'
   description: 'Snowqualmie Region'
 
+cities:
+  description: 'Cities'

@@ -1,3 +1,15 @@
+seattle:
+  region: cities
+  description: 'Seattle city'
+  latitude: 47.606209
+  longitude: -122.332071
+
+bonney_lake:
+  region: cities
+  description: 'Bonney Lake'
+  latitude: 47.179774
+  longitude: -122.186741
+
 gold bar:
   region: central_cascades
   description: 'Stevens Pass - West'
