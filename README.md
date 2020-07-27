@@ -56,8 +56,9 @@ I decided to build this simple website to answer that question for me. The Pacif
 
 ### How to run :
 1) Download this code.
-2) on command line, run : rails server
-3) localhost:3000/test for test data, localhost:3000 for real weather information.
+2) Generate (rails secret) rails secret key and copy to config/master.key
+3) on command line, run : rails server
+4) localhost:3000/test for test data, localhost:3000 for real weather information.
 
 ### Tech details
 * Stack - Rails 6.0, SCSS, haml, bootstrap, Rspec
