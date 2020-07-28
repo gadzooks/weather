@@ -33,6 +33,13 @@ https://github.com/gadzooks/weather/blob/2e00d8eca2c64b65bd20b5ae59e4e8a99f9c110
 - Rake task to run rails server in production locally 
 https://github.com/gadzooks/weather/blob/3e37ff24c0e89b1e6aa6498edef836d6c63ac161/lib/tasks/runlocally.rake#L1
 
+### Docker
+From https://yizeng.me/2019/11/09/setup-a-ruby-on-rails-6-api-project-with-docker-compose/
+- docker-compose build
+- docker-compose run web rails db:create
+- docker-compose run web rails db:migrate
+- docker-compose up --build
+
 ## Problem statement :
 Where should I go hiking in the next week based on weather forecasts ?
 
