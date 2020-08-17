@@ -6,7 +6,7 @@ class AuthApplicationController < ApplicationController
   #######
 
   def encode_token(payload)
-    JWT.encode(payload, 's3cr3t')
+    JWT.encode(payload, ENV['JWT_SECRET'])
   end
 
   def auth_header
@@ -19,7 +19,7 @@ class AuthApplicationController < ApplicationController
       token = auth_header.split(' ')[1]
       # header: { 'Authorization': 'Bearer <token>' }
       begin
-        JWT.decode(token, 's3cr3t', true, algorithm: 'HS256')
+        JWT.decode(token, ENV['JWT_SECRET'], true, algorithm: 'HS256')
       rescue JWT::DecodeError
         nil
       end

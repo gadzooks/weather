@@ -3,7 +3,6 @@ require 'bcrypt'
 class User < ApplicationRecord
   # users.password_hash in the database is a :string
   include BCrypt
-  #has_secure_password
 
   def password
     @password ||= Password.new(password_hash)
