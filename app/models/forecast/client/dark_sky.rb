@@ -52,7 +52,7 @@ class DarkSky < Base
   private
   #######
   # FIXME use different api keys for devo and prod
-  API_KEY = Rails.application.credentials.dark_sky[:api_key]
+  API_KEY = ENV['DARK_SKY_API_KEY']
   BASE_URL = "https://api.darksky.net/forecast/#{API_KEY}"
   EXCLUDE_BLOCK = "?exclude=minutely,hourly"
 

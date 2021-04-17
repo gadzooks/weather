@@ -7,12 +7,16 @@ class Base
     raise NotImplementedError
   end
 
-  def self.new_client(call_real_service, locations)
-    if call_real_service
-      DarkSky.new locations
-    else
-      DarkSkyMock.new locations
-    end
+  def self.new_ds_client(locations)
+    DarkSky.new locations
+  end
+
+  def self.new_vc_client(locations)
+    VisualCrossing.new locations
+  end
+
+  def self.new_mock_client(locations)
+    DarkSkyMock.new locations
   end
 
   #######
