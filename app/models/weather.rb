@@ -21,7 +21,16 @@ class Weather
   end
 
   def get_forecast
-    @client.get_forecast if @client
+    if @client
+      responses, errors = @client.get_forecast
+      forecast = case @type
+                 when DARK_SKY_CLIENT
+                   Forecast::Parser.dark_sky_parser(responses, errors)
+                 else
+                   Forecast::VcParser.parse(responses, errors)
+                 end
+      return forecast
+    end
   end
 
   def self.find_by_region(params)
@@ -29,12 +38,15 @@ class Weather
                params[:places]
              elsif params[:locations].to_s == 'all'
                LatitudeLongitudeByRegion.instance.all_places
+               # ['seattle']
              else
                [:hood_canal, :teanaway]
              end
 
     lat_long = LatitudeLongitudeByRegion.instance.convert(places)
 
+    Rails.logger.info "lat_long is " + places.inspect
+    Rails.logger.info "lat_long is " + lat_long.inspect
     self.new(make_fake_call(params), lat_long, client_type(params))
   end
 
@@ -47,7 +59,6 @@ class Weather
 
   def self.client_type(params)
     type = params['client_type']
-    type = MOCK_CLIENT if make_fake_call(params)
     type ||= DARK_SKY_CLIENT
   end
 
@@ -62,6 +73,7 @@ class Weather
 
   def initialize(make_fake_call, lat_long, type = DARK_SKY_CLIENT)
     @make_actual_call = !make_fake_call
+    @type = type
     Rails.logger.info "client is " + type
     @client =
       case type

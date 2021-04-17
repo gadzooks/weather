@@ -28,6 +28,7 @@ class Parser
       currently = daily = nil
       next if response.blank?
 
+      Rails.logger.info "response is " + response.inspect
       c_forecast = response[CURRENT_FORECAST]
       unless c_forecast.blank?
         ts = Forecast::Data.new(c_forecast)

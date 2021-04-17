@@ -16,9 +16,13 @@ class WeatherController < ApplicationController
     @google_image_src = nil
   end
 
-  def by_vc
-
-
+  def vc
+    params['client_type'] = Weather::VC_CLIENT
+    @weather = Weather.find_by_region(params)
+    @forecast_summary = @weather.get_forecast
+    @by_region = true
+    @google_image_src = nil
+    render 'by_region' and return
   end
 
   #######
