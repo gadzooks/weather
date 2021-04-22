@@ -2,10 +2,11 @@ require_dependency 'initialize_from_hash'
 module Forecast
 class Data
   include InitializeFromHash
-  MY_ATTRIBUTES = [:time, :summary, :icon, :precipIntensity, :precipProbability,
-    :temperature, :apparentTemperature, :dewPoint, :timeSeriesType,
-    :temperatureHigh, :temperatureHighTime, :temperatureLow, :temperatureLowTime,
-    :sunsetTime, :sunriseTime, :visibility, :cloudCover
+  MY_ATTRIBUTES = [:time, :summary, :icon,
+                   :precipIntensity, :precipProbability,
+                   :temperature, :apparentTemperature, :dewPoint,
+                   :temperatureHigh, :temperatureLow,
+                   :sunsetTime, :sunriseTime, :visibility, :cloudCover
   ]
   attr_reader *MY_ATTRIBUTES
 

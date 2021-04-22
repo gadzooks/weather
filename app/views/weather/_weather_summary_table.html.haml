@@ -4,7 +4,8 @@
   %table.table.table-sm.weather-forecast.weather-forecast-summary
     %thead
       %tr.table-heading.center
-        %th{scope: 'col', colspan: 10}
+        - columns = forecast_summary.daily_times.size + 2
+        %th{scope: 'col', colspan: columns}
           -unless forecast_summary.alerts.blank?
             %span.alert_id
               %a{href: '#all-alerts'}

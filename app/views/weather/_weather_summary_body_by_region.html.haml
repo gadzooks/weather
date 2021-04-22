@@ -2,7 +2,8 @@
   - forecasts_by_region(forecasts) do |is_new_region, region, loc, detail|
     -if is_new_region
       %tr.region-details
-        %td{colspan: 10}
+        - columns = forecast_summary.daily_times.size + 2
+        %td{colspan: columns}
           = region.description
           = render partial: 'wta_trip_report_link', locals: { loc: loc, link_text: 'WTA trip reports' }
 

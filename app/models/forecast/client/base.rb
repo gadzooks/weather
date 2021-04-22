@@ -24,6 +24,10 @@ class Base
     DarkSkyMock.new locations
   end
 
+  def self.new_vc_mock_client(locations)
+    VisualCrossingMock.new locations
+  end
+
   def get_forecast
     Rails.logger.debug "Getting forecast for : " + @locations.inspect
 

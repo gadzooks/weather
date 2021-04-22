@@ -1,20 +1,20 @@
+require 'pry'
 module Forecast
-class Parser
-  CURRENT_FORECAST = 'currently'
-  DAILY_FORECAST = 'daily'
+class VcParser
+  DAILY_FORECAST = 'days'
   ALERTS = 'alerts'
 
-  def self.dark_sky_parser(json_response, errors)
+  def self.parse(json_response, errors)
     json_response ||= {}
 
     all_alerts, forecast_by_location, max_daily_data_points = parse_weather_responses(json_response)
 
-    Rails.logger.debug 'parsing forecast for locations : '
-    Rails.logger.debug forecast_by_location.keys.inspect
     Forecast::Summary.new(forecast_by_location, max_daily_data_points, all_alerts, errors)
   end
 
+  #######
   private
+  #######
 
   def self.parse_weather_responses(json_response)
     forecast_by_location = {}
@@ -23,28 +23,30 @@ class Parser
     all_alerts = Set.new
 
     forecast_id = 1
+    set_current_fcst = true
+
     json_response.each do |location, response|
       alerts_for_location = {}
       currently = daily = nil
       next if response.blank?
 
-      Rails.logger.info "response is " + response.to_s
-      c_forecast = response[CURRENT_FORECAST]
-      unless c_forecast.blank?
-        ts = Forecast::Data.new(c_forecast)
-        currently = Forecast::TimeSeriesSummary.new_currently(
-            c_forecast['summary'],
-            c_forecast['icon'],
-            ts
-        )
-      end
-
-      daily_summary = ''
+      daily_summary = response['description'] || ''
       d_forecast = response[DAILY_FORECAST]
       unless d_forecast.blank?
-        daily_summary = d_forecast['summary'] || ''
-        daily_data = (d_forecast['data'] || []).map do |hsh|
-          Forecast::Data.new(hsh)
+
+        # current forecast is day 0 forecast
+        c_forecast = d_forecast.shift
+        unless c_forecast.blank?
+          ts = Forecast::Data.new(make_compatible(c_forecast))
+          currently = Forecast::TimeSeriesSummary.new_currently(
+            c_forecast['description'],
+            c_forecast['icon'],
+            ts
+          )
+        end
+
+        daily_data = (d_forecast || []).map do |hsh|
+          Forecast::Data.new(make_compatible(hsh))
         end
 
         if daily_data.size > max_daily_data_points.size
@@ -52,8 +54,8 @@ class Parser
         end
 
         daily = Forecast::TimeSeriesSummary.new_daily(
-            d_forecast['summary'],
-            d_forecast['icon'],
+            response['description'],
+            response['icon'],
             daily_data
         )
       end
@@ -84,6 +86,32 @@ class Parser
       forecast_id += 1
     end
     return all_alerts, forecast_by_location, max_daily_data_points
+  end
+
+  #######
+  private
+  #######
+
+  def self.make_compatible(hsh)
+    return {} if hsh.blank?
+    hsh['time'] = hsh.delete('datetimeEpoch')
+    hsh['summary'] = hsh.delete('description')
+
+    hsh['precipProbability'] = hsh.delete('precipprob')
+    hsh['temperature'] = hsh.delete('temp')
+    hsh['apparentTemperature'] = hsh.delete('feelslike')
+    hsh['dewPoint'] = hsh.delete('dew')
+
+
+    hsh['temperatureHigh'] = hsh.delete('tempmax')
+    hsh['temperatureLow'] = hsh.delete('tempmin')
+
+    hsh['sunsetTime'] = hsh.delete('sunsetEpoch')
+    hsh['sunriseTime'] = hsh.delete('sunriseEpoch')
+
+    hsh['cloudCover'] = hsh.delete('cloudcover')
+
+    hsh
   end
 
 end
