@@ -20,6 +20,7 @@ class Data
 
       @visibility = @visibility.to_i * 10
       @cloudCover = (@cloudCover.to_f * 100).round
+      @cloudCover /= 100 if (@cloudCover > 100)
 
       # icon gives the worst weather status in 24 hours for daily forecast
       # we are only interested in how it is during the day (for the most part)

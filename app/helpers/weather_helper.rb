@@ -38,7 +38,9 @@ module WeatherHelper
 
   def precipitation(precipitation)
     precipitation ||= 0
-    (precipitation * 100).round.to_s + '%'
+    precipitation *= 100
+    precipitation /= 100 if precipitation > 100
+    precipitation.round.to_s + '%'
   end
 
   def sorted_alerts(alerts)
