@@ -124,6 +124,7 @@ class VcParser
     hsh['title'] = hsh.delete('event')
     hsh['expires'] = hsh.delete('endsEpoch')
     hsh['uri'] = hsh.delete('link')
+    hsh['description'] = (hsh['description'] || '').humanize
 
     hsh
   end

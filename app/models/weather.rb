@@ -25,7 +25,7 @@ class Weather
                params[:places]
              elsif params[:locations].to_s == 'all'
                [LatitudeLongitudeByRegion.instance.all_places.sample]
-               LatitudeLongitudeByRegion.instance.all_places
+               LatitudeLongitudeByRegion.instance.all_places[0..8]
              else
                [:hood_canal, :teanaway]
              end

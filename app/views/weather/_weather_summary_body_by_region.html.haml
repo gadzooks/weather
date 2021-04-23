@@ -11,7 +11,7 @@
       %td{class: 'center'}
         = render partial: 'alert_links',
           locals: {alerts: detail.alerts, blank_alert_msg: 'N/A'}
-      %td.location-change
+      %td.location-change.location-row
         = render partial: 'wta_trip_report_link', locals: { loc: loc, link_text: nil }
         %a{href: "##{loc.description}"}
           =loc.description.upcase
