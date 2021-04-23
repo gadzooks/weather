@@ -1,6 +1,11 @@
 class Weather
+  DARK_SKY_CLIENT = 'DARK_SKY_CLIENT'
+  VC_CLIENT       = 'VC_CLIENT'
+  DS_MOCK_CLIENT  = 'DS_MOCK_CLIENT'
+  VC_MOCK_CLIENT  = 'VC_MOCK_CLIENT'
+
   attr_accessor :make_actual_call
-  attr_reader :forecast
+  attr_reader :forecast, :type
 
   def self.find(params)
     places =
@@ -16,11 +21,7 @@ class Weather
 
     lat_long = LatitudeLongitudeByRegion.instance.convert(places)
 
-    self.new(self.make_fake_call(params), lat_long)
-  end
-
-  def get_forecast
-    @client.get_forecast if @client
+    self.new(make_fake_call(params), lat_long, client_type(params))
   end
 
   def self.find_by_region(params)
@@ -29,17 +30,28 @@ class Weather
              elsif params[:locations].to_s == 'all'
                LatitudeLongitudeByRegion.instance.all_places
              else
-               [:hood_canal, :teanaway]
+               [LatitudeLongitudeByRegion.instance.all_places.sample]
              end
 
     lat_long = LatitudeLongitudeByRegion.instance.convert(places)
 
-    new(make_fake_call(params), lat_long)
+    type = client_type(params)
+    self.new(make_fake_call(params), lat_long, type)
+  end
+
+  def get_forecast
+    @client.get_forecast if @client
   end
 
   #######
   private
   #######
+
+  def self.client_type(params)
+    type = params['client_type']
+    type ||= DARK_SKY_CLIENT
+  end
+
   def self.make_fake_call(params)
     if(params[:test].blank? && !Rails.env.production?)
       # in non prod by default we will make FAKE service calls
@@ -49,9 +61,11 @@ class Weather
     end
   end
 
-  def initialize(make_fake_call, lat_long)
+  def initialize(make_fake_call, lat_long, type)
     @make_actual_call = !make_fake_call
-    @client = Forecast::Client::Base.new_client(@make_actual_call, lat_long)
+    @type = type
+    Rails.logger.debug "client is " + type
+    @client = Forecast::Client::Base.new_client(type, lat_long, make_actual_call)
   end
 
 end

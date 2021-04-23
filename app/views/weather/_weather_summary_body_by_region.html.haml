@@ -2,7 +2,8 @@
   - forecasts_by_region(forecasts) do |is_new_region, region, loc, detail|
     -if is_new_region
       %tr.region-details
-        %td{colspan: 10}
+        - columns = forecast_summary.daily_times.size + 2
+        %td{colspan: columns}
           = region.description
           = render partial: 'wta_trip_report_link', locals: { loc: loc, link_text: 'WTA trip reports' }
 
@@ -10,7 +11,7 @@
       %td{class: 'center'}
         = render partial: 'alert_links',
           locals: {alerts: detail.alerts, blank_alert_msg: 'N/A'}
-      %td.location-change
+      %td.location-change.location-row
         = render partial: 'wta_trip_report_link', locals: { loc: loc, link_text: nil }
         %a{href: "##{loc.description}"}
           =loc.description.upcase

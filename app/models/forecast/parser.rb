@@ -4,17 +4,17 @@ class Parser
   DAILY_FORECAST = 'daily'
   ALERTS = 'alerts'
 
-  def self.dark_sky_parser(json_response, errors)
+  def self.parse(json_response, errors)
     json_response ||= {}
 
     all_alerts, forecast_by_location, max_daily_data_points = parse_weather_responses(json_response)
 
-    Rails.logger.debug 'parsing forecast for locations : '
-    Rails.logger.debug forecast_by_location.keys.inspect
     Forecast::Summary.new(forecast_by_location, max_daily_data_points, all_alerts, errors)
   end
 
+  #######
   private
+  #######
 
   def self.parse_weather_responses(json_response)
     forecast_by_location = {}
@@ -82,6 +82,7 @@ class Parser
       forecast_by_location[location] = Forecast::Detail.new hsh
       forecast_id += 1
     end
+
     return all_alerts, forecast_by_location, max_daily_data_points
   end
 

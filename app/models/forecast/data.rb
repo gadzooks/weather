@@ -2,10 +2,11 @@ require_dependency 'initialize_from_hash'
 module Forecast
 class Data
   include InitializeFromHash
-  MY_ATTRIBUTES = [:time, :summary, :icon, :precipIntensity, :precipProbability,
-    :temperature, :apparentTemperature, :dewPoint, :timeSeriesType,
-    :temperatureHigh, :temperatureHighTime, :temperatureLow, :temperatureLowTime,
-    :sunsetTime, :sunriseTime, :visibility, :cloudCover
+  MY_ATTRIBUTES = [:time, :summary, :icon,
+                   :precipIntensity, :precipProbability,
+                   :temperature, :apparentTemperature, :dewPoint,
+                   :temperatureHigh, :temperatureLow,
+                   :sunsetTime, :sunriseTime, :visibility, :cloudCover
   ]
   attr_reader *MY_ATTRIBUTES
 
@@ -19,6 +20,7 @@ class Data
 
       @visibility = @visibility.to_i * 10
       @cloudCover = (@cloudCover.to_f * 100).round
+      @cloudCover /= 100 if (@cloudCover > 100)
 
       # icon gives the worst weather status in 24 hours for daily forecast
       # we are only interested in how it is during the day (for the most part)

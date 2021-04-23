@@ -4,15 +4,14 @@
   %table.table.table-sm.weather-forecast.weather-forecast-summary
     %thead
       %tr.table-heading.center
-        %th{scope: 'col', colspan: 10}
+        - columns = forecast_summary.daily_times.size + 2
+        %th{scope: 'col', colspan: columns}
           -unless forecast_summary.alerts.blank?
             %span.alert_id
               %a{href: '#all-alerts'}
                 &darr;
                 =pluralize(forecast_summary.alerts.size, 'Alert')
                 &darr;
-          %a{:href => 'https://darksky.net/poweredby', :target=>"_blank"}
-            [Dark SKY API]
     %thead
       %tr.header-secondary.header-secondary-main
         %td.align-middle

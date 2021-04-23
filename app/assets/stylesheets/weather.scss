@@ -10,7 +10,7 @@
   span.title {
     margin-top: 0;
     margin-bottom: .25rem;
-    color: white;
+    font-weight: bolder;
     padding: 5px;
     border-radius: .25rem;
   }
@@ -135,6 +135,10 @@ table.weather-forecast {
       }
 
       td.summary {
+        text-align: left;
+      }
+
+      td.location-row {
         text-align: left;
       }
 

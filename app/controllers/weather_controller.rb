@@ -2,17 +2,26 @@ class WeatherController < ApplicationController
   before_action :set_by_region_flag
 
   def index
+    params['client_type'] = Weather::DARK_SKY_CLIENT
     @weather = Weather.find(params)
     @forecast_summary = @weather.get_forecast
-    google_map = Maps::GoogleMapClient.new @forecast_summary.forecasts
-    @google_image_src = google_map.image_src
+    @forecast_type = @weather.type
   end
 
   def by_region
+    params['client_type'] = Weather::DARK_SKY_CLIENT
     @weather = Weather.find_by_region(params)
     @forecast_summary = @weather.get_forecast
+    @forecast_type = @weather.type
     @by_region = true
-    @google_image_src = nil
+  end
+
+  def vc
+    params['client_type'] = Weather::VC_CLIENT
+    @weather = Weather.find_by_region(params)
+    @forecast_summary = @weather.get_forecast
+    @forecast_type = @weather.type
+    @by_region = true
   end
 
   #######

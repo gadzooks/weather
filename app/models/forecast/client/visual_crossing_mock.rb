@@ -1,6 +1,6 @@
 module Forecast
 module Client
-class DarkSkyMock < Base
+class VisualCrossingMock < Base
 
   def get_forecast
     Rails.logger.debug 'Making FAKE api call'
@@ -8,9 +8,8 @@ class DarkSkyMock < Base
     # randomize returning the results a bit
     selected_locations = @locations[0..rand(@locations.size)]
 
-    Rails.logger.debug "Calling for : #{selected_locations.inspect}"
     raw_response = setup_raw_response(selected_locations)
-    Forecast::Parser.parse(raw_response, nil)
+    Forecast::VcParser.parse(raw_response, nil)
   end
 
   def setup_raw_response(selected_locations)
@@ -18,7 +17,7 @@ class DarkSkyMock < Base
 
     selected_locations.each do |loc|
       next if loc.blank?
-      filename = "spec/models/api/response/#{loc.name}.json"
+      filename = "spec/models/api/vc/response/vc-#{loc.name}.json"
       filename = filename.gsub(/ /,'')
       if File.exists? filename
         File.open(filename) do |fh|
