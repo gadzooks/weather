@@ -10,7 +10,7 @@ class DarkSkyMock < Base
 
     Rails.logger.debug "Calling for : #{selected_locations.inspect}"
     raw_response = setup_raw_response(selected_locations)
-    Parser.dark_sky_parser(raw_response, nil)
+    Forecast::Parser.parse(raw_response, nil)
   end
 
   def setup_raw_response(selected_locations)

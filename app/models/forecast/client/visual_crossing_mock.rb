@@ -9,7 +9,7 @@ class VisualCrossingMock < Base
     selected_locations = @locations[0..rand(@locations.size)]
 
     raw_response = setup_raw_response(selected_locations)
-    raw_response
+    Forecast::VcParser.parse(raw_response, nil)
   end
 
   def setup_raw_response(selected_locations)

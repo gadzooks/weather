@@ -4,48 +4,17 @@ class VisualCrossing < Base
   include Typhoeus
 
   # https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/38.96972,-77.38519?key=YOUR_KEY&include=obs,fcst
-  def get_forecast
 
-    hydra = Hydra.new
-    requests = {}
-    locations.each do |loc|
-      next if loc.blank?
-      req = create_dark_sky_request(loc)
-      requests[loc] = req
-      hydra.queue req
-    end
+  #########
+  protected
+  #########
 
-    hydra.run
+  def create_request_for_location(loc)
+    url = BASE_URL + '/' +  loc.latitude.to_s + ',' + loc.longitude.to_s +
+        EXCLUDE_BLOCK
 
-    responses = {}
-    errors = {}
-
-    requests.each do |location, r|
-      Rails.logger.debug "Response code for #{location.name} is : " +
-        r.response.response_code.to_s
-
-      # FIXME handle JSON parse errors
-      if r.response.response_code != 200
-        if r.try(:response).try(:body)
-          body = r.response.body
-          errors[location] = JSON.parse body
-        else
-          errors[location] = { code: nil, error: 'Unknown error while calling API' }
-        end
-      else
-        if r.response.body
-          body = r.response.body
-          responses[location] = JSON.parse body
-          # write_dark_sky_api_results_to_files(location, responses, 'vc')
-        else
-          responses[location] = {}
-        end
-      end
-    end
-
-    responses
+    Request.new(url, cache_ttl: 6.hours)
   end
-
 
   #######
   private
@@ -62,13 +31,6 @@ class VisualCrossing < Base
     filename.downcase!
     puts "Writing to #{filename}"
     File.open(filename, 'w') { |f| f.write responses[location].to_json }
-  end
-
-  def create_dark_sky_request(loc)
-    url = BASE_URL + '/' +  loc.latitude.to_s + ',' + loc.longitude.to_s +
-        EXCLUDE_BLOCK
-
-    Request.new(url, cache_ttl: 6.hours)
   end
 
 

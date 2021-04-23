@@ -3,9 +3,20 @@ module Client
 class DarkSky < Base
 
   # https://api.darksky.net/forecast/[key]/[latitude],[longitude]
-  #######
+  #########
   protected
+  #########
+  def create_request_for_location(loc)
+    url = BASE_URL + '/' +  loc.latitude.to_s + ',' + loc.longitude.to_s +
+        EXCLUDE_BLOCK
+
+    Request.new(url, cache_ttl: 6.hours)
+  end
+
   #######
+  private
+  #######
+
   # FIXME use different api keys for devo and prod
   API_KEY = ENV['DARK_SKY_API_KEY']
   BASE_URL = "https://api.darksky.net/forecast/#{API_KEY}"
@@ -18,14 +29,6 @@ class DarkSky < Base
     puts "Writing to #{filename}"
     File.open(filename, 'w') { |f| f.write responses[location].to_json }
   end
-
-  def create_request_for_location(loc)
-    url = BASE_URL + '/' +  loc.latitude.to_s + ',' + loc.longitude.to_s +
-        EXCLUDE_BLOCK
-
-    Request.new(url, cache_ttl: 6.hours)
-  end
-
 
 end
 end

@@ -2,30 +2,36 @@ module Forecast
 module Client
 class Base
   include Typhoeus
-  attr_reader :locations
+  attr_reader :locations, :make_actual_call, :type
 
-  def get_forecast
-    raise NotImplementedError
+  DARK_SKY_CLIENT = 'DARK_SKY_CLIENT'
+  VC_CLIENT       = 'VC_CLIENT'
+  DS_MOCK_CLIENT  = 'DS_MOCK_CLIENT'
+  VC_MOCK_CLIENT  = 'VC_MOCK_CLIENT'
+
+  def self.new_ds_client(locations, make_actual_call)
+    new_client(DARK_SKY_CLIENT, locations, make_actual_call)
   end
 
-  def create_request_for_location(location)
-    raise NotImplementedError
+  def self.new_vc_client(locations, make_actual_call)
+    new_client(VC_CLIENT, locations, make_actual_call)
   end
 
-  def self.new_ds_client(locations)
-    DarkSky.new locations
-  end
-
-  def self.new_vc_client(locations)
-    VisualCrossing.new locations
-  end
-
-  def self.new_ds_mock_client(locations)
-    DarkSkyMock.new locations
-  end
-
-  def self.new_vc_mock_client(locations)
-    VisualCrossingMock.new locations
+  def self.new_client(type, locations, make_actual_call = false)
+    client = nil
+    if type == DARK_SKY_CLIENT
+      if make_actual_call
+        client = DarkSky.new(locations, Forecast::Parser)
+      else
+        client = DarkSkyMock.new(locations, Forecast::Parser)
+      end
+    else
+      if make_actual_call
+        client = VisualCrossing.new(locations, Forecast::VcParser)
+      else
+        client = VisualCrossingMock.new(locations, Forecast::VcParser)
+      end
+    end
   end
 
   def get_forecast
@@ -66,15 +72,25 @@ class Base
       end
     end
 
-    [responses, errors]
+    @parser.parse(responses, errors)
+  end
+
+  #########
+  protected
+  #########
+
+  # each subclass needs to implement this method
+  def create_request_for_location(location)
+    raise NotImplementedError
   end
 
   #######
   private
   #######
 
-  def initialize(locations)
+  def initialize(locations, parser)
     @locations = locations
+    @parser = parser
   end
 
 end

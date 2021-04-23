@@ -1,7 +1,11 @@
-require 'pry'
 class Weather
+  DARK_SKY_CLIENT = 'DARK_SKY_CLIENT'
+  VC_CLIENT       = 'VC_CLIENT'
+  DS_MOCK_CLIENT  = 'DS_MOCK_CLIENT'
+  VC_MOCK_CLIENT  = 'VC_MOCK_CLIENT'
+
   attr_accessor :make_actual_call
-  attr_reader :forecast
+  attr_reader :forecast, :type
 
   def self.find(params)
     places =
@@ -24,10 +28,9 @@ class Weather
     places = if !params[:places].blank?
                params[:places]
              elsif params[:locations].to_s == 'all'
-               [LatitudeLongitudeByRegion.instance.all_places.sample]
-               LatitudeLongitudeByRegion.instance.all_places[0..8]
+               LatitudeLongitudeByRegion.instance.all_places
              else
-               [:hood_canal, :teanaway]
+               [LatitudeLongitudeByRegion.instance.all_places.sample]
              end
 
     lat_long = LatitudeLongitudeByRegion.instance.convert(places)
@@ -37,27 +40,12 @@ class Weather
   end
 
   def get_forecast
-    if @client
-      responses, errors = @client.get_forecast
-      # FIXME : set parser via Dependency Injection
-      forecast = case @type
-                 when DARK_SKY_CLIENT, DS_MOCK_CLIENT
-                   Forecast::Parser.dark_sky_parser(responses, errors)
-                 when VC_CLIENT, VC_MOCK_CLIENT
-                   Forecast::VcParser.parse(responses, errors)
-                 end
-      return forecast
-    end
+    @client.get_forecast if @client
   end
-
 
   #######
   private
   #######
-  DARK_SKY_CLIENT = 'DARK_SKY_CLIENT'
-  VC_CLIENT       = 'VC_CLIENT'
-  DS_MOCK_CLIENT  = 'DS_MOCK_CLIENT'
-  VC_MOCK_CLIENT  = 'VC_MOCK_CLIENT'
 
   def self.client_type(params)
     type = params['client_type']
@@ -77,22 +65,7 @@ class Weather
     @make_actual_call = !make_fake_call
     @type = type
     Rails.logger.debug "client is " + type
-    @client =
-      case type
-      when DARK_SKY_CLIENT
-        Forecast::Client::Base.
-          new_ds_client(lat_long)
-      when VC_CLIENT
-        Forecast::Client::Base.
-          new_vc_client(lat_long)
-      when DS_MOCK_CLIENT
-        Forecast::Client::Base.
-          new_ds_mock_client(lat_long)
-      when VC_MOCK_CLIENT
-        Forecast::Client::Base.
-          new_vc_mock_client(lat_long)
-      end
-
+    @client = Forecast::Client::Base.new_client(type, lat_long, make_actual_call)
   end
 
 end
