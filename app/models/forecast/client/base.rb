@@ -29,8 +29,6 @@ class Base
   end
 
   def get_forecast
-    Rails.logger.debug "Getting forecast for : " + @locations.inspect
-
     hydra = Hydra.new
     requests = {}
     locations.each do |loc|

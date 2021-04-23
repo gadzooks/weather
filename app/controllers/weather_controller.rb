@@ -13,8 +13,8 @@ class WeatherController < ApplicationController
   end
 
   def vc
-    params['client_type'] = Weather::VC_CLIENT
     params['client_type'] = Weather::VC_MOCK_CLIENT
+    params['client_type'] = Weather::VC_CLIENT
     @weather = Weather.find_by_region(params)
     @forecast_summary = @weather.get_forecast
     @by_region = true

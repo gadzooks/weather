@@ -34,6 +34,7 @@ class VcParser
       d_forecast = response[DAILY_FORECAST]
       unless d_forecast.blank?
 
+=begin
         # current forecast is day 0 forecast
         c_forecast = d_forecast.shift
         unless c_forecast.blank?
@@ -44,6 +45,7 @@ class VcParser
             ts
           )
         end
+=end
 
         daily_data = (d_forecast || []).map do |hsh|
           Forecast::Data.new(make_compatible(hsh))
@@ -60,8 +62,9 @@ class VcParser
         )
       end
 
+      Rails.logger.debug "ALERTS : " + response[ALERTS].inspect
       (response[ALERTS] || []).each do |alert_hash|
-        alert = Forecast::Alert.new(alert_hash)
+        alert = Forecast::Alert.new(make_compatible_for_alert(alert_hash))
         if all_alerts.include?(alert)
           alert.alert_id = all_alerts.first { |a| a == alert }.alert_id
           alerts_for_location[alert.alert_id] = alert
@@ -110,6 +113,17 @@ class VcParser
     hsh['sunriseTime'] = hsh.delete('sunriseEpoch')
 
     hsh['cloudCover'] = hsh.delete('cloudcover')
+
+    hsh
+  end
+
+
+  # MY_ATTRIBUTES = :title, :regions, :severity, :time, :expires, :description, :uri, :alert_id
+  def self.make_compatible_for_alert(hsh)
+    return {} if hsh.blank?
+    hsh['title'] = hsh.delete('event')
+    hsh['expires'] = hsh.delete('endsEpoch')
+    hsh['uri'] = hsh.delete('link')
 
     hsh
   end

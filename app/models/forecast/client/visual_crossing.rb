@@ -5,7 +5,6 @@ class VisualCrossing < Base
 
   # https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/38.96972,-77.38519?key=YOUR_KEY&include=obs,fcst
   def get_forecast
-    Rails.logger.debug "Getting forecast for : " + @locations.inspect
 
     hydra = Hydra.new
     requests = {}
@@ -37,14 +36,14 @@ class VisualCrossing < Base
         if r.response.body
           body = r.response.body
           responses[location] = JSON.parse body
-          write_dark_sky_api_results_to_files(location, responses, 'vc')
+          # write_dark_sky_api_results_to_files(location, responses, 'vc')
         else
           responses[location] = {}
         end
       end
     end
 
-    Parser.dark_sky_parser(responses, errors)
+    responses
   end
 
 
