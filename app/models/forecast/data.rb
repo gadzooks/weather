@@ -3,7 +3,7 @@ module Forecast
 class Data
   include InitializeFromHash
   MY_ATTRIBUTES = [:time, :summary, :icon,
-                   :precipIntensity, :precipProbability,
+                   :precipIntensity, :precipProbability, :precipAmount,
                    :temperature, :apparentTemperature, :dewPoint,
                    :temperatureHigh, :temperatureLow,
                    :sunsetTime, :sunriseTime, :visibility, :cloudCover

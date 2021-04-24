@@ -1,7 +1,8 @@
 %table.table.table-bordered.table-sm.weather-forecast
+  - totalColumns = 8
   %thead{id: loc.description}
     %tr
-      %th{scope: 'col', colspan: 7, class: 'header-main center'}
+      %th{scope: 'col', colspan: totalColumns, class: 'header-main center'}
         %span{title: detail.daily_summary}
           = render partial: 'alert_links',
               locals: {alerts: detail.alerts, blank_alert_msg: ''}
@@ -11,9 +12,9 @@
             (top)
     %tr.header-secondary
       %td{scope: "col", colspan: 2, class: 'center'} DATE
-      %td{scope: "col", colspan: 2, class: :center} DESC
+      %td{scope: "col", colspan: 2, class: :center} DETAILS
       %td{scope: "col", class: 'fahrenheit'} HI / LOW
-      %td{scope: "col"} PRECIP
+      %td{scope: "col", colspan: 2} PRECIP
       %td{scope: "col"} CLOUD COVER
 
   %tbody
@@ -38,13 +39,16 @@
         %td.center
           -if daily_ts
             =daily_ts.temperatureHigh.round.to_s + '° / ' +  daily_ts.temperatureLow.round.to_s + '°'
-        %td.center
+        %td.precipitation-prob
           -if daily_ts
             =precipitation(daily_ts.precipProbability)
+        %td.precipitation-amount
+          -if daily_ts
+            =precipitationAmount(daily_ts.precipAmount)
         %td.center
           -if daily_ts
             =daily_ts.cloudCover.to_s + '%'
     %tr.daily-summary
-      %td.center{scope: 'col', colspan: 7}
+      %td.center{scope: 'col', colspan: totalColumns}
         -if detail
           =detail.daily_summary

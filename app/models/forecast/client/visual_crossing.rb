@@ -23,7 +23,7 @@ class VisualCrossing < Base
   API_KEY = ENV["VISUAL_CROSSING_API_KEY"]
   # https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/38.96972,-77.38519?key=YOUR_KEY&include=obs,fcst
   BASE_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline"
-  EXCLUDE_BLOCK = "?key=#{API_KEY}&include=obs,fcst,alerts"
+  EXCLUDE_BLOCK = "?key=#{API_KEY}&include=obs,fcst,alerts&alertLevel=detail"
 
   # useful for debugging and using in mock service
   def write_dark_sky_api_results_to_files(location, responses, prefix = 'ds')

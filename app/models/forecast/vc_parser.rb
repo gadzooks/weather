@@ -100,6 +100,7 @@ class VcParser
     hsh['summary'] = hsh.delete('description')
 
     hsh['precipProbability'] = hsh.delete('precipprob')
+    hsh['precipAmount'] = hsh.delete('precip')
     hsh['temperature'] = hsh.delete('temp')
     hsh['apparentTemperature'] = hsh.delete('feelslike')
     hsh['dewPoint'] = hsh.delete('dew')

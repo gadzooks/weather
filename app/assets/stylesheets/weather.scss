@@ -162,6 +162,14 @@ table.weather-forecast {
         text-align: center;
       }
 
+      td.precipitation-prob {
+        border-right: none;
+        text-align: right;
+      }
+      td.precipitation-amount {
+        border-left: none;
+        text-align: right;
+      }
     }
   }
 

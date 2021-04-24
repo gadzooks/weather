@@ -43,6 +43,18 @@ module WeatherHelper
     precipitation.round.to_s + '%'
   end
 
+  def precipitationAmount(p)
+    if p
+      if p == 0 || p.round(1) == 0
+        return '-'
+      end
+
+      return p.round(1).to_s + ' in'
+    else
+      return '-'
+    end
+  end
+
   def sorted_alerts(alerts)
     alerts.sort_by { |a| a.numeric_severity }
   end
