@@ -61,4 +61,7 @@ Rails.application.configure do
 
   # Also use creds in devo
   config.require_master_key = true
+
+  # For allowing ngrok to expose port when running on macbook
+  config.hosts << "cc934a953614.ngrok.io"
 end

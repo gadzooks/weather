@@ -10,9 +10,4 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery3
-//= require jquery.sparkline.min.js.gz
-//= require rails-ujs
-//= require activestorage
-//= require jquery-readyselector
 //= require_tree .

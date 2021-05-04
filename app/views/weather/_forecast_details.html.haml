@@ -45,7 +45,7 @@
         %td.precipitation-amount
           -if daily_ts
             =precipitationAmount(daily_ts.precipAmount)
-        %td.center
+        %td.cloud-cover
           -if daily_ts
             =daily_ts.cloudCover.to_s + '%'
     %tr.daily-summary

@@ -1,6 +1,10 @@
 // Place all the styles related to the Weather controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.weather-forecast-table {
+  font-family: 'Courier'
+  // font-family: 'Apercu Mono'
+}
 .alert-details {
   padding: 0.5rem;
   margin-bottom: 1.25rem;
@@ -186,6 +190,10 @@ table.weather-forecast {
       td.precipitation-amount {
         border-left: none;
         text-align: right;
+      }
+      td.cloud-cover {
+        text-align: right;
+        padding-right: 4em;
       }
     }
   }
