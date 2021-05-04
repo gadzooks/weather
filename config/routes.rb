@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'weather#index'
   get 'weather/index', as: :weather
   get 'regional', to: 'weather#by_region',  defaults: { locations: :all }
-  get 'vc', to: 'weather#vc',  defaults: { locations: :all }
+  get 'vc', to: 'weather#vc',  defaults: { locations: :all }, as: :vc
   get 'all', to: 'weather#index',  defaults: { locations: :all }
   get 'test', to: 'weather#index', defaults: { test: 'true' }, as: :test
   get 'prod', to: 'weather#index', defaults: { test: 'false' }, as: :prod_test

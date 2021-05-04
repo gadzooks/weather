@@ -47,7 +47,7 @@ RSpec.describe Forecast::VcParser, type: :model do
 
         expect(planetory_info.sunriseEpoch.to_i).to eq(1618665158)
         expect(planetory_info.sunsetEpoch.to_i).to eq(1618714704)
-        expect(planetory_info.moonPhases).to eq(0.12)
+        expect(planetory_info.moonPhases).to eq([0.12, 0.16, 0.21, 0.26, 0.31, 0.36, 0.41, 0.45, 0.48, 0.5, 0.5, 0.52, 0.54, 0.58, 0.63])
     end
   end
 
