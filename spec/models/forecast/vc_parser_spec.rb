@@ -35,6 +35,20 @@ RSpec.describe Forecast::VcParser, type: :model do
 
 
     end
+
+    it "should parse planetory info correctly" do
+        location = LatitudeLongitudeByRegion.instance.convert(['snowqualmie_pass'])
+        # STDERR.puts "vc parsing for location : #{location}"
+        client = Forecast::Client::Base.new_vc_client(location, false)
+        service_response = client.setup_raw_response(location)
+
+        forecast_summary = Forecast::VcParser.parse(service_response, nil)
+        planetory_info = forecast_summary.planetory_info
+
+        expect(planetory_info.sunriseEpoch.to_i).to eq(1618665158)
+        expect(planetory_info.sunsetEpoch.to_i).to eq(1618714704)
+        expect(planetory_info.moonPhases).to eq(0.12)
+    end
   end
 
 end

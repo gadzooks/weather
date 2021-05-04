@@ -23,6 +23,15 @@
             %span.day-of-week
               =time.strftime('%a %b %d').upcase unless time.blank?
 
+    - planetory_info = forecast_summary.planetory_info
+    - if planetory_info
+      %tr.planetory-info
+        %td.sun-rise-set{colspan: 2}
+          ="Sunrise #{planetory_info.sunriseEpoch.strftime('%l:%M %P')}, Sunset: #{planetory_info.sunsetEpoch.strftime('%l:%M %P')}"
+        - planetory_info.moonPhases.each do |mp|
+          %td.moon-phase
+            - title, moon_icon_class = moon_phase_icon_class(mp)
+            %i{class: moon_icon_class, title: title}
     - if by_region
       = render :partial => 'weather_summary_body_by_region', locals: {forecasts: forecasts, forecast_summary: forecast_summary}
     - else

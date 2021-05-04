@@ -36,6 +36,51 @@ module WeatherHelper
     "wi weather-icon wi-#{mapping} #{mapping} #{additional_class}"
   end
 
+
+  def moon_phase_icon_class(moon_phase)
+    moon_phase = moon_phase.to_f
+    title, mapping = case moon_phase
+              when 0, 1
+                ['New Moon : ' + moon_phase.to_s, 'new']
+              when 0.25
+                ['First Quarter Moon : ' + moon_phase.to_s, 'first-quarter']
+              when 0.5
+                ['Full Moon : ' + moon_phase.to_s, 'full']
+              when 0.75
+                ['Last Quarter Moon : ' + moon_phase.to_s, 'last-quarter']
+              else
+                []
+              end
+    unless mapping
+      title, mapping =
+        if(moon_phase > 0.75)
+          ['Waning Crescen Moon : ' + moon_phase.to_s, 'waning-crescent-' + moon_phase_numeric(moon_phase)]
+        elsif(moon_phase > 0.5)
+          ['Waning Gibbous Moon : ' + moon_phase.to_s, 'waning-gibbous-' + moon_phase_numeric(moon_phase)]
+        elsif(moon_phase > 0.25)
+          ['Waxing Gibbous Moon : ' + moon_phase.to_s, 'waxing-gibbous-' + moon_phase_numeric(moon_phase)]
+        elsif(moon_phase > 0)
+          ['Waxing Crescent Moon : ' + moon_phase.to_s, 'waxing-crescent-' + moon_phase_numeric(moon_phase)]
+        end
+    end
+    [title, "wi weather-icon wi-moon-#{mapping}"]
+  end
+
+  # convert range of values between 0.1 to 0.24 to 1 to 6
+  def moon_phase_numeric(moon_phase)
+    moon_phase %= 0.25 # get the quadrant value
+    moon_phase *= 100  # convert fraction to number
+    # 28 total values - 4 values for full moon, new moon and 2 quarter moons
+    # these remaining 24 values are to be divided into 6 regions so each region
+    # will have rage of 4
+    moon_phase /= 4.0
+    # fix issue of rounding
+    moon_phase = 1 if moon_phase.round.zero?
+
+    return moon_phase.round.to_s
+  end
+
+
   def precipitation(precipitation)
     precipitation ||= 0
     precipitation *= 100

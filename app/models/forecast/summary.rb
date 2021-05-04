@@ -1,5 +1,5 @@
 module Forecast
-  Summary = Struct.new(:forecasts, :daily_times, :alerts, :errors) do
+  Summary = Struct.new(:planetory_info, :forecasts, :daily_times, :alerts, :errors) do
     def blank?
       forecasts.blank?
     end

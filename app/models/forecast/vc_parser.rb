@@ -6,20 +6,11 @@ class VcParser
   def self.parse(json_response, errors)
     json_response ||= {}
 
-    all_alerts, forecast_by_location, max_daily_data_points = parse_weather_responses(json_response)
-
-    Forecast::Summary.new(forecast_by_location, max_daily_data_points, all_alerts, errors)
-  end
-
-  #######
-  private
-  #######
-
-  def self.parse_weather_responses(json_response)
     forecast_by_location = {}
     max_daily_data_points = []
     alert_starting_id = 'A'
     all_alerts = Set.new
+    planetory_info = nil
 
     forecast_id = 1
     set_current_fcst = true
@@ -45,6 +36,10 @@ class VcParser
           )
         end
 =end
+
+        unless planetory_info
+          planetory_info = parse_planetory_info(d_forecast)
+        end
 
         daily_data = (d_forecast || []).map do |hsh|
           Forecast::Data.new(make_compatible(hsh))
@@ -87,12 +82,29 @@ class VcParser
       forecast_by_location[location] = Forecast::Detail.new hsh
       forecast_id += 1
     end
-    return all_alerts, forecast_by_location, max_daily_data_points
+
+    Forecast::Summary.new(planetory_info, forecast_by_location, max_daily_data_points, all_alerts, errors)
   end
 
   #######
   private
   #######
+
+  def self.parse_planetory_info(forecasts)
+    forecasts ||= []
+    unless forecasts.blank?
+      hsh = {}
+      hsh['sunriseEpoch'] = forecasts.first['sunriseEpoch']
+      hsh['sunsetEpoch'] = forecasts.first['sunsetEpoch']
+
+      moonPhases = forecasts.map do |forecast|
+        forecast['moonphase']
+      end
+
+      hsh['moonPhases'] = moonPhases
+      Forecast::Planetory.new(hsh)
+    end
+  end
 
   def self.make_compatible(hsh)
     return {} if hsh.blank?
