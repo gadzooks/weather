@@ -15,6 +15,14 @@ module WeatherHelper
     'tornado' => 'tornado',
   }
 
+  def hh_mm_in_pdt(time)
+    if time.respond_to? :in_time_zone
+      time.in_time_zone("Pacific Time (US & Canada)").strftime('%l:%M %P')
+    else
+      time
+    end
+  end
+
   def add_weekend_class(time, additional_class)
     weekend_class = (time && time.on_weekend?) ? ' weekend ' : ' '
     additional_class + weekend_class

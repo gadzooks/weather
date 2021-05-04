@@ -23,12 +23,17 @@
             %span.day-of-week
               =time.strftime('%a %b %d').upcase unless time.blank?
 
-    - planetory_info = forecast_summary.planetory_info
-    - if planetory_info
+    - pl = forecast_summary.planetory_info
+    - if pl
       %tr.planetory-info
         %td.sun-rise-set{colspan: 2}
-          ="Sunrise #{planetory_info.sunriseEpoch.strftime('%l:%M %P')}, Sunset: #{planetory_info.sunsetEpoch.strftime('%l:%M %P')}"
-        - planetory_info.moonPhases.each do |mp|
+          %span.sunrise
+            %i{class: 'wi weather-icon wi-sunrise', title: 'Sunrise at'}
+            =hh_mm_in_pdt(pl.sunriseEpoch)
+          %span.sunset
+            %i{class: 'wi weather-icon wi-sunset', title: 'Sunset at'}
+            =hh_mm_in_pdt(pl.sunsetEpoch)
+        - pl.moonPhases.each do |mp|
           %td.moon-phase
             - title, moon_icon_class = moon_phase_icon_class(mp)
             %i{class: moon_icon_class, title: title}

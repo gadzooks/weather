@@ -91,6 +91,23 @@ table.weather-forecast-summary {
       font-size: 1.2em;
     }
   }
+
+  tr.planetory-info {
+    span.sunrise {
+      i {
+        color: #ffc107;
+        padding-right: 0.4em;
+      }
+      padding-right: 2em;
+    }
+    span.sunset {
+      i {
+        color: #0e151d;
+        padding-right: 0.4em;
+      }
+      padding-left: 2em;
+    }
+  }
 }
 
 table.weather-forecast {
