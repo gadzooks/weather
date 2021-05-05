@@ -117,6 +117,7 @@ class VcParser
     hsh['apparentTemperature'] = hsh.delete('feelslike')
     hsh['dewPoint'] = hsh.delete('dew')
 
+    hsh['moonPhase'] = hsh.delete('moonphase')
 
     hsh['temperatureHigh'] = hsh.delete('tempmax')
     hsh['temperatureLow'] = hsh.delete('tempmin')

@@ -5,7 +5,7 @@ class Data
   MY_ATTRIBUTES = [:time, :summary, :icon,
                    :precipIntensity, :precipProbability, :precipAmount,
                    :temperature, :apparentTemperature, :dewPoint,
-                   :temperatureHigh, :temperatureLow,
+                   :temperatureHigh, :temperatureLow, :moonPhase,
                    :sunsetTime, :sunriseTime, :visibility, :cloudCover
   ]
   attr_reader *MY_ATTRIBUTES
