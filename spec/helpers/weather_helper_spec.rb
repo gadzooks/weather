@@ -11,6 +11,32 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe WeatherHelper, type: :helper do
+  context '#icon_class' do
+    it 'should compute day-cloudy class based on precipitation' do
+      expected_class = 'wi weather-icon wi-day-cloudy day-cloudy sunshine-10'
+      expect(helper.icon_class('partly-cloudy-day', '0', '49')).
+        to eq(expected_class)
+
+      expected_class = 'wi weather-icon wi-day-cloudy day-cloudy sunshine-10'
+      expect(helper.icon_class('partly-cloudy-day', '24', '')).
+        to eq(expected_class)
+
+      expected_class = 'wi weather-icon wi-day-cloudy day-cloudy sunshine-50'
+      expect(helper.icon_class('partly-cloudy-day', '31', '0')).
+        to eq(expected_class)
+
+      expected_class = 'wi weather-icon wi-day-cloudy day-cloudy sunshine-100'
+      expect(helper.icon_class('partly-cloudy-day', '61', '33')).
+        to eq(expected_class)
+
+
+      # one test for 'cloudy' class
+      expected_class = 'wi weather-icon wi-day-cloudy day-cloudy sunshine-50'
+      expect(helper.icon_class('partly-cloudy-day', '31', '50')).
+        to eq(expected_class)
+    end
+  end
+
   context 'moon_phase_numeric' do
     it "should compute valid number for all moon phases" do
       expect(helper.moon_phase_numeric(0.01)).to eq("1")

@@ -8,7 +8,7 @@ module WeatherHelper
     'wind' => 'strong-wind',
     'fog' => 'fog',
     'cloudy' => 'cloudy',
-    'partly-cloudy-day' => 'day-cloudy',
+    'partly-cloudy-day' => 'cloudy',
     'partly-cloudy-night' => 'night-partly-cloudy',
     'hail' => 'hail',
     'thunderstorm' => 'thunderstorm',
@@ -28,17 +28,27 @@ module WeatherHelper
     additional_class + weekend_class
   end
 
-  def icon_class(icon, precipitation)
-    precipitation = precipitation.to_f
+  def icon_class(icon, precipitation, cloud_cover)
     mapping = ICON_MAPPING[icon] || 'na'
     additional_class = ''
-    if mapping == 'day-cloudy'
-      additional_class =
-        if precipitation < 0.3
-          'day-cloudy-10'
-        else
-          'day-cloudy-100'
-        end
+    if mapping == 'cloudy'
+      unless precipitation.blank?
+        precipitation = precipitation.to_f
+        additional_class =
+          if precipitation < 30
+            'sunshine-10'
+          elsif precipitation < 60
+            'sunshine-50'
+          else
+            'sunshine-100'
+          end
+      end
+      cloud_cover = cloud_cover.to_f
+      # OVERRIDE sunshine color to greyish if cloud cover is high
+      additional_class = 'sunshine-50' if cloud_cover > 60
+
+      # show a bit of sun peeking out if there is less than 50% cloud cover
+      mapping = 'day-cloudy' if cloud_cover <= 50
     end
 
     "wi weather-icon wi-#{mapping} #{mapping} #{additional_class}"
@@ -129,7 +139,6 @@ module WeatherHelper
         end
       end
     end
-
   end
 
 end

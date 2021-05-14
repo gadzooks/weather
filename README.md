@@ -61,5 +61,5 @@ I decided to build this simple website to answer that question for me. The Pacif
 
 ### Tech details
 * Stack - Rails 6.0, SCSS, haml, bootstrap, Rspec
-* Weather API provided by DarkSky.net
-* Weather icons : https://www.freepik.com/free-photos-vectors/icon
+* Weather API provided by VisualCrossing.com, DarkSKY
+* Weather icons : http://erikflowers.github.io/weather-icons
