@@ -112,7 +112,7 @@ module WeatherHelper
         return '-'
       end
 
-      return p.round(1).to_s + ' in'
+      return p.round(1).to_s + '"'
     else
       return '-'
     end
