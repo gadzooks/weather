@@ -10,6 +10,12 @@ bonney_lake:
   latitude: 47.179774
   longitude: -122.186741
 
+issaquah:
+  region: cities
+  description: 'Issaquah'
+  latitude: 47.179774
+  longitude: -122.186741
+
 gold bar:
   region: central_cascades
   description: 'Stevens Pass - West'
@@ -19,7 +25,7 @@ gold bar:
 
 leavenworth:
   region: central_cascades
-  description: 'Stevens Pass - East'
+  description: 'Stevens Pass - East (Leavenworth)'
   latitude: 47.596233
   longitude: -120.661476
   sub_region: 'f6845d37f1edba9dc2bc8a75346f5bd5'
@@ -59,11 +65,61 @@ yakima:
   longitude:  -120.509983
   sub_region: '7a4397f2ffde7d0b490ff1ca77cceb9e'
 
+# cougar mountain:
+#   region: issaquah
+#   description: 'Cougar Mountain'
+#   latitude: 47.5403783
+#   longitude: -122.0992871
+#   sub_region: '325fdb0c3072b1b9acca522fb9e69ec2'
+
 issaquah:
   region: issaquah
-  description: 'Issaquah'
-  latitude: 47.533287
-  longitude: -122.032801
+  description: 'Issaquah Mountains'
+  latitude: 47.4964902
+  longitude: -122.0384518
+  sub_region: 'all'
+
+# tiger mountain:
+#   region: issaquah
+#   description: 'Tiger Mountain'
+#   latitude: 47.4884351
+#   longitude: -121.9473381
+#   sub_region: '9f13d8a3fcd2e1ab7a5b5aaab5997a9e'
+
+# taylor mountain:
+#   region: issaquah
+#   description: 'Taylor Mountain'
+#   latitude: 47.4545464
+#   longitude: -121.8945579
+#   sub_region: '98ea7186f4ff4bbba5329613f9a89bfb'
+
+bellingham area:
+  region: sound_islands
+  description: 'Bellingham Area'
+  latitude: 48.754900
+  longitude: -122.478120
+  sub_region: '92528ff6af30075eec65f35159defc50'
+
+san juan islands:
+  region: sound_islands
+  description: 'San Juan Islands'
+  latitude: 48.595350
+  longitude: -122.653470
+  sub_region: '7e0a6ce03ba1204d6bd3fdf64d3ad805'
+
+# seattle tacoma area:
+#   region: sound_islands
+#   description: 'Seattle Tacoma Area'
+#   latitude: 47.606209
+#   longitude: -122.332069
+#   sub_region: 'df2c2da1637452abe74a5d10837c2e03'
+
+whidbey island:
+  region: sound_islands
+  description: 'Whidbey Island'
+  latitude: 48.335049
+  longitude: -122.669273
+  sub_region: 'd9dddf65d66479f065d40c1aeac18da3'
 
 chinook pass:
   region: mt_rainier
