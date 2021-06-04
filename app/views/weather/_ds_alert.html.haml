@@ -1,10 +1,8 @@
 %div{class: css_classes}
   %span.alert_id.title{id: alert.alert_id}
     %a{href: '#top'}
-      =alert.alert_id
+      =alert.title
       &uarr;
-  %span.title
-    = alert.title
   - unless alert.regions.blank?
     .regions
       %span.center.region

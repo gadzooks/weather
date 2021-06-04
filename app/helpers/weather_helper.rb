@@ -15,6 +15,10 @@ module WeatherHelper
     'tornado' => 'tornado',
   }
 
+  def shorten_me(str)
+    truncate(str, length: 10, separator: ' ', omission: '')
+  end
+
   def hh_mm_in_pdt(time)
     if time.respond_to? :in_time_zone
       time.in_time_zone("Pacific Time (US & Canada)").strftime('%l:%M %P')

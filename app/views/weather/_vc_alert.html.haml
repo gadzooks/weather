@@ -2,10 +2,8 @@
 %div{class: css_classes}
   %span.alert_id.title{id: alert.alert_id}
     %a{href: '#top'}
-      =alert.alert_id
+      = alert.title
       &uarr;
-  %span.title
-    = alert.title
   - if alert.uri
     %span
       %a{href: alert.uri, target: '_blank', title: alert.uri}

@@ -5,7 +5,7 @@
       %th{scope: 'col', colspan: totalColumns, class: 'header-main center'}
         %span{title: detail.daily_summary}
           = render partial: 'alert_links',
-              locals: {alerts: detail.alerts, blank_alert_msg: ''}
+              locals: {alerts: detail.alerts, blank_alert_msg: '', shorten: false}
           =loc.description.upcase
           = render partial: 'wta_trip_report_link', locals: { loc: loc, link_text: nil }
           %a{href: '#top'}

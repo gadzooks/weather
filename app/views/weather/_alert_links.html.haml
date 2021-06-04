@@ -3,7 +3,8 @@
 - else
   -alerts.keys.sort.each do |k|
     - v = alerts[k]
+    - str = shorten ? shorten_me(v.title) : v.title
     %span.alert_id
       %a{href: "##{k}"}
-        =k
+        = str
         &darr;

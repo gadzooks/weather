@@ -5,7 +5,7 @@
     %tr.weather-details
       %td{class: 'center'}
         = render partial: 'alert_links',
-          locals: {alerts: detail.alerts, blank_alert_msg: 'N/A'}
+          locals: {alerts: detail.alerts, blank_alert_msg: 'N/A', shorten: true}
       %td.location-change
         %a{href: "##{loc.description}"}
           =loc.description.upcase
