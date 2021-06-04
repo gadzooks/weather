@@ -1,0 +1,33 @@
+- ad = alert.alert_details
+%div{class: css_classes}
+  %span.alert_id.title{id: alert.alert_id}
+    %a{href: '#top'}
+      =alert.alert_id
+      &uarr;
+  %span.title
+    = alert.title
+  - if alert.uri
+    %span
+      %a{href: alert.uri, target: '_blank', title: alert.uri}
+        More details
+
+  - if ad.where?
+    .regions
+      %span.center.region
+        Regions Impacted :
+      = ad.where
+  - if ad.time?
+    .description
+      %span.center
+        Time :
+      =ad.time
+  - if ad.what?
+    .description
+      %span.center
+        What :
+      =ad.what
+  - if ad.impacts?
+    .description
+      %span.center
+        Impacts :
+      =ad.impacts

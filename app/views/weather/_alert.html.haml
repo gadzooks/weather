@@ -3,19 +3,9 @@
   - alerts.sort.each do |alert|
     - css_classes = 'alert-details '
     - css_classes += 'alert-' + alert.severity if alert.severity
-    %div{class: css_classes}
-      %span.alert_id.title{id: alert.alert_id}
-        %a{href: '#top'}
-          =alert.alert_id
-          &uarr;
-      %span.title
-        = alert.title
-      - unless alert.regions.blank?
-        .regions
-          %span.center.region
-            = "Regions Impacted : "
-          = alert.regions.join(', ')
-      .description
-        %span.center.description
-          = "Details : "
-        =alert.description
+    -# - css_classes += ' alert-details-vc ' if alert.is_vc?
+    - if alert.is_vc?
+      = render partial: 'vc_alert', locals: {css_classes: css_classes, alert: alert}
+    - else
+      = render partial: 'ds_alert', locals: {css_classes: css_classes, alert: alert}
+

@@ -34,6 +34,10 @@ class Alert
 
   SEVERITIES = { 'advisory' => 2, 'watch' => 1, 'warning' => 0 }
 
+  def is_vc?
+    false
+  end
+
   def numeric_severity
     SEVERITIES[severity] || -1
   end

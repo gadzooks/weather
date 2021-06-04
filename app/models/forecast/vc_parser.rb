@@ -58,7 +58,7 @@ class VcParser
 
       Rails.logger.debug "ALERTS : " + response[ALERTS].inspect
       (response[ALERTS] || []).each do |alert_hash|
-        alert = Forecast::Alert.new(make_compatible_for_alert(alert_hash))
+        alert = Forecast::Vc::Alert.new(alert_hash)
         if all_alerts.include?(alert)
           alert.alert_id = all_alerts.first { |a| a == alert }.alert_id
           alerts_for_location[alert.alert_id] = alert
@@ -129,17 +129,6 @@ class VcParser
     hsh
   end
 
-
-  # MY_ATTRIBUTES = :title, :regions, :severity, :time, :expires, :description, :uri, :alert_id
-  def self.make_compatible_for_alert(hsh)
-    return {} if hsh.blank?
-    hsh['title'] = hsh.delete('event')
-    hsh['expires'] = hsh.delete('endsEpoch')
-    hsh['uri'] = hsh.delete('link')
-    hsh['description'] = (hsh['description'] || '').humanize
-
-    hsh
-  end
 
 end
 end
