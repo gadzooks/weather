@@ -35,7 +35,8 @@
             Details
 
       %tbody
-        - @forecast_summary.errors.each do |location, details|
+        - @forecast_summary.errors.keys.sort_by {|l| l.name }.each do |location|
+          - details = @forecast_summary.errors[location]
           %tr
             %td=location.description
             %td=details['code']
