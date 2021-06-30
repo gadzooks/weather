@@ -65,8 +65,7 @@ class Base
           body = r.response.body
           begin
             msg = JSON.parse body
-            errors[location] = { 'code' => r.response.response_code,
-                                 'error' => msg}
+            errors[location] = msg
           rescue => e
             errors[location] = { 'code' => r.response.response_code,
                                  'error' => body }
