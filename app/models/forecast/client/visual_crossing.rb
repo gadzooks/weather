@@ -9,6 +9,10 @@ class VisualCrossing < Base
   protected
   #########
 
+  def max_concurrency
+    1
+  end
+
   def create_request_for_location(loc)
     url = BASE_URL + '/' +  loc.latitude.to_s + ',' + loc.longitude.to_s +
         EXCLUDE_BLOCK

@@ -35,19 +35,18 @@ class Base
   end
 
   def get_forecast
-    hydra = Hydra.new
+    hydra_options = {}
+    if max_concurrency != -1
+      hydra_options[:max_concurrency] = max_concurrency
+    end
+    Rails.logger.info "hydra_options are : #{hydra_options.inspect}"
+    hydra = Hydra.new(hydra_options)
     requests = {}
-    count = 0
     locations.each do |loc|
       next if loc.blank?
       req = create_request_for_location(loc)
       requests[loc] = req
       hydra.queue req
-      if count == 14
-        break
-      else
-        count += 1
-      end
     end
 
     hydra.run
@@ -94,6 +93,11 @@ class Base
   # each subclass needs to implement this method
   def create_request_for_location(location)
     raise NotImplementedError
+  end
+
+  # can be overridden in base class. -1 means max possible
+  def max_concurrency
+    -1
   end
 
   #######
