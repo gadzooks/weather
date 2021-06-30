@@ -22,10 +22,7 @@
       .col-sm-12.col-xs-12.col-lg-12
         = render partial: 'alert', locals: { alerts: @forecast_summary.alerts }
 
--else
-  - if @weather.make_actual_call
-    .h3.center.warn
-      Could not retrieve the forecast. Please try again !
+- if @weather.make_actual_call
   - unless @forecast_summary.errors.blank?
     %table.table.table-sm.weather-forecast.weather-forecast-summary
       %thead

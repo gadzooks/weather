@@ -37,11 +37,17 @@ class Base
   def get_forecast
     hydra = Hydra.new
     requests = {}
+    count = 0
     locations.each do |loc|
       next if loc.blank?
       req = create_request_for_location(loc)
       requests[loc] = req
       hydra.queue req
+      if count == 14
+        break
+      else
+        count += 1
+      end
     end
 
     hydra.run
@@ -57,9 +63,16 @@ class Base
       if r.response.response_code != 200
         if r.try(:response).try(:body)
           body = r.response.body
-          errors[location] = JSON.parse body
+          begin
+            msg = JSON.parse body
+            errors[location] = { 'code' => r.response.response_code,
+                                 'error' => msg}
+          rescue => e
+            errors[location] = { 'code' => r.response.response_code,
+                                 'error' => body }
+          end
         else
-          errors[location] = { code: nil, error: 'Unknown error while calling API' }
+          errors[location] = { 'code' => nil, 'error' => 'Unknown error while calling API' }
         end
       else
         if r.response.body
