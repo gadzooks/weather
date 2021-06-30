@@ -4,6 +4,11 @@
       .h3
         FAKE results (for testing only)
 
+- if found_api_errors?(@weather.make_actual_call, @forecast_summary)
+  %span
+    %a{href: "#api-errors"}
+      = "Found #{@forecast_summary.errors.size} errors"
+      &darr;
 -unless @forecast_summary.blank?
   .row
     .center
@@ -24,8 +29,11 @@
 
 - if @weather.make_actual_call
   - unless @forecast_summary.errors.blank?
-    %table.table.table-sm.weather-forecast.weather-forecast-summary
-      %thead
+    %a{name: 'api-errors'}
+    %a{href: '#top'}
+      Top
+    %table.table.table-striped.table-sm.table-hover
+      %thead.thead-dark
         %tr
           %th
             Location
@@ -37,7 +45,7 @@
       %tbody
         - @forecast_summary.errors.keys.sort_by {|l| l.name }.each do |location|
           - details = @forecast_summary.errors[location]
-          %tr
+          %tr{scope: :row}
             %td=location.description
             %td=details['code']
             %td=details['error']

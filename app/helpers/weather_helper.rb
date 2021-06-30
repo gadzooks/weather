@@ -15,6 +15,10 @@ module WeatherHelper
     'tornado' => 'tornado',
   }
 
+  def found_api_errors?(make_actual_call, f_summary)
+    return make_actual_call && f_summary != nil && !f_summary.errors.blank?
+  end
+
   def shorten_me(str)
     truncate(str, length: 10, separator: ' ', omission: '')
   end
