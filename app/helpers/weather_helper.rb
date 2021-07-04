@@ -36,7 +36,7 @@ module WeatherHelper
     additional_class + weekend_class
   end
 
-  def icon_class(icon, precipitation, cloud_cover)
+  def icon_class(icon, precipitation, cloud_cover, max_temp)
     mapping = ICON_MAPPING[icon] || 'na'
     additional_class = ''
     if mapping == 'cloudy'
@@ -57,6 +57,14 @@ module WeatherHelper
 
       # show a bit of sun peeking out if there is less than 50% cloud cover
       mapping = 'day-cloudy' if cloud_cover <= 50
+    elsif mapping == 'day-sunny'
+      if max_temp >= 90
+        mapping = 'wi-hot'
+        additional_class = 'high-temp-wi-hotter'
+      elsif max_temp >= 80
+        mapping = 'wi-hot'
+        additional_class = 'high-temp-wi-hot'
+      end
     end
 
     "wi weather-icon wi-#{mapping} #{mapping} #{additional_class}"
