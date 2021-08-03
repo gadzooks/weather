@@ -57,15 +57,16 @@ module WeatherHelper
 
       # show a bit of sun peeking out if there is less than 50% cloud cover
       mapping = 'day-cloudy' if cloud_cover <= 50
-    elsif mapping == 'day-sunny'
-      if max_temp >= 90
-        mapping = 'wi-hot'
-        additional_class = 'high-temp-wi-hotter'
-      elsif max_temp >= 80
-        mapping = 'wi-hot'
-        additional_class = 'high-temp-wi-hot'
-      end
+    elsif mapping == 'day-sunny' && max_temp >= 80
+      mapping = 'hot'
     end
+
+    if max_temp >= 90
+      additional_class += ' high-temp-wi-hotter'
+    elsif max_temp >= 80
+      additional_class += ' high-temp-wi-hot'
+    end
+
 
     "wi weather-icon wi-#{mapping} #{mapping} #{additional_class}"
   end
