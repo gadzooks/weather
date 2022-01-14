@@ -33,7 +33,9 @@
         %td.precipitation.left-col-of-merged-cells
           -if daily_ts
             %i{class: icon_class(daily_ts.icon, daily_ts.precipProbability, daily_ts.cloudCover, daily_ts.temperatureHigh), title: daily_ts.summary}
-        %td.right-col-of-merged-cells
+        - alert_class = detail.alert_lasts_till >= time ? ' alert-cell-triangle ' : ' '
+        - css_class = 'right-col-of-merged-cells' + alert_class
+        %td{class: css_class}
           -if daily_ts
             =daily_ts.desc.gsub(/-/,' ').titleize
         %td.center
