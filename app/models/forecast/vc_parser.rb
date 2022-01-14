@@ -56,9 +56,16 @@ class VcParser
         )
       end
 
+      max_alert_epoch = Time.at(2000)
+
       Rails.logger.debug "ALERTS : " + response[ALERTS].inspect
       (response[ALERTS] || []).each do |alert_hash|
         alert = Forecast::Vc::Alert.new(alert_hash)
+
+        if alert.expires
+          max_alert_epoch = [max_alert_epoch, alert.expires].max
+        end
+
         if all_alerts.include?(alert)
           alert.alert_id = all_alerts.first { |a| a == alert }.alert_id
           alerts_for_location[alert.alert_id] = alert
@@ -77,6 +84,7 @@ class VcParser
           daily: daily,
           daily_summary: daily_summary,
           alerts: alerts_for_location,
+          alert_lasts_till: max_alert_epoch,
       }
 
       forecast_by_location[location] = Forecast::Detail.new hsh

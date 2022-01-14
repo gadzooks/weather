@@ -6,6 +6,24 @@
   // font-family: 'Apercu Mono'
 }
 
+$color-alert-bg: black;
+
+.alert-cell-triangle {
+    position: relative;
+}
+.alert-cell-triangle:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0; 
+  display: block;
+  border-left: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-top: 15px solid $color-alert-bg;
+}
+
 .alert-details {
   padding: 0.5rem;
   margin-bottom: 1.25rem;
@@ -67,7 +85,7 @@ span.alerts-summary {
 }
 
 span.alert_id {
-  background-color: #ffc453;
+  background-color: $color-alert-bg;
   padding: 1px 5px;
   margin: 3px;
   a {

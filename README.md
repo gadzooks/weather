@@ -59,7 +59,39 @@ I decided to build this simple website to answer that question for me. The Pacif
 2) on command line, run : rails server
 3) localhost:3000/test for test data, localhost:3000 for real weather information.
 
+### Testing :
+bundle exec rspec
+bundle exec guard
+
 ### Tech details
 * Stack - Rails 6.0, SCSS, haml, bootstrap, Rspec
 * Weather API provided by VisualCrossing.com, DarkSKY
 * Weather icons : http://erikflowers.github.io/weather-icons
+
+### Installation
+```sh
+# Install rails 6.0.0 : 
+gem install rails -v 6.0.0
+# Create credentials : 
+rails credentials:edit
+# Install postgres : 
+brew install postgres
+# Create postgres user : 
+~/homebrew/bin/createuser -s postgres
+# Log in and create weather_dev db : 
+createdb weather_dev
+
+postgres=# create database weather_dev;
+CREATE DATABASE
+postgres=# \l
+                               List of databases
+    Name     |   Owner   | Encoding | Collate | Ctype |    Access privileges
+-------------+-----------+----------+---------+-------+-------------------------
+ postgres    | akarwande | UTF8     | C       | C     |
+ template0   | akarwande | UTF8     | C       | C     | =c/akarwande           +
+             |           |          |         |       | akarwande=CTc/akarwande
+ template1   | akarwande | UTF8     | C       | C     | =c/akarwande           +
+             |           |          |         |       | akarwande=CTc/akarwande
+ weather_dev | postgres  | UTF8     | C       | C     |
+(4 rows)
+```

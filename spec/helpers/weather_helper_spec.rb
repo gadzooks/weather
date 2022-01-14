@@ -14,25 +14,25 @@ RSpec.describe WeatherHelper, type: :helper do
   context '#icon_class' do
     it 'should compute day-cloudy class based on precipitation' do
       expected_class = 'wi weather-icon wi-day-cloudy day-cloudy sunshine-10'
-      expect(helper.icon_class('partly-cloudy-day', '0', '49')).
+      expect(helper.icon_class('partly-cloudy-day', '0', '49', 70)).
         to eq(expected_class)
 
       expected_class = 'wi weather-icon wi-day-cloudy day-cloudy sunshine-10'
-      expect(helper.icon_class('partly-cloudy-day', '24', '')).
+      expect(helper.icon_class('partly-cloudy-day', '24', '', 70)).
         to eq(expected_class)
 
-      expected_class = 'wi weather-icon wi-day-cloudy day-cloudy sunshine-50'
-      expect(helper.icon_class('partly-cloudy-day', '31', '0')).
+      expected_class = 'wi weather-icon wi-day-cloudy day-cloudy sunshine-50 high-temp-wi-hot'
+      expect(helper.icon_class('partly-cloudy-day', '31', '0', 80)).
         to eq(expected_class)
 
-      expected_class = 'wi weather-icon wi-day-cloudy day-cloudy sunshine-100'
-      expect(helper.icon_class('partly-cloudy-day', '61', '33')).
+      expected_class = 'wi weather-icon wi-day-cloudy day-cloudy sunshine-100 high-temp-wi-hotter'
+      expect(helper.icon_class('partly-cloudy-day', '61', '33', 90)).
         to eq(expected_class)
 
 
       # one test for 'cloudy' class
       expected_class = 'wi weather-icon wi-day-cloudy day-cloudy sunshine-50'
-      expect(helper.icon_class('partly-cloudy-day', '31', '50')).
+      expect(helper.icon_class('partly-cloudy-day', '31', '50', 70)).
         to eq(expected_class)
     end
   end

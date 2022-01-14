@@ -31,7 +31,11 @@ module WeatherHelper
     end
   end
 
-  def add_weekend_class(time, additional_class)
+  def add_weekend_class(time, additional_class, show_alert_class = false)
+    if show_alert_class
+      additional_class + ' alert-cell-triangle '
+    end
+
     weekend_class = (time && time.on_weekend?) ? ' weekend ' : ' '
     additional_class + weekend_class
   end
