@@ -59,18 +59,28 @@ class VcParser
       max_alert_epoch = Time.at(2000)
 
       Rails.logger.debug "ALERTS : " + response[ALERTS].inspect
+
+      Rails.logger.debug "-----------------------------------"
+      Rails.logger.debug "LOCATION : " + location.name
       (response[ALERTS] || []).each do |alert_hash|
         alert = Forecast::Vc::Alert.new(alert_hash)
+
+        # Rails.logger.info alert_hash.inspect
+        Rails.logger.debug alert.title
 
         if alert.expires
           max_alert_epoch = [max_alert_epoch, alert.expires].max
         end
 
         if all_alerts.include?(alert)
-          alert.alert_id = all_alerts.first { |a| a == alert }.alert_id
+          alert.alert_id = all_alerts.find { |a| a.title == alert.title }.alert_id
+          Rails.logger.debug "title already found : " + alert.title
+          Rails.logger.debug "title already found : " + alert.alert_id
           alerts_for_location[alert.alert_id] = alert
         else
+          Rails.logger.debug "title NOT found : " + alert.title
           alert.alert_id = alert_starting_id
+          Rails.logger.debug "title NOT found : " + alert.alert_id
           alerts_for_location[alert_starting_id] = alert
           all_alerts << alert
           alert_starting_id = alert_starting_id.next
