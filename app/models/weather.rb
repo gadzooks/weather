@@ -27,6 +27,8 @@ class Weather
   def self.find_by_region(params)
     places = if !params[:places].blank?
                params[:places]
+             elsif !params[:region].blank?
+               LatitudeLongitudeByRegion.instance.all_places_for_region(params[:region])
              elsif params[:locations].to_s == 'all'
                LatitudeLongitudeByRegion.instance.all_places
              else

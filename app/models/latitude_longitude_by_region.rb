@@ -79,6 +79,13 @@ class LatitudeLongitudeByRegion
     @regions
   end
 
+  def all_places_for_region(region)
+    @locations.values.select {|loc|
+      loc.region_obj.name == region
+    }.map {|l| l.name}
+
+  end
+
   def region_for_location(location)
     region_name = location
     region_name = location.region if location.respond_to? :region
