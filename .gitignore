@@ -47,3 +47,5 @@ spec/examples.txt
 
 .undodir
 .idea
+
+.env
