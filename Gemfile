@@ -8,7 +8,7 @@ gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dab
 # gem 'minitest', '~> 5.14.0', '>= 5.14.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 6.1.0'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -77,7 +77,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.0'
 end
 
-gem "haml-rails", "~> 1.0"
+gem "haml-rails", "~> 2.0"
 gem 'simple_form'
 
 gem 'apixu', :git => 'https://github.com/apixu/apixu-ruby.git'
