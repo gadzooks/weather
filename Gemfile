@@ -67,6 +67,10 @@ group :test do
   gem 'turnip'
   gem 'pry'
   gem 'pry-nav'
+
+  # for circleCI
+  gem 'rspec_junit_formatter'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

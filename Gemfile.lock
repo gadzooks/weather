@@ -318,6 +318,8 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.3)
+    rspec_junit_formatter (0.5.1)
+      rspec-core (>= 2, < 4, != 2.12.0)
     ruby_parser (3.18.1)
       sexp_processor (~> 4.16)
     rubyzip (2.3.2)
@@ -424,6 +426,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 7.0.1)
   rspec-rails (~> 4.0.0)
+  rspec_junit_formatter
   safe-enum
   sass-rails (~> 5.0)
   selenium-webdriver
