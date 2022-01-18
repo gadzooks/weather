@@ -98,3 +98,7 @@ gem 'jquery-rails'
 gem 'ahoy_matey'
 # Analytics dashboard
 gem 'blazer'
+
+
+gem 'devise'
+gem 'oauth2', '~> 1.4'

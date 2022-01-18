@@ -6,7 +6,8 @@
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application',  media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag params[:controller]
+    -if params[:controller] == 'weather'
+      = stylesheet_link_tag params[:controller]
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag 'favicon.png'
   %body{ id: controller_name + '_' + action_name }
@@ -17,6 +18,28 @@
       %a{:href => 'https://github.com/gadzooks/weather/blob/master/README.md',
       :target=>"_blank"}
         [github]
+
+      %p.navbar-text.float-right
+        - if user_signed_in?
+          %h5.my-0.mr-md-auto.font-weight-normal Logged in as&nbsp;
+          = succeed "." do
+            %strong= current_user.email
+          = button_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link'
+          |
+          \#{button_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'}
+        - else
+          = link_to "Sign up", new_user_registration_path, :class => 'navbar-link'
+          |
+          \#{link_to "Login", new_user_session_path, :class => 'navbar-link'}
+
+
+
+    -# for device
+    - if notice
+      %p.alert.alert-success= notice
+    - if alert
+      %p.alert.alert-danger= alert
+
     .container-fluid
       = yield
   %footer.pt-4.my-md-5.pt-md-5.border-top

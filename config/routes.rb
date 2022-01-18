@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root "weather#index"
   get "weather/index", as: :weather
   get "regional", to: "weather#by_region",  defaults: { locations: :all }
