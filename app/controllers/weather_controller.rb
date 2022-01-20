@@ -1,5 +1,6 @@
 class WeatherController < ApplicationController
   before_action :set_by_region_flag
+  skip_before_action :authenticate_user!, only: [:vc]
 
   def index
     params['client_type'] = Weather::DARK_SKY_CLIENT
