@@ -95,3 +95,16 @@ postgres=# \l
  weather_dev | postgres  | UTF8     | C       | C     |
 (4 rows)
 ```
+
+## Devise
+http://railsapps.github.io/tutorial-rails-mongoid-devise.html
+
+## MAWS (move to aws)
+1. Move ahoy to mongo : https://github.com/andrewculver/ahoy#mongodb
+2. move devise to mongo : http://railsapps.github.io/tutorial-rails-mongoid-devise.html
+3. setup website on AWS using Elastic Beanstalk
+4. set up CICD with CodePipeline
+5. update travelweather.co to new website.
+
+## Deployment to heroku
+Based on Procfile at root.
