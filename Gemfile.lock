@@ -206,6 +206,9 @@ GEM
       domain_name (~> 0.5)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
+    importmap-rails (1.0.2)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     io-like (0.3.1)
     io-wait (0.2.1)
     jbuilder (2.11.5)
@@ -422,6 +425,7 @@ DEPENDENCIES
   guard
   guard-rspec
   haml-rails (~> 2.0)
+  importmap-rails
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   mimemagic!

@@ -87,6 +87,9 @@ gem 'safe-enum'
 # https://github.com/rails/sprockets-rails
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 
+#https://github.com/rails/importmap-rails
+gem 'importmap-rails'
+
 # Analytics for Rails
 gem 'ahoy_matey'
 # Analytics dashboard
