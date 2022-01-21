@@ -35,7 +35,6 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-gem "bootstrap", ">= 4.1.2"
  
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -86,9 +85,9 @@ gem 'apixu', :git => 'https://github.com/apixu/apixu-ruby.git'
 gem 'typhoeus'
 gem 'frozen_record'
 gem 'safe-enum'
-gem 'sprockets', '~>3.7.2'
 
-gem 'jquery-rails'
+# https://github.com/rails/sprockets-rails
+gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 # Analytics for Rails
 gem 'ahoy_matey'
