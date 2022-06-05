@@ -1,6 +1,6 @@
 class WeatherController < ApplicationController
   before_action :set_by_region_flag
-  skip_before_action :authenticate_user!, only: [:vc]
+  skip_before_action :authenticate_user!, only: [:vc, :weather_json]
 
   def index
     params['client_type'] = Weather::DARK_SKY_CLIENT
@@ -23,6 +23,24 @@ class WeatherController < ApplicationController
     @forecast_summary = @weather.get_forecast
     @forecast_type = @weather.type
     @by_region = true
+  end
+
+  def weather_json
+    weather = Weather.find_by_region(params)
+    respond_to do |format|
+      unless weather.blank?
+        results = {
+          locations: weather,
+          forecast_summary: weather.get_forecast,
+          forecast_type: weather.type
+        }
+        format.json { render json: results, status: :ok }
+      else
+        format.json { render json: {errors: :not_found}, status: :not_found }
+      end
+    end
+
+    (weather || {}).to_json
   end
 
   #######
