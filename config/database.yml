@@ -1,16 +1,17 @@
 development:
-  adapter: postgresql
-  database: weather_dev
+  adapter: sqlite3
+  database: db/development.sqlite3
   pool: 5
   timeout: 5000
+
 test:
-  adapter: postgresql
-  database: weather_test
+  adapter: sqlite3
+  database: db/test.sqlite3
   pool: 5
   timeout: 5000
 
 production:
-  adapter: postgresql
-  database: weather_production
+  adapter: sqlite3
+  database: db/production.sqlite3
   pool: 5
   timeout: 5000

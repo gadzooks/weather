@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  after_action :track_action, unless: -> { params[:controller] == 'ping' }
+  # after_action :track_action, unless: -> { params[:controller] == 'ping' }
   before_action :authenticate_user!, unless: -> { params[:controller] == 'ping' }
 
 
@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protected
   #########
 
-  def track_action
-    ahoy.track "Ran action", request.path_parameters
-  end
+  # def track_action
+  #   ahoy.track "Ran action", request.path_parameters
+  # end
 end

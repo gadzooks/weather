@@ -95,10 +95,11 @@ gem 'sprockets', '~>3.7.2'
 gem 'jquery-rails'
 
 # Analytics for Rails
-gem 'ahoy_matey'
-# Analytics dashboard
-gem 'blazer'
+# gem 'ahoy_matey'
+# # Analytics dashboard
+# gem 'blazer'
 
+gem 'sqlite3'
 
 gem 'devise'
 gem 'oauth2', '~> 1.4'
